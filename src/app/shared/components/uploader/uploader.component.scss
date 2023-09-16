@@ -1,0 +1,32 @@
+.avatar {
+  --box-shadow-color: rgba(0, 0, 0, .1);
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  box-shadow: 0 0 0 2px var(--box-shadow-color);
+  max-width: unset;
+}
+
+.icon-section {
+  bottom: 45px;
+}
+
+.icon-container {
+  color: var(--ion-color-light) !important;
+  background-color: var(--ion-color-primary);
+  padding: 6px;
+  border-radius: 20px;
+  width: 35px;
+  min-height: 35px;
+  cursor: pointer;
+}
+
+:host-context(.ng-submitted.ng-invalid) {
+  :host(:not(.ng-valid)) {
+    img.avatar {
+      box-shadow: 0 0 0 2px var(--ion-color-danger);
+    }
+  }
+}

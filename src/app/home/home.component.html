@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>{{'home' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12" class="ion-no-padding">
+        <img src="assets/images/home.jpg" alt="img" loading="lazy" class="w-100" >
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-searchbar (ionFocus)="onFocus()" class="ion-no-padding" [placeholder]="'whatAreYouLookingFor' | translate"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="categories.length > 0; else emptyData" class="ion-margin-top">
+      <ion-col size="4" class="ion-text-center ion-no-padding" *ngFor="let category of categories">
+        <div (click)="navigateToListPage(category)">
+          <img [src]="category.image" alt="img" loading="lazy" class="rounded-circle category-image">
+          <div class="font-weight-bold">{{category.name}}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ng-template #emptyData>
+  <app-empty-data></app-empty-data>
+</ng-template>

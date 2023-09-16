@@ -1,0 +1,103 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
+
+*:not(i):not(mat-icon):not(ion-icon) {
+  font-family: "Cairo", sans-serif !important;
+}
+
+.mat-icon.mat-primary {
+  color: var(--ion-color-dark);
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #dfbdbd73;
+}
+
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+  padding-inline-start: 0 !important;
+}
+
+.loading-page {
+  background: var(--ion-color-primary);
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  flex-flow: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .img {
+    zoom: 0.25;
+    animation: heartbeat 1s infinite;
+  }
+
+  @keyframes heartbeat {
+    0% {
+      transform: scale(0.75);
+    }
+
+    20% {
+      transform: scale(1);
+    }
+
+    40% {
+      transform: scale(0.75);
+    }
+
+    60% {
+      transform: scale(1);
+    }
+
+    80% {
+      transform: scale(0.75);
+    }
+
+    100% {
+      transform: scale(0.75);
+    }
+  }
+}
+
+.offline-page {
+  .oops {
+    font-size: 35px !important;
+    color: #fff !important;
+  }
+  .txt-no-net {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+    direction: ltr;
+  }
+}

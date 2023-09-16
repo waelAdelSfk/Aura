@@ -1,0 +1,57 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": false,
+    // "strictBindCallApply": false,
+    // "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "skipLibCheck": true, // To ignore firebase serve errors https://github.com/angular/angularfire/issues/3255
+    // "noImplicitAny": true,
+    // "strictNullChecks": false,
+    // "noImplicitThis": false,
+    // "allowSyntheticDefaultImports": true, 
+    // "emitDecoratorMetadata": true,
+    "target": "es2022",
+    "module": "es2020",
+    "lib": [
+      "es2018", 
+      "dom"
+    ],
+    "paths": {
+      "@app/services": ["app/shared/services"],
+      "@app/models": ["app/shared/models"],
+      "@app/enums": ["app/shared/enums"],
+      "@app/types": ["app/shared/types"],
+      "@app/components": ["app/shared/components"],
+      "@app/utilities": ["app/shared/utilities"],
+      "@app/validators": ["app/shared/validators"]
+    },
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    // "enableI18nLegacyMessageIdFormat": false,
+    // "strictAttributeTypes": true, // https://angular.io/guide/template-typecheck
+    // "strictInputTypes": true,
+
+    "preserveWhitespaces": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "strictTemplates": true,
+    "strictInputAccessModifiers": true
+  }
+}

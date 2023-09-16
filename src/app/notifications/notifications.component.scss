@@ -1,0 +1,11 @@
+.seen {
+  --background: var(--ion-color-light);
+}
+
+.not-seen {
+  --background: var(--ion-color-secondary);
+}
+
+.message {
+  font-size: 14px;
+}

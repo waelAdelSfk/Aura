@@ -1,0 +1,16 @@
+<div class="ion-text-center d-flex flex-column">
+  <div class="avatar-container">
+    <img [src]="selectedImage" alt="image" class="avatar" loading="lazy" />
+  </div>
+  <div class="icon-section position-relative d-flex justify-content-center align-items-center flex-column">
+    <div class="icon-container d-flex justify-content-center align-items-center" (click)="selectImageSource()">
+      <ion-icon name="image"></ion-icon>
+    </div>
+    <div *ngIf="form && form.submitted && form.invalid && form.form.get('image')?.hasError('required')" class="text-danger mt-3">
+      <small>{{'filedRequired' | translate}}</small>
+    </div>
+    <small *ngIf="isImageExceededMaxSize" class="text-danger mt-3">
+      {{'maxContentSize' | translate: { size: 3 } }}
+    </small>
+  </div>
+</div>

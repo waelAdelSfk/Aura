@@ -1,0 +1,13 @@
+<ng-container [formGroup]="formGroup.form">
+  <mat-form-field class="w-100" appearance="fill">
+    <mat-label>{{label}}</mat-label>
+    <input matInput [type]="type" [formControlName]="formControlName">
+    <button *ngIf="hasEyeIcon" mat-icon-button matSuffix (click)="toggleShowPassword()"
+      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isPasswordVisible">
+      <mat-icon color="primary">{{isPasswordVisible ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="errorMessage !== ''">
+      {{ errorMessage | translate }}
+    </mat-error>
+  </mat-form-field>
+</ng-container>

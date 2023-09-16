@@ -1,0 +1,14 @@
+.container-search-bar {
+    flex-direction: column;
+}
+
+
+
+::ng-deep {
+    .map-container {
+        .button-inner {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

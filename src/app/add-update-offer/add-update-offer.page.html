@@ -1,0 +1,39 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/Dashboard/Offers"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">
+      {{ ( offer.id !== '0' ? 'updateOffer' : 'addOffer') | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="addUpdateOfferForm" class="ion-padding" novalidate (ngSubmit)="save()">
+      <ion-item class="select-container">
+        <ion-label>{{'pleaseSelect' | translate}}</ion-label>
+        <ion-select class="select" interface="popover" formControlName="companyId">
+          <ion-select-option *ngFor="let comp of companies" [value]="comp.id">
+            <span *ngIf="currentLanguage === 'ar'; else english">{{comp.arabicCompanyName}}</span>
+            <ng-template #english>{{comp.englishCompanyName}}</ng-template>
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="wrap-input">
+        <ion-label position="floating">{{'arabicName' | translate}}</ion-label>
+        <ion-textarea formControlName="arabicOfferText" type="text"></ion-textarea>
+      </ion-item>
+      <ion-item class="wrap-input">
+        <ion-label position="floating">{{'englishName' | translate}}</ion-label>
+        <ion-textarea formControlName="englishOfferText" type="text"></ion-textarea>
+      </ion-item>
+      <div class="w-100 container-btn">
+        <ion-button class="ion-padding-vertical ion-margin-vertical submit-btn" expand="full" color="light" type="submit">
+          <ion-spinner *ngIf="submitted" name="lines-small"></ion-spinner>
+          {{( offer.id ==='0' ? 'add' : 'update' | translate)}}
+        </ion-button>
+      </div>
+    </form>
+</ion-content> -->

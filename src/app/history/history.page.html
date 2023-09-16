@@ -1,0 +1,70 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title size="small">
+      {{'histroy' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row class="ion-no-padding ion-no-margin">
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>{{'mySavedPlaces' | translate}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding ion-no-margin">
+            <ng-container *ngIf="userSave.length > 0; else emptySave">
+              <div *ngFor="let item of userSave">
+                <div class="chip-container">
+                  <ion-chip (click)="viewCompanyDetails(item.companyId)">
+                    <ion-avatar>
+                      <img [src]="getCompanyImage(item)" alt="image">
+                    </ion-avatar>
+                    <ion-label>{{getPlcaeName(item)}}</ion-label>
+                  </ion-chip>
+                  <ion-button class="button-icon ion-no-padding" slot="icon-only" (click)="removeSave(item)">
+                    <ion-icon name="trash" color="danger"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #emptySave>
+              <app-empty-data></app-empty-data>
+            </ng-template>
+           
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>{{'myLikedPlaces' | translate}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding ion-no-margin">
+            <ng-container *ngIf="userLikes.length > 0; else emptyLike">
+              <div *ngFor="let item of userLikes">
+                <div class="chip-container">
+                  <ion-chip (click)="viewCompanyDetails(item.companyId)">
+                    <ion-avatar>
+                      <img [src]="getCompanyImage(item)" alt="image">
+                    </ion-avatar>
+                    <ion-label>{{getPlcaeName(item)}}</ion-label>
+                  </ion-chip>
+                  <ion-button class="button-icon ion-no-padding" slot="icon-only" (click)="removeLike(item)">
+                    <ion-icon name="trash" color="danger"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #emptyLike>
+              <app-empty-data></app-empty-data>
+            </ng-template>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content> -->

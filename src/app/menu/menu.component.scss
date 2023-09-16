@@ -1,0 +1,7 @@
+ion-item.selected {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-primary);
+  ion-icon {
+    color: var(--ion-color-primary);
+  }
+}

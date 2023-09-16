@@ -1,0 +1,36 @@
+<ion-content class="menu-content">
+  <ion-list lines="none" class="ion-no-padding">
+    <ion-item [color]="'primary'" class="item-header mb-3">
+      <ion-label>
+        What's Trendy
+      </ion-label>
+    </ion-item>
+    <ion-menu-toggle *ngFor="let item of menuItems" autoHide="false">
+      <!-- [routerLink]="'app' + item.url" routerLinkActive #rla="routerLinkActive" routerDirection="root"
+        detail="false" class="menu-item" [class.selected]="rla.isActive" -->
+      <ion-item [ngClass]="{'selected': isItemActive(item.url) }" (click)="navigate(item.url)">
+        <ion-icon *ngIf="item.icon" slot="start" [name]=" isItemActive(item.url) ?  item.icon : item.icon + '-outline'"></ion-icon>
+        <div class="ion-padding-end ion-margin-end" *ngIf="item.htmlIcon" [innerHTML]="item.htmlIcon"></div>
+        <ion-label>
+          <span class="px-2">{{ item.labelKey | translate }}</span>
+        </ion-label>
+        <ion-badge *ngIf="item.count && item.count > 0" mode="ios" color="primary">{{item.count}}</ion-badge>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-list lines="none">
+      <mat-divider></mat-divider>
+      <ion-item (click)="openLanguageSwitcher()" [detail]="false" class="menu-item cursor-pointer">
+        <ion-icon slot="start" [name]="'earth'"></ion-icon>
+        <ion-label>
+          <span class="px-2">{{'language' | translate }}</span>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" (click)="logOut()" class="menu-item cursor-pointer">
+        <ion-icon slot="start" color="danger" name="log-out"></ion-icon>
+        <ion-label color="danger">
+          <span class="px-2">{{ 'logout' | translate }}</span>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+</ion-content>

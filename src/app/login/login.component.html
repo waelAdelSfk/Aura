@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>{{'login' | translate}}</ion-title>
+    <ion-buttons>
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" color="secondary">
+  <form [formGroup]="loginForm" novalidate>
+    <ion-row class="ion-padding">
+      <ion-col size="12" class="ion-text-center">
+        <h1 class="font-weight-bold">
+          <ion-text color="dark">{{'welcomeBack' | translate}}</ion-text>
+        </h1>
+      </ion-col>
+      <ion-col size="12">
+        <app-input formControlName="email" [label]="'email' | translate"></app-input>
+      </ion-col>
+      <ion-col size="12">
+        <app-input formControlName="password" [label]="'password' | translate" [hasEyeIcon]="true"></app-input>
+      </ion-col>
+      <ion-col size="12" (click)="openForgetPasswordModal()">
+        <div class="d-flex justify-content-end">
+          <ion-text color="dark">{{'forgotPassword' | translate}}</ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" type="submit" class="ion-padding" (click)="login()" color="primary">
+    {{'login' | translate}}
+  </ion-button>
+</ion-footer>
