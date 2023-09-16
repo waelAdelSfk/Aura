@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-no-padding">
+      <!-- <ion-searchbar animated color="light" (ionCancel)="cancelSearch()"  [placeholder]="'search' | translate" [(ngModel)]="searchText" (ionChange)="filterCompaines(searchText)">
+      </ion-searchbar> -->
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="filter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+      <ion-button (click)="viewMyLocation(false)">
+        <ion-icon name="locate-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>  
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <div *ngIf="!isDataLoading">
+    <!-- <app-skeleton></app-skeleton> -->
+  </div>  
+
+  <div>
+    <ion-list>
+      <ion-list-header>
+       <!-- <h4> {{categoryName}}</h4> -->
+      </ion-list-header>
+      <div *ngIf="isDataLoading && companies.length > 0">
+        <div *ngFor="let item of companies">
+          <ion-item (click)="navigateToDetailsPage(item.id)">
+            <ion-avatar slot="start">
+              <!-- <img [src]="item.image ? item.image : 'assets/images/avatar.png" alt="img"> -->
+            </ion-avatar>
+            <ion-label>
+              <ion-text color="primary">
+                <!-- <h2>{{item.name}}</h2> -->
+              </ion-text>
+            </ion-label>
+            <ion-note slot="end" color="primary">
+              <!-- <div [ngSwitch]="item.rate">
+
+                <span *ngSwitchCase="1">
+                  <ion-icon name="star-outline"></ion-icon>
+                </span>
+                <span *ngSwitchCase="2">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                </span>
+                <span *ngSwitchCase="3">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+
+                </span>
+                <span *ngSwitchCase="4">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                </span>
+                <span *ngSwitchCase="5">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                </span>
+                <span *ngSwitchDefault>
+                  ---
+                </span>
+              </div> -->
+            </ion-note>
+          </ion-item>
+          </div>
+      </div>
+  
+    </ion-list>
+  </div>
+  <!-- <app-empty-data *ngIf="companies.length < 1 && isDataLoading"></app-empty-data> -->
+
+</ion-content>

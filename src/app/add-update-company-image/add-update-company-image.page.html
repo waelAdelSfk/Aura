@@ -1,0 +1,57 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="backToPreviousPage()">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="company">
+      <span  *ngIf="currentLanguage === 'ar'">{{company.arabicCompanyName}}</span>
+      <span  *ngIf="currentLanguage === 'en'">{{company.englishCompanyName}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          {{'maxImagesIs4' | translate}}
+
+            <div *ngIf="photos.length > 0">
+              <ion-item *ngFor="let item of photos">
+                <ion-avatar slot="start">
+                  <img [src]="item.image" alt="img">
+                </ion-avatar>
+                
+                <ion-note slot="end">
+
+                  <ion-button shape="round" [color]="item.isUploaded ? 'success' : 'secondary'" type="button" [disabled]="item.isUploaded" (click)="uploadImage(item)">
+                    <span *ngIf="item.showText">{{ (item.isUploaded ? 'uploaded' : 'upload') | translate}}</span>
+                    <ion-spinner *ngIf="item.showSpinner" color="light" name="lines-small"></ion-spinner>
+                  </ion-button>
+
+                  <ion-button *ngIf="!item.isUploaded" shape="round" color="light" type="button" (click)="removeImage(item)">
+                    <ion-icon name="trash" color="danger" ></ion-icon>
+                  </ion-button>
+
+                  <ion-button *ngIf="item.isUploaded" shape="round" color="light" type="button" (click)="removeImageFromServer(item)">
+                    <ion-icon name="trash" color="danger" ></ion-icon>
+                  </ion-button>
+
+                </ion-note>
+              </ion-item>
+            </div>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="selectImageSource()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab> -->

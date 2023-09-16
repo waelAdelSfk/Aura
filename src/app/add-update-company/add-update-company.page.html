@@ -1,0 +1,181 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/Dashboard/Company"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">
+      {{ ( company.id !== '0' ?  'editCompany' : 'addCompany') | translate}}
+    </ion-title>
+    <ion-buttons slot="end"  (click)="getCurrentPosition()">
+      <ion-button class="btn-header">
+        <ion-icon name="map"></ion-icon>
+      </ion-button>
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <div #map id="map"></div>
+  <form [formGroup]="addUpdateCompanyForm" class="ion-padding" novalidate (ngSubmit)="addUpdateCompany()"  *ngIf="user">
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <img [src]="isAvatarCaptureImage ? avatarCapturedImage : defaultImage" alt="img" class="c-avatar">    
+            <ion-fab slot="fixed" class="fab-btn">
+              <ion-fab-button (click)="selectImageSource(true)">
+                <ion-icon name="camera"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item>
+      <ion-label>{{'category' | translate}}</ion-label>
+      <ion-select formControlName="category" [interfaceOptions]="customAlertOptions" [cancelText]="'cancel' | translate" [okText]="'okay' | translate">
+        <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
+          <span *ngIf="currentLanguage === 'ar'">{{cat.categoryArabicName}}</span>
+          <span *ngIf="currentLanguage === 'en'">{{cat.categoryEnglishName}}</span>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'arabicName' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="arabicCompanyName"></ion-input>
+      <span *ngIf="(arabicCompanyName.dirty || arabicCompanyName.touched) && arabicCompanyName.errors" class="errors">
+        <span *ngIf="arabicCompanyName.errors?.required">{{'filedIsrequired' | translate}}</span>
+      </span>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'englishName' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="englishCompanyName"></ion-input>
+      <span *ngIf="(englishCompanyName.dirty || englishCompanyName.touched) && englishCompanyName.errors" class="errors">
+        <span *ngIf="englishCompanyName.errors?.required">{{'filedIsrequired' | translate}}</span>
+      </span>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'companyNumber' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="mobile"></ion-input>
+      <span *ngIf="(mobile.dirty || mobile.touched) && mobile.errors" class="errors">
+        <span *ngIf="mobile.errors?.required">{{'filedIsrequired' | translate}}</span>
+      </span>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'companyEmail' | translate}}</ion-label>
+      <ion-input type="email" class="input" formControlName="email"></ion-input>
+      <span *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">{{'filedIsrequired' | translate}}</span>
+        <span *ngIf="email.errors?.email">{{'invalidEmail' | translate}}</span>
+      </span>
+    </ion-item>
+
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'website' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="website"></ion-input>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'descriptionArabic' | translate}}</ion-label>
+      <ion-textarea formControlName="descriptionArabic"></ion-textarea>
+      <span *ngIf="(descriptionArabic.dirty || descriptionArabic.touched) && descriptionArabic.errors" class="errors">
+        <span *ngIf="descriptionArabic.errors?.required">{{'filedIsrequired' | translate}}</span>
+      </span>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'descriptionEnglish' | translate}}</ion-label>
+      <ion-textarea formControlName="descriptionEnglish"></ion-textarea>
+      <span *ngIf="(descriptionEnglish.dirty || descriptionEnglish.touched) && descriptionEnglish.errors" class="errors">
+        <span *ngIf="descriptionEnglish.errors?.required">{{'filedIsrequired' | translate}}</span>
+      </span>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'startTime' | translate}}</ion-label>
+      <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="startTime" [mode]="'ios'"></ion-datetime>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'endTime' | translate}}</ion-label>
+      <ion-datetime display-format="h:mm A" picker-format="h:mm A" formControlName="endTime" [mode]="'ios'"></ion-datetime>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'workDaysArabic' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="workDaysArabic"></ion-input>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'workDaysEnglish' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="workDaysEnglish"></ion-input>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'addressArabic' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="addressArabic"></ion-input>
+    </ion-item>
+
+    <ion-item class="wrap-input">
+      <ion-label position="floating">{{'addressEnglish' | translate}}</ion-label>
+      <ion-input type="text" class="input" formControlName="addressEnglish"></ion-input>
+    </ion-item>
+
+
+
+    <ion-item *ngIf="company.id !== '0'">
+      <ion-avatar slot="start">
+        <img [src]="(isMenuImageCaptured || company.menuImage) ? menuCaptureImage: defaultImage">
+      </ion-avatar>
+      <ion-label>{{'menu' | translate}}</ion-label>
+
+      <ion-button *ngIf="menuSelectedPhoto" color="success" type="button" (click)="uploadMenuImage()">
+        {{ 'upload' | translate}}
+      </ion-button>
+
+
+      <ion-button (click)="selectImageSource(false)" color="light" type="button">
+        <ion-icon name="create" color="secondary"></ion-icon>
+      </ion-button>
+
+ 
+    <ion-button *ngIf="isMenuImageCaptured || company.menuImage" color="light" type="button" (click)="removeMenuImage()">
+        <ion-icon name="trash" color="danger" ></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-list>
+      <ion-radio-group formControlName="status">
+        <ion-list-header>
+          <ion-label>{{'status' | translate}}</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>{{'open' | translate}}</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'closed' | translate}}</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'commingSoon' | translate}}</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+ 
+      <ion-button shape="round" class="ion-padding-vertical btn-submit" expand="block" color="primary" type="submit">
+        {{ ( company.id == '0' ? 'add' : 'update') | translate}}
+        <ion-spinner *ngIf="submitted" color="light" name="lines-small"></ion-spinner>
+      </ion-button>
+
+  </form>
+</ion-content> -->

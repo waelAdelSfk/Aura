@@ -1,0 +1,71 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title size="small">
+      {{'offers' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <div class="total">{{'total' | translate}}: ({{offers.length}})</div>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-empty-data *ngIf="offers.length < 1 && !isDataLoading"></app-empty-data>
+
+  <div *ngIf="isDataLoading">
+    <app-skeleton></app-skeleton>
+  </div>
+
+  <div *ngIf="!isDataLoading && offers.length > 0">
+
+    <ion-card *ngFor="let offer of offers">
+      <ion-card-header>
+        <div class="container-card">
+          <div>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="getCompanyImage(offer.companyId)" alt="img">
+              </ion-avatar>
+              <ion-label (click)="showCompanyDetails(offer.companyId)">
+                <ion-text color="primary">
+                  {{getCompanyName(offer.companyId)}}
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </div>
+          <div *ngIf="role !== 'user'">
+            <ion-button class="button-icon ion-no-padding" (click)="edit(offer)">
+              <ion-icon name="pencil-outline" color="secondary"></ion-icon>
+            </ion-button>
+            <ion-button class="button-icon ion-no-padding" (click)="remove(offer)">
+              <ion-icon name="trash" color="danger"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-header>
+    
+      <ion-card-content class="card-content">
+          <span *ngIf="currentLanguage === 'en'; else arabic">
+            {{offer.englishOfferText}}
+          </span>
+          <ng-template #arabic>
+            {{offer.arabicOfferText}}
+          </ng-template>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="role !== 'user'">
+  <ion-fab-button (click)="navigateToAddOfferPage()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+ -->

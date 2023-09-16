@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>{{'notifications' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="notifications.length > 0; else emptyData" class="ion-no-padding">
+    <ion-item-sliding *ngFor="let item of notifications; last as last" (click)="markAsSeen(item)">
+      <ion-item [ngClass]="item.cssClass" [lines]="last ? 'none' : 'full'">
+        <ion-label class="ion-no-margin py-2">
+          <div class="d-flex justify-content-between align-items-center pb-2">
+            <div>
+              <div *ngIf="item.content" class="ion-padding-bottom">
+                {{item.content | translate}}
+              </div>
+              <div *ngIf="item.notificationType === notificationType.newRegister" class="badge badge-success">
+                {{'newUser' | translate}}
+              </div>
+              <div *ngIf="item.notificationType === notificationType.deleted" class="badge badge-danger">
+                {{'deleted' | translate}}
+              </div>
+              <div *ngIf="item.notificationType === notificationType.blocked" class="badge badge-danger">
+                {{'blocked' | translate}}
+              </div>
+            </div>
+            <ion-text slot="end" color="medium">
+              <small>{{item.date.toDate() | date:'mediumDate'}}</small>
+            </ion-text>
+          </div>
+          <ion-text class="ion-text-wrap message">
+            <div *ngIf="item.notificationType === notificationType.newRegister" [innerHTML]="'newUserMessage' | translate: 
+              {userName: item.userName, email: item.email, 'date': item.date.toMillis() | date:'medium' }">
+            </div>
+            <div *ngIf="item.notificationType === notificationType.deleted" [innerHTML]="'deletedUserMessage' | translate: 
+              {userName: item.userName, email: item.email, 'date': item.date.toMillis() | date:'medium' }">
+            </div>
+            <div *ngIf="item.notificationType === notificationType.blocked" [innerHTML]="'blockedUserMessage' | translate: 
+              {userName: item.userName, email: item.email, 'date': item.date.toMillis() | date:'medium' }">
+            </div>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(item)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ng-template #emptyData>
+  <app-empty-data></app-empty-data>
+</ng-template>

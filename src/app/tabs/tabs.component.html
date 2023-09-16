@@ -1,0 +1,56 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" mode="md">
+
+    <ion-tab-button tab="home">
+      <ion-icon [name]="isTabSelected('home') ? 'home' : 'home-outline'"></ion-icon>
+      {{'home' | translate}}
+    </ion-tab-button>
+
+    <!-- *ngIf="role === 'user'" -->
+    <!-- <ion-tab-button   tab="history">
+        <ion-icon name="list-outline"></ion-icon>
+        <ion-label>{{'history' | translate}}</ion-label>
+      </ion-tab-button> -->
+
+    <!-- *ngIf="role === 'Admin'" -->
+    <ion-tab-button tab="categories">
+      <ion-icon [name]="isTabSelected('categories') ? 'list' : 'list-outline'"></ion-icon>
+      {{'categories' | translate}}
+    </ion-tab-button>
+
+    <!-- *ngIf="role !== 'user'"  -->
+    <!-- <ion-tab-button tab="company">
+        <ion-icon name="grid-outline"></ion-icon>
+        <ion-label>{{'companies' | translate}}</ion-label>
+      </ion-tab-button> -->
+
+    <!-- *ngIf="role !== 'Admin'"  -->
+    <!-- <ion-tab-button tab="offers">
+        <ion-icon name="megaphone"></ion-icon>
+        <ion-label>{{'offers' | translate}}</ion-label>
+      </ion-tab-button> -->
+
+
+    <!-- <ion-tab-button *ngIf="role !== 'Admin'" tab="EditProfile">
+        <div *ngIf="!user">
+          <ion-icon name="people-circle-outline"></ion-icon>
+        </div>
+        <img *ngIf="user" alt="img" class="user-image" [src]="user.image ? user.image : deafultImage">
+      <ion-label>{{'profile' | translate}}</ion-label>
+      </ion-tab-button> -->
+    <!-- *ngIf="role === 'Admin'" -->
+    <ion-tab-button tab="users">
+      <ion-icon [name]="isTabSelected('users') ? 'people' : 'people-outline'"></ion-icon>
+      {{'users' | translate}}
+    </ion-tab-button>
+
+
+    <ion-tab-button tab="notifications">
+      <ng-container *ngIf="(notifications | async)?.length as count">
+        <ion-badge color="primary">{{ count }}</ion-badge>
+      </ng-container>
+      <ion-icon [name]="isTabSelected('notifications') ? 'notifications' : 'notifications-outline'"></ion-icon>
+      <ion-label>{{'notifications' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

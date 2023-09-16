@@ -1,0 +1,38 @@
+// Select Styles
+.select-interface-option {
+  .alert-radio-label {
+    color: var(--ion-color-dark) !important;
+  }
+
+  .alert-radio-icon {
+    .alert-radio-inner {
+      border-color: var(--ion-color-dark) !important;
+    }
+  }
+}
+
+.alert-button-role-cancel {
+  color: var(--ion-color-medium) !important;
+}
+
+.alert-button:not(.alert-button-role-cancel):not(.alert-delete-btn) {
+  color: var(--ion-color-primary) !important;
+}
+
+.alert-delete-btn {
+  color: var(--ion-color-danger) !important;
+}
+
+.success-alert {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+  
