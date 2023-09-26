@@ -58,6 +58,12 @@ export class MenuComponent {
       url: 'feedback',
       icon: 'thumbs-down',
       visibility: [Role.admin, Role.user]
+    },
+    {
+      labelKey: 'offers',
+      url: 'offer',
+      icon: 'gift',
+      visibility: [Role.admin, Role.user]
     }
   ];
 

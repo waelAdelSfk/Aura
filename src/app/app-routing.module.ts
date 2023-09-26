@@ -2,22 +2,24 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { IntroComponent } from './intro/intro.component';
+// import { IntroComponent } from './intro/intro.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import { IntroGuard } from './shared/guard/intro.guard';
+// import { IntroGuard } from './shared/guard/intro.guard';
 import { AutoLoginGuard } from './shared/guard/auto-login.guard';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { UsersComponent } from './users/users.component';
+// import { UsersComponent } from './users/UsersComponent';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { OfferComponent } from './offer/offer.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [AutoLoginGuard] },
-  { path: 'intro', component: IntroComponent, canActivate: [IntroGuard] },
+  // { path: 'intro', component: IntroComponent, canActivate: [IntroGuard] },
   {
     path: 'app', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
@@ -27,6 +29,14 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'restaurants', component: RestaurantsComponent },
+      { path: 'offer', component: OfferComponent },
+      { path: 'offer/:id', loadComponent: () => import('./offer/offer.component').then(m => m.OfferComponent) },
+      // {
+      //   path: `${'offer'}/:id`,
+      //   loadComponent: () => import('./offer/offer.component').then(m => m.OfferComponent)
+      // },
+
+      // {path: 'admin', loadComponent: () => import('./admin/panel.component').then(mod => mod.AdminPanelComponent)},
       // {
       //   path: 'liked',
       //   loadChildren: () => import('../liked/liked.module').then( m => m.LikedPageModule)

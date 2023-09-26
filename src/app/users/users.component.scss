@@ -1,8 +1,16 @@
 .lable-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    div.companyInfo {
-        padding: 0 7px;
-    }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  div.companyInfo {
+    padding: 0 7px;
+  }
 }
+
+ion-icon {
+  font-size: 18px;
+}
+
+// ion-icon.approved {
+//   color: blue;
+// }

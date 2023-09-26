@@ -36,7 +36,38 @@
 }
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: #dfbdbd73;
+  background-color: #e9e9e973;
+}
+
+.margin-bottom {
+  margin-bottom: 60px;
+}
+
+#ion-modal {
+  border-radius: 20px;
+  // box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  // opacity: 1;
+}
+
+.register-modal {
+  @extend #ion-modal;
+  margin-top: 180px;
+}
+
+.login-modal {
+  // height: 50%;
+  @extend #ion-modal;
+  margin-top: 300px;
+  // margin-top: 370px;
+}
+
+.forgetPassword-modal {
+  @extend #ion-modal;
+  margin-top: 350px;
+}
+
+.custom-header.header-ios ion-toolbar:last-of-type {
+  --border-width: 0 0 0px;
 }
 
 .mat-mdc-form-field-hint-wrapper,

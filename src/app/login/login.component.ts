@@ -36,15 +36,19 @@ export class LoginComponent implements OnInit {
     const modal = await this.modalController.create({
       component: ForgetPasswordComponent,
       animated: true,
+      cssClass: 'forgetPassword-modal',
       mode: 'ios',
-      backdropDismiss: false
+      backdropDismiss: false,
+      showBackdrop: false,
+      breakpoints: [0.1, 0.5, 1],
+      keyboardClose: true,
     });
     return await modal.present();
   }
 
- async login(): Promise<void> {
-  this.loginForm.markAllAsTouched();
-   if (this.loginForm.valid) {
+  async login(): Promise<void> {
+    this.loginForm.markAllAsTouched();
+    if (this.loginForm.valid) {
       this.close();
       const formValue = this.loginForm.value;
       this.authService.login(formValue.email, formValue.password);
@@ -54,7 +58,7 @@ export class LoginComponent implements OnInit {
   private initFormModels(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password:  ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 }

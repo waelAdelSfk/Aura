@@ -1,13 +1,18 @@
 import { FieldPath, Timestamp, WhereFilterOp } from '@angular/fire/firestore';
 
-import { AccountStatus, NotificationType, Role } from '@app/enums';
+import { AccountStatus, NotificationType, Role, OfferStatus } from '@app/enums';
 
 export interface ICollectionData {
-    collectionName: string; 
+    collectionName: string;
     fieldPath: string | FieldPath;
-    opStr: WhereFilterOp; 
-    value: unknown; 
+    opStr: WhereFilterOp;
+    value: unknown;
     idField: string;
+}
+
+export interface IManage {
+    id: string;
+    name: string;
 }
 
 export interface IUserBase {
@@ -21,6 +26,7 @@ export interface IUser extends IUserBase {
     role: Role;
     status: AccountStatus;
     creationDate: Timestamp;
+    subscriberList: Array<{ userId: string; subStatus: number }>;
 }
 
 export interface ICategory {
@@ -42,6 +48,8 @@ export interface IMenu {
 
 export interface INotification {
     id: string;
+    offerId: string;
+    shopOwnerId: string;
     userId: string;
     title: string;
     content: string;
@@ -58,6 +66,18 @@ export interface INotificationViewModel extends INotification {
     email: string;
     image: string;
     cssClass: string;
+}
+
+export interface IOffers {
+    id: string;
+    image: string;
+    title: string;
+    startDate: Timestamp;
+    endDate: Timestamp;
+    description: string;
+    shopOwner: string;
+    offerStatus: OfferStatus,
+    categoryId: string;
 }
 
 export interface IRestaurant {

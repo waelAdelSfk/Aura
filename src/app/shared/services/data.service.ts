@@ -28,6 +28,8 @@ export class DataService {
     });
   }
 
+
+
   update(path: string, data: any): void {
     this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
       this.fireStoreService.updateDoc(path, data).subscribe(() => {

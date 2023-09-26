@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, from, map, of } from 'rxjs';
 
 // import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc, setDoc, docData, PartialWithFieldValue, 
-  DocumentReference, where, Query, CollectionReference, query } from '@angular/fire/firestore';
-  import { AngularFirestore, AngularFirestoreCollection, DocumentData, QueryFn } from '@angular/fire/compat/firestore';
-  
-import { NotificationType } from '@app/enums';
+import {
+  Firestore, collection, addDoc, collectionData, doc, updateDoc, setDoc, docData, PartialWithFieldValue,
+  DocumentReference, where, Query, CollectionReference, query
+} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentData, QueryFn } from '@angular/fire/compat/firestore';
+
+import { NotificationType, Role } from '@app/enums';
 import { IUser, ICollectionData, INotification } from '@app/models';
 import { convertSnaps } from './db-utils';
 
@@ -42,18 +44,21 @@ export class FireStoreService {
   async setUserDoc(user: IUser): Promise<void> {
     const docRef: DocumentReference = doc(this.firestore, `users/${user.id}`);
     return setDoc(docRef, user).then(() => {
-      const notification: Partial<INotification> = {
-        userId: user.id,
-        title: '',
-        content: '',
-        isAdminSeen: false,
-        isUserSeen: false,
-        isAdminRemoved: false,
-        isUserRemoved: false,
-        notificationType: NotificationType.newRegister,
-        date: user.creationDate
-      };
-      this.addDoc('notifications', notification).subscribe();
+      const shopOwner = user.role === Role.shopOwner;
+      if (shopOwner) {
+        const notification: Partial<INotification> = {
+          userId: user.id,
+          title: '',
+          content: '',
+          isAdminSeen: false,
+          isUserSeen: false,
+          isAdminRemoved: false,
+          isUserRemoved: false,
+          notificationType: NotificationType.newRegister,
+          date: user.creationDate
+        };
+        this.addDoc('notifications', notification).subscribe();
+      }
     }).catch((error) => {
       console.log('error', error);
     });
@@ -63,6 +68,7 @@ export class FireStoreService {
     const docRef = doc(this.firestore, path);
     return from(updateDoc(docRef, data));
   }
+
 
   delete(path: string): Observable<void> {
     return from(this.angularFirestore.doc(path).delete());

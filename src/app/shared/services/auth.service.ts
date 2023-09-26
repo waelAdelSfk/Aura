@@ -40,10 +40,13 @@ export class AuthService {
       this.angularFireAuth.createUserWithEmailAndPassword(userData.email, userData.password)
         .then((data: any) => {
           if (data && data.user) {
+            const activity = userData.role === Role.user ? AccountStatus.approved : AccountStatus.pending;
+            const subscription = userData.role === Role.shopOwner ? userData.subscriberList = [] : '';
             const userInfo: IUser = {
               ...userData,
               id: data.user.multiFactor.user.uid,
-              status: AccountStatus.pending,
+              status: activity,
+              subscriberList: subscription,
               creationDate: Timestamp.fromDate(new Date())
             };
             this.fireStoreService.setUserDoc(userInfo).then(() => {

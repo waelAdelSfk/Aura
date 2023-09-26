@@ -4,7 +4,7 @@
     <h1><ion-text color="dark">What's Trendy</ion-text></h1>
     <h4><ion-text color="dark">{{'letsStart' | translate}}</ion-text></h4>
   </div>
-</ion-content> -->
+</ion-content>
 
 <ion-footer class="ion-no-border">
   <ion-toolbar color="secondary">
@@ -13,6 +13,40 @@
     </ion-button>
     <ion-button expand="block" color="primary" (click)="login()" shape="round" mode="ios" class="ion-padding">
       {{'login' | translate}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer> -->
+
+<ion-header>
+  <!-- <div></div> -->
+  <!-- <ion-toolbar>
+    <ion-title>App</ion-title>
+  </ion-toolbar> -->
+</ion-header>
+<ion-content scrollY="false"> <!--class="ion-padding"-->
+
+
+  <swiper-container (slidechange)="swiperSlideChange($event)" [loop]="true" [pagination]="true" [zoom]="true">
+    <swiper-slide *ngFor="let image of images">
+      <div class="swiper-zoom-container">
+        <img [src]="image" class="slide-image" alt="img" loading="lazy" />
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>
+
+
+
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="">
+    <ion-button id="open-login-modal" expand="block" (click)="login()" shape="round" mode="ios"
+      class="ion-padding login-button">
+      {{'login' | translate}}
+    </ion-button>
+    <ion-button expand="block" color="light" (click)="register()" shape="round" mode="ios"
+      class="ion-padding  register-button">
+      {{'signUp' | translate}}
     </ion-button>
   </ion-toolbar>
 </ion-footer>

@@ -14,6 +14,8 @@ import { MaterialModule } from './modules/material.module';
 import { InputComponent } from './components/input/input.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 const modules = [
   TranslateModule,
@@ -39,6 +41,8 @@ const components = [
 @NgModule({
   declarations: components,
   imports: modules,
-  exports: [ ...components, ...modules ]
+  exports: [...components, ...modules],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class SharedModule { }

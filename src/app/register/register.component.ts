@@ -5,17 +5,20 @@ import { ModalController } from '@ionic/angular';
 import { AuthService } from '@app/services';
 import { SharedModule } from 'app/shared/shared.module';
 import { mustMatch } from 'app/shared/validators/must-match.validators';
+import { Role } from '@app/enums';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
   standalone: true,
   imports: [SharedModule]
 })
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-
+  user = Role.user;
+  shopOwner = Role.shopOwner;
   constructor(
     private formBuilder: FormBuilder,
     private modalController: ModalController,
@@ -31,7 +34,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  async register(): Promise<void>  {
+  async register(): Promise<void> {
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
       this.close();
@@ -43,9 +46,10 @@ export class RegisterComponent implements OnInit {
   private initFormModels(): void {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
-      email:  ['', [Validators.required, Validators.email]],
-      password:  ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword:  ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     }, {
       validator: mustMatch('password', 'confirmPassword')
     });

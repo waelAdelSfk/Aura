@@ -1,12 +1,11 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyB5DcRIIbX2bmPCBESuMIxEELFtxiM8o-I",
-    authDomain: "trendy-41c4d.firebaseapp.com",
-    projectId: "trendy-41c4d",
-    storageBucket: "trendy-41c4d.appspot.com",
-    messagingSenderId: "246114122594",
-    appId: "1:246114122594:web:5a32a95c8e7a66aa8e4a3b",
-    measurementId: "G-JP7PKWMZ83"
+    apiKey: "AIzaSyDwvj2j_1kkBh6YAQfKDCuo27eipFJ_gac",
+    authDomain: "offers-notifier-97114.firebaseapp.com",
+    projectId: "offers-notifier-97114",
+    storageBucket: "offers-notifier-97114.appspot.com",
+    messagingSenderId: "884764178183",
+    appId: "1:884764178183:web:9638672d58517ac0c5f7a2"
   }
 };

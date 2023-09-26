@@ -1,31 +1,107 @@
 <ion-header>
-  <ion-toolbar color="primary" mode="ios">
+  <!-- <ion-toolbar color="primary" mode="ios">
     <ion-title>{{'home' | translate}}</ion-title>
+  </ion-toolbar> -->
+  <div class="header">
     <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#d700b1" fill-opacity="1"
+      d="M0,192L60,181.3C120,171,240,149,360,170.7C480,192,600,256,720,277.3C840,299,960,277,1080,240C1200,203,1320,149,1380,122.7L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+    </path>
+  </svg>
+
 </ion-header>
 
-<ion-content color="secondary">
+<ion-content color="light">
   <ion-grid class="ion-no-padding">
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="12" class="ion-no-padding">
-        <img src="assets/images/home.jpg" alt="img" loading="lazy" class="w-100" >
+        <img src="assets/images/home.jpg" alt="img" loading="lazy" class="w-100">
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
-        <ion-searchbar (ionFocus)="onFocus()" class="ion-no-padding" [placeholder]="'whatAreYouLookingFor' | translate"></ion-searchbar>
+        <ion-searchbar (ionFocus)="onFocus()" class="ion-no-padding"
+          [placeholder]="'whatAreYouLookingFor' | translate"></ion-searchbar>
       </ion-col>
-    </ion-row>
-    <ion-row *ngIf="categories.length > 0; else emptyData" class="ion-margin-top">
+    </ion-row> -->
+    <!-- <ion-row *ngIf="categories.length > 0; else emptyData" class="ion-margin-top">
       <ion-col size="4" class="ion-text-center ion-no-padding" *ngFor="let category of categories">
         <div (click)="navigateToListPage(category)">
           <img [src]="category.image" alt="img" loading="lazy" class="rounded-circle category-image">
           <div class="font-weight-bold">{{category.name}}</div>
         </div>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
+
+
+    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)">
+      <swiper-slide *ngFor="let category of categories">
+        <div class="swiper-zoom-container">
+          <ion-card (click)="navigateToListPage(category)">
+            <ion-card-header>
+              <ion-card-title>{{category.name}}</ion-card-title>
+              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+            </ion-card-header>
+
+            <ion-card-content>
+              <!-- Here's a small text description for the card content. Nothing more, nothing less. -->
+            </ion-card-content>
+          </ion-card>
+          <!-- <div (click)="navigateToListPage(category)">
+            <img [src]="category.image" class="category-image" alt="img" loading="lazy" />
+            <br>
+            <span class="font-weight-bold">{{category.name}}</span>
+          </div> -->
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </ion-grid>
+
+  <ion-grid class="ion-no-padding">
+    <div class="swiper-container">
+
+    </div>
+    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)" [loop]="true"
+      [zoom]="true" [parallax]="true" [perSlideOffset]="2">
+      <swiper-slide *ngFor="let offer of offers">
+        <div class="swiper-zoom-container">
+          <div>
+            <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
+            <br>
+            <span class="font-weight-bold">{{offer.title}}</span>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+
+  <ion-grid class="ion-padding">
+    <!-- Slider main container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        ...
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+    </div>
+
+  </ion-grid>
+
+
 </ion-content>
 
 <ng-template #emptyData>

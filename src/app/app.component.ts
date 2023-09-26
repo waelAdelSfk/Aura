@@ -6,8 +6,12 @@ import { StatusBar } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
 import { Toast } from '@capacitor/toast';
 import { App } from '@capacitor/app';
-
 import { AuthService, LanguageService, TranslationService } from './shared/services';
+
+import { register } from 'swiper/element/bundle';
+register();
+
+
 
 @Component({
   selector: 'app-root',
@@ -44,7 +48,7 @@ export class AppComponent implements OnInit {
 
   private setStatusBarBackground(): void {
     if (Capacitor.isPluginAvailable('StatusBar')) {
-      StatusBar.setBackgroundColor({color: '#2b9eee'});
+      StatusBar.setBackgroundColor({ color: '#2b9eee' });
     }
   }
 

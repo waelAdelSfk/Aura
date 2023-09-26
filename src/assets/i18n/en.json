@@ -174,5 +174,8 @@
   "restaurants": "Restaurants",
   "phoneNumber": "Phone Number",
   "location": "Location",
-  "openingTimes": "Opening Times"
+  "openingTimes": "Opening Times",
+  "selectAccountType": "Select Account Type",
+  "shopOwner": "Shop Owner",
+  "user": "User"
 }

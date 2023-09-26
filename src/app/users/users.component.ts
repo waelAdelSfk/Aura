@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountStatus, Role, subscriptionStatus } from '@app/enums';
 
 import { IUser } from '@app/models';
-import { FireStoreService } from '@app/services';
+import { DataService, FireStoreService } from '@app/services';
+import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
+import { Observable, map } from 'rxjs';
 // import { AlertController, ModalController } from '@ionic/angular';
 // import { TranslateService } from '@ngx-translate/core';
 // import { Subject } from 'rxjs';
@@ -20,136 +23,147 @@ import { SharedModule } from 'app/shared/shared.module';
   standalone: true,
   imports: [SharedModule]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends CommonUtility implements OnInit {
 
-  users: Array<IUser> = [];
+  // users: Array<IUser> = [];
+  users: Observable<IUser[]>;
+  usersCopy: Observable<IUser[]>;
+  // usersCopy: Array<IUser> = [];
 
   // userId: string;
-  // isDataLoading = false;
+  isDataLoading = false;
+  isDataLoadingNow = true;
   // destroyed = new Subject();
   // users: User[] = [];
   // searchUsers: User[] = [];
-  // defaultImage = 'assets/images/avatar.png';
+  defaultImage = 'assets/images/avatar.png';
 
+
+  accountStatus = AccountStatus;
+  subStatus = subscriptionStatus;
 
   constructor(
-    private FireStoreService: FireStoreService
-  //   private adminService: AdminService,
-  //   public modalController: ModalController,
-  //   private alertController: AlertController,
-  //   private translateService: TranslateService,
-  //   private utilityService: UtilityService
-
-    ) { }
+    private fireStoreService: FireStoreService,
+    private dataService: DataService,
+    // private toastService: ToastService,
+    // private firebaseService: FirebaseService,
+    // private navigationService: NavigationService,
+    // private usersService: UsersService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.FireStoreService.getAll<IUser>('users').subscribe(users => {
-      this.users = users;
-    });
+    this.getAllUsers();
+    // this.getUsersByRole();
+    // this.FireStoreService.getAll<IUser>('users').subscribe(users => {
+    //   this.users = users;
+    // });
+  }
+
+  // chat(user: IUser): void {
+  //   // this.navigationService.navigateDependOnRole(`${Constants.Routes.chat}/${user.id}`);
+  // }
+
+  async remove(user: IUser): Promise<void> {
+    // await this.firebaseService.delete(Constants.FirebaseCollection.users, user.id);
+  }
+
+  filter(searchText: string): void {
+    // this.users = this.usersCopy.pipe(map(users => users.filter(item => item.userName.toLocaleLowerCase().indexOf(searchText) !== -1)));
   }
 
   seeDetails(user: IUser): void {
-
+    // this.navigationService.navigateDependOnRole(`${Constants.Routes.users}/${user.id}`);
   }
 
-  // ionViewWillEnter(): void {
-  //   this.utilityService.showLoading().then((loading: any) => {
-  //     this.getData();
-  //     loading.dismiss();
-  //   });
+  approved(user: IUser): void {
+    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
+    //   ...user,
+    //   accountActivity: this.accountStatus.Approved,
+    // });
+  }
+
+  block(user: IUser): void {
+    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
+    //   ...user,
+    //   accountActivity: this.accountStatus.Blocked,
+    // });
+  }
+
+  pending(user: IUser): void {
+    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
+    //   ...user,
+    //   accountActivity: this.accountStatus.Pending,
+    // });
+  }
+
+
+  //   this.FireStoreService.getAll<IUser>('users').subscribe(users => {
+  //     this.users = users;
+
+
+
+  private getAllUsers(): void {
+    // this.users = this.fireStoreService.getAll<IUser>('users').pipe(map((users: IUser[]) =>
+    //   users.filter((user) => {
+    //     if (user && user != undefined && user != null) {
+    //       user.role === Role.shopOwner
+    //     }
+    //   })));
+
+    this.users = this.fireStoreService.getAll<IUser>('users').pipe(map((users: IUser[]) =>
+      users.filter(user => user.role === Role.shopOwner))
+    );
+    // this.users.subscribe(res => {
+    //   res.forEach(item => {
+    //     console.log('item', item.subscriberList.length);
+    //   })
+    // })
+  }
+
+  subscribe(user: IUser): void {
+    const addUserToSubscribeList = { userId: this.userId, subStatus: this.subStatus.subscribe };
+    if (user.subscriberList) {
+      const isUserInList = user.subscriberList.find((u) => u.userId === this.userId && u.subStatus === this.subStatus.unSubscribe);
+      if (isUserInList) {
+        isUserInList.subStatus = this.subStatus.subscribe
+      } else {
+        user.subscriberList.push(addUserToSubscribeList);
+      }
+    }
+    this.dataService.update(`/${'users'}/${user.id}`, { ...user })
+    // this.toastService.showToaster('subscribe');
+  }
+
+
+  unsubscribe(user: IUser): void {
+    const isUserInList = user.subscriberList.find((u) => u.userId === this.userId && u.subStatus === this.subStatus.subscribe);
+    if (isUserInList) {
+      isUserInList.subStatus = this.subStatus.unSubscribe
+      this.dataService.update(`/${'users'}/${user.id}`, { ...user });
+    }
+  }
+
+  getUserStatus(user: IUser): number {
+    const userStatusChanges = user.subscriberList || [];
+    const userStatus = userStatusChanges.find(u => u.userId === this.userId);
+    return userStatus ? userStatus.subStatus : undefined;
+  }
+
+
+
+
+  // private getAllUsers(): void {
+  //   this.FireStoreService.getAll<IUser>('users')
+  //     .pipe(map((users: IUser[]) => {
+  //       return users.filter(user => user.role === 3);
+  //     })
+  //     )
+  //     .subscribe((filteredUsers: IUser[]) => {
+  //       this.users = filteredUsers;
+  //     });
   // }
-
-
-
-  // cancelSearch(): void {
-  //   this.getData();
-  // }
-
-  // async showUserDetails(user: User): Promise<void> {
-  //   const modal = await this.modalController.create({
-  //     component: UserDetailsPage,
-  //     componentProps: {
-  //       currentUser: user
-  //     }
-  //   });
-  //   return await modal.present();
-  // }
-
-
-  // async deleteUser(user: User): Promise<void> {
-  //   const alert = await this.alertController.create({
-  //     mode: 'ios',
-  //     header: this.translateService.instant('confirmDelete'),
-  //     message: this.translateService.instant('areYouSureYouWantToDelete'),
-  //     buttons: [
-  //       {
-  //         text: this.translateService.instant('okay'),
-  //         handler: () => {
-  //           this.utilityService.showLoading().then((loading: any) => {
-  //             this.adminService.removeUser(user.userId).then(() => {
-  //               this.utilityService.showServerMessage(this.translateService.instant('removedSuccessfully'), 'success');
-  //               this.getData();
-  //               loading.dismiss();
-  //               }).catch((err) => {
-  //                 loading.dismiss();
-  //                 this.utilityService.showServerMessage(err.message, 'danger');
-  //               });
-  //           });
-
-  //         }
-  //       },
-  //       {
-  //         text: this.translateService.instant('cancel'),
-  //         role: 'cancel',
-  //         handler: () => {}
-  //       }
-  //     ]
-  //   });
-  //   await alert.present();
-  // }
-
-  // filterUsers(searchText: string): void {
-  //   if (searchText !== '') {
-  //     this.users = this.searchUsers.filter(com => com.name.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) !== -1);
-  //   } else {
-  //     this.ionViewWillEnter();
-  //   }
-  // }
-
-  // refreshPage(event: any): void {
-  //   this.isDataLoading = false;
-  //   this.users = [];
-  //   this.searchUsers = [];
-  //   this.getData(event);
-  // }
-
-  // private getData(event?: any): void {
-  //   this.adminService.getAllUsers().subscribe((res: UserDto[]) => {
-  //     if (res.length > 0) {
-  //       this.users = [];
-  //       this.searchUsers = [];
-  //       res.filter(u => u.data.email != 'admin@admin.com').map((item: UserDto) => {
-  //         const usr: User = {
-  //           userId: item.data.userId,
-  //           email: item.data.email,
-  //           name: item.data.name,
-  //           mobile: item.data.mobile,
-  //           image: item.data.image,
-  //           latitude: item.data.latitude,
-  //           createdAt: item.data.createdAt,
-  //           longitude: item.data.latitude,
-  //           role: item.data.role
-  //         };
-  //         this.users.push(usr);
-  //         this.searchUsers = this.users;
-  //       });
-  //       this.isDataLoading = true;
-  //       if (event) {
-  //         event.target.complete();
-  //       }
-  //     }
-  //   });
-  // }
-
 
 }
+

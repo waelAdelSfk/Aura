@@ -2,14 +2,15 @@
   <ion-list lines="none" class="ion-no-padding">
     <ion-item [color]="'primary'" class="item-header mb-3">
       <ion-label>
-        What's Trendy
+        Offers Notifier
       </ion-label>
     </ion-item>
     <ion-menu-toggle *ngFor="let item of menuItems" autoHide="false">
       <!-- [routerLink]="'app' + item.url" routerLinkActive #rla="routerLinkActive" routerDirection="root"
         detail="false" class="menu-item" [class.selected]="rla.isActive" -->
       <ion-item [ngClass]="{'selected': isItemActive(item.url) }" (click)="navigate(item.url)">
-        <ion-icon *ngIf="item.icon" slot="start" [name]=" isItemActive(item.url) ?  item.icon : item.icon + '-outline'"></ion-icon>
+        <ion-icon *ngIf="item.icon" slot="start"
+          [name]=" isItemActive(item.url) ?  item.icon : item.icon + '-outline'"></ion-icon>
         <div class="ion-padding-end ion-margin-end" *ngIf="item.htmlIcon" [innerHTML]="item.htmlIcon"></div>
         <ion-label>
           <span class="px-2">{{ item.labelKey | translate }}</span>

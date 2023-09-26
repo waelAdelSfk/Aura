@@ -13,10 +13,13 @@ export class CommonUtility {
   get isAdmin(): boolean {
     return localStorage.getItem('role') === Role.admin.toString();
   }
+  get isUser(): boolean {
+    return localStorage.getItem('role') === Role.user.toString();
+  }
 
   get userId(): string {
     const id = localStorage.getItem('userId');
-    return id ?? '' ;
+    return id ?? '';
   }
 
   isExistAndInitialized(value: string | number): boolean {
