@@ -45,7 +45,6 @@ export class WelcomeComponent implements OnInit {
       animated: true,
       cssClass: 'login-modal',
       mode: 'ios',
-      backdropDismiss: false,
       showBackdrop: false,
       breakpoints: [0.1, 0.5, 1],
       keyboardClose: true,
@@ -59,15 +58,9 @@ export class WelcomeComponent implements OnInit {
       animated: true,
       cssClass: 'register-modal',
       mode: 'ios',
-      backdropDismiss: false,
       showBackdrop: false,
       breakpoints: [0.1, 0.5, 1],
       keyboardClose: true,
-      // initialBreakpoint: 0.5,  //define modal height
-      // htmlAttributes?: { [key: string]: any },
-      // breakpoints?: number[],
-      // backdropBreakpoint: 0.5,
-      // handle: true,
     });
     return await modal.present();
   }

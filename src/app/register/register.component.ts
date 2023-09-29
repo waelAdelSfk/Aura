@@ -10,7 +10,6 @@ import { Role } from '@app/enums';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
   standalone: true,
   imports: [SharedModule]
 })

@@ -100,7 +100,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/app/home', pathMatch: 'full' },
     ]
   },
-  { path: '', redirectTo: 'intro', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

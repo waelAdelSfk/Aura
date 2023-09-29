@@ -6,6 +6,10 @@
     <ion-buttons slot="end">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
+    <div class="user-info">
+      <img class="user-image" alt="Silhouette of mountains" src="assets/images/avatar.png" />
+      <h6>{{'Wael Adel'}}</h6>
+    </div>
   </div>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
     <path fill="#d700b1" fill-opacity="1"
@@ -14,6 +18,7 @@
   </svg>
 
 </ion-header>
+<h4>{{'categories' | translate}}</h4>
 
 <ion-content color="light">
   <ion-grid class="ion-no-padding">
@@ -26,82 +31,43 @@
           [placeholder]="'whatAreYouLookingFor' | translate"></ion-searchbar>
       </ion-col>
     </ion-row> -->
-    <!-- <ion-row *ngIf="categories.length > 0; else emptyData" class="ion-margin-top">
-      <ion-col size="4" class="ion-text-center ion-no-padding" *ngFor="let category of categories">
-        <div (click)="navigateToListPage(category)">
-          <img [src]="category.image" alt="img" loading="lazy" class="rounded-circle category-image">
-          <div class="font-weight-bold">{{category.name}}</div>
-        </div>
-      </ion-col>
-    </ion-row> -->
 
-
-    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)">
+    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)"
+      [slidesPerView]="2" [initialSlide]="1" [spaceBetween]="10" [centeredSlides]="false">
+      <!-- [centeredSlides]="true" [spaceBetween]="10" [initialSlide]="0" -->
       <swiper-slide *ngFor="let category of categories">
         <div class="swiper-zoom-container">
-          <ion-card (click)="navigateToListPage(category)">
-            <ion-card-header>
-              <ion-card-title>{{category.name}}</ion-card-title>
-              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
-            </ion-card-header>
-
+          <ion-card class="category" (click)="navigateToListPage(category)">
             <ion-card-content>
-              <!-- Here's a small text description for the card content. Nothing more, nothing less. -->
+              <h6>{{category.name}}</h6>
             </ion-card-content>
           </ion-card>
-          <!-- <div (click)="navigateToListPage(category)">
-            <img [src]="category.image" class="category-image" alt="img" loading="lazy" />
-            <br>
-            <span class="font-weight-bold">{{category.name}}</span>
-          </div> -->
-        </div>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
-
-  <ion-grid class="ion-no-padding">
-    <div class="swiper-container">
-
-    </div>
-    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)" [loop]="true"
-      [zoom]="true" [parallax]="true" [perSlideOffset]="2">
-      <swiper-slide *ngFor="let offer of offers">
-        <div class="swiper-zoom-container">
-          <div>
-            <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
-            <br>
-            <span class="font-weight-bold">{{offer.title}}</span>
-          </div>
         </div>
       </swiper-slide>
     </swiper-container>
   </ion-grid>
 
   <ion-grid class="ion-padding">
-    <!-- Slider main container -->
-    <div class="swiper">
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        ...
-      </div>
-      <!-- If we need pagination -->
-      <div class="swiper-pagination"></div>
-
-      <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-
-      <!-- If we need scrollbar -->
-      <div class="swiper-scrollbar"></div>
-    </div>
-
+    <!-- <h5>{{'offers' | translate}}</h5> -->
+    <swiper-container #swiper (afterinit)="initializeSwiper()" (slidechange)="swiperSlideChange($event)" [loop]="false"
+      [zoom]="false" [slidesPerView]="1.25">
+      <swiper-slide *ngFor="let offer of offers">
+        <div class="swiper-zoom-container">
+          <ion-card>
+            <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
+            <ion-card-content>
+              {{offer.title}}
+            </ion-card-content>
+          </ion-card>
+          <!-- <div>
+            <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
+            <br>
+            <span class="font-weight-bold">{{offer.title}}</span>
+          </div> -->
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </ion-grid>
-
-
 </ion-content>
 
 <ng-template #emptyData>

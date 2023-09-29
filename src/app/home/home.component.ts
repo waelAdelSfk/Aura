@@ -42,36 +42,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getCurrentLanguage();
     this.getCategories();
     this.getAllOffers();
-    this.swiper = new Swiper('.swiper-container', {
-      slidesPerView: 2, // Display two slides at a time
-      spaceBetween: 20, // Adjust the space between slides
-      // Add other configuration options as needed
-      // For example, pagination, navigation, etc.
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      scrollbar: {
-        el: '.swiper-scrollbar',
-        draggable: true,
-      },
-    });
+    // this.swiper = new Swiper('.swiper-container', {
+    //   slidesPerView: 2, // Display two slides at a time
+    //   spaceBetween: 20, // Adjust the space between slides
+    //   // Add other configuration options as needed
+    //   // For example, pagination, navigation, etc.
+    //   pagination: {
+    //     el: '.swiper-pagination',
+    //     clickable: true,
+    //   },
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //     draggable: true,
+    //   },
+    // });
   }
 
   initializeSwiper() {
-    // this.swiper = this.swiperRef?.nativeElement.swiper,
+    this.swiper = this.swiperRef?.nativeElement.swiper,
 
-    // {
-    //   autoplay: {
-    //     delay: 1000,
-    //   },
-    //   // speed: 400,
-    //   //   spaceBetween: 100,
-    //   //   loop: true,
-    //   //   loopedSlides: 3,
-    // };
+    {
+      autoplay: {
+        delay: 1000,
+      },
+      // speed: 400,
+      //   spaceBetween: 100,
+      //   loop: true,
+      //   loopedSlides: 3,
+    };
 
-    // window.addEventListener('resize', this.updateSwiper);
+    window.addEventListener('resize', this.updateSwiper);
   }
 
   updateSwiper = () => {
