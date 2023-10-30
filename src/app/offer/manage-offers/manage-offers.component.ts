@@ -1,21 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DocumentReference, Timestamp } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+// import { DateAdapter } from '@angular/material/core';
 import { OfferStatus, subscriptionStatus } from '@app/enums';
 import { ICategory, INotification, IOffers, IUser } from '@app/models';
 import { DataService, FireStoreService, ModalService } from '@app/services';
 import { CommonUtility } from '@app/utilities';
+import { ControlsModule } from 'app/controls/controls.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { Observable, map } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, ControlsModule],
   selector: 'app-manage-offers',
   templateUrl: './manage-offers.component.html',
   styleUrls: ['./manage-offers.component.scss'],
+
 })
 export class ManageOffersComponent extends CommonUtility implements OnInit {
+
 
   manageForm: FormGroup;
   @Input() item: IOffers;
@@ -111,6 +115,9 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       title: [null, Validators.required],
       image: [null, Validators.required],
       categoryId: [null, Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      description: [null, Validators.required],
     });
   }
 
@@ -118,7 +125,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm.patchValue({
       title: this.item.title,
       image: this.item.image,
-      categoryId: this.item.categoryId,
+      // categoryId: this.item.categoryId,
     });
   }
 
