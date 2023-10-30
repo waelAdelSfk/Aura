@@ -32,7 +32,6 @@ export class UsersComponent extends CommonUtility implements OnInit {
 
   // userId: string;
   isDataLoading = false;
-  isDataLoadingNow = true;
   // destroyed = new Subject();
   // users: User[] = [];
   // searchUsers: User[] = [];
@@ -41,6 +40,8 @@ export class UsersComponent extends CommonUtility implements OnInit {
 
   accountStatus = AccountStatus;
   subStatus = subscriptionStatus;
+  public isCurrentUserInList: boolean = false;
+  // public isUserInList: boolean = false;
 
   constructor(
     private fireStoreService: FireStoreService,
@@ -65,9 +66,9 @@ export class UsersComponent extends CommonUtility implements OnInit {
   //   // this.navigationService.navigateDependOnRole(`${Constants.Routes.chat}/${user.id}`);
   // }
 
-  async remove(user: IUser): Promise<void> {
-    // await this.firebaseService.delete(Constants.FirebaseCollection.users, user.id);
-  }
+  // async remove(user: IUser): Promise<void> {
+  //   // await this.firebaseService.delete(Constants.FirebaseCollection.users, user.id);
+  // }
 
   filter(searchText: string): void {
     // this.users = this.usersCopy.pipe(map(users => users.filter(item => item.userName.toLocaleLowerCase().indexOf(searchText) !== -1)));
@@ -77,25 +78,29 @@ export class UsersComponent extends CommonUtility implements OnInit {
     // this.navigationService.navigateDependOnRole(`${Constants.Routes.users}/${user.id}`);
   }
 
+  remove(user: IUser): void {
+    this.dataService.remove(`users/${user.id}`);
+  }
+
   approved(user: IUser): void {
-    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
-    //   ...user,
-    //   accountActivity: this.accountStatus.Approved,
-    // });
+    this.dataService.update(`users/${user.id}`, {
+      ...user,
+      status: AccountStatus.approved,
+    });
   }
 
   block(user: IUser): void {
-    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
-    //   ...user,
-    //   accountActivity: this.accountStatus.Blocked,
-    // });
+    this.dataService.update(`users/${user.id}`, {
+      ...user,
+      status: AccountStatus.blocked,
+    });
   }
 
   pending(user: IUser): void {
-    // this.firebaseService.updateDoc(Constants.FirebaseCollection.users, user.id, {
-    //   ...user,
-    //   accountActivity: this.accountStatus.Pending,
-    // });
+    this.dataService.update(`users/${user.id}`, {
+      ...user,
+      status: AccountStatus.pending,
+    });
   }
 
 
@@ -112,9 +117,17 @@ export class UsersComponent extends CommonUtility implements OnInit {
     //     }
     //   })));
 
-    this.users = this.fireStoreService.getAll<IUser>('users').pipe(map((users: IUser[]) =>
-      users.filter(user => user.role === Role.shopOwner))
-    );
+    if (this.isAdmin) {
+      this.users = this.fireStoreService.getAll<IUser>('users').pipe(map((users: IUser[]) =>
+        users.filter(user => user.role === Role.shopOwner))
+      );
+    } else {
+      this.users = this.fireStoreService.getAll<IUser>('users').pipe(map((users: IUser[]) =>
+        users.filter(user => user.role === Role.shopOwner && user.status === AccountStatus.approved))
+      );
+    }
+
+
     // this.users.subscribe(res => {
     //   res.forEach(item => {
     //     console.log('item', item.subscriberList.length);
@@ -122,19 +135,50 @@ export class UsersComponent extends CommonUtility implements OnInit {
     // })
   }
 
-  subscribe(user: IUser): void {
-    const addUserToSubscribeList = { userId: this.userId, subStatus: this.subStatus.subscribe };
-    if (user.subscriberList) {
-      const isUserInList = user.subscriberList.find((u) => u.userId === this.userId && u.subStatus === this.subStatus.unSubscribe);
-      if (isUserInList) {
-        isUserInList.subStatus = this.subStatus.subscribe
-      } else {
-        user.subscriberList.push(addUserToSubscribeList);
-      }
-    }
-    this.dataService.update(`/${'users'}/${user.id}`, { ...user })
-    // this.toastService.showToaster('subscribe');
+  isUserInList(user: IUser): boolean {
+    return user.subscriberList?.some(u => u.userId === this.userId);
   }
+
+  subscribe(user: IUser): void {
+    // if (!user.subscriberList) {
+    //   user.subscriberList = [];
+    // }
+    if (this.isUserInList(user)) {
+      const userIndex = user.subscriberList.findIndex(u => u.userId === this.userId);
+      user.subscriberList[userIndex].subStatus = this.subStatus.subscribe;
+      this.dataService.update(`/${'users'}/${user.id}`, { ...user });
+    }
+
+    if (!this.isUserInList(user)) {
+      const addUserToSubscribeList = { userId: this.userId, subStatus: this.subStatus.subscribe };
+      user.subscriberList.push(addUserToSubscribeList);
+      this.dataService.update(`/${'users'}/${user.id}`, { ...user });
+    }
+    // else {
+    //   const userIndex = user.subscriberList.findIndex(u => u.userId === this.userId);
+    //   if (userIndex !== -1) {
+    //     user.subscriberList[userIndex].subStatus = this.subStatus.subscribe;
+    //   }
+    //   this.dataService.update(`/${'users'}/${user.id}`, { ...user });
+    // }
+  }
+
+
+
+
+  // subscribe(user: IUser): void {
+  //   // this.isCurrentUserInList = user.subscriberList.some(a => a.userId === this.userId);
+  //   const addUserToSubscribeList = { userId: this.userId, subStatus: this.subStatus.subscribe };
+  //   if (user.subscriberList) {
+  //     this.isUserInList = user.subscriberList.some((u) => u.userId === this.userId);
+  //     if (this.isUserInList === true) {
+  //       this.subStatus.subscribe
+  //     } else {
+  //       user.subscriberList.push(addUserToSubscribeList);
+  //     }
+  //   }
+  //   this.dataService.update(`/${'users'}/${user.id}`, { ...user })
+  // }
 
 
   unsubscribe(user: IUser): void {

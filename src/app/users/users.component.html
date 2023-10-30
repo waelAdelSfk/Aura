@@ -47,64 +47,107 @@
         </ng-container>
       </ion-item>
 
-      <ng-container>
-        <ion-item-options side="start">
-
-          <ion-item-option color="light" (click)="remove(item)">
-            <ion-icon color="danger" name="trash"></ion-icon>
-          </ion-item-option>
-
-          <ng-container *ngIf="item.subscriberList">
-
-            <ng-container *ngIf="item.subscriberList.length === 0 ">
-              <ion-item-option color="light" (click)="subscribe(item)">
-                <ion-icon color="success" name="notifications"></ion-icon>
-              </ion-item-option>
-            </ng-container>
-
-            <ng-container *ngFor="let a of item.subscriberList">
-              <ion-item-option *ngIf="(a.subStatus === subStatus.unSubscribe && a.userId === userId)" color="light"
-                (click)="subscribe(item)">
-                <ion-icon color="success" name="notifications"></ion-icon>
-              </ion-item-option>
-            </ng-container>
-
-
-            <ng-container *ngFor="let a of item.subscriberList">
-              <ion-item-option color="light" *ngIf="(a.subStatus === subStatus.subscribe && a.userId === userId)"
-                (click)="unsubscribe(item)">
-                <ion-icon color="danger" name="notifications-off-outline"></ion-icon>
-              </ion-item-option>
-            </ng-container>
-
+      <!-- <ng-container> -->
+      <ion-item-options *ngIf="isUser" side="start">
+        <ng-container *ngIf="item.subscriberList">
+          <ng-container *ngIf="item.subscriberList.length === 0 || !isUserInList(item)">
+            <ion-item-option color="light" (click)="subscribe(item)">
+              <ion-icon color="success" name="notifications"></ion-icon>
+            </ion-item-option>
           </ng-container>
 
-        </ion-item-options>
-        <ion-item-options *ngIf="isAdmin" side="end">
-          <ion-item-option *ngIf="item.status !== accountStatus.blocked" color="light" (click)="block(item)">
-            <ion-icon color="danger" name="close-circle"></ion-icon>
-          </ion-item-option>
-          <ion-item-option *ngIf="item.status !== accountStatus.pending" color="light" (click)="pending(item)">
-            <ion-icon color="warning" name="help-circle"></ion-icon>
-          </ion-item-option>
-          <ion-item-option *ngIf="item.status !== accountStatus.approved" color="light" (click)="approved(item)">
-            <ion-icon color="success" name="checkmark-circle"></ion-icon>
-          </ion-item-option>
+          <ng-container *ngFor="let a of item.subscriberList">
+            <ion-item-option *ngIf="a.userId === userId && a.subStatus === subStatus.unSubscribe" color="light"
+              (click)="subscribe(item)">
+              <ion-icon color="success" name="notifications"></ion-icon>
+            </ion-item-option>
+          </ng-container>
 
-        </ion-item-options>
-      </ng-container>
+          <ng-container *ngFor="let a of item.subscriberList">
+            <ion-item-option color="light" *ngIf="(a.subStatus === subStatus.subscribe && a.userId === userId)"
+              (click)="unsubscribe(item)">
+              <ion-icon color="danger" name="notifications-off-outline"></ion-icon>
+            </ion-item-option>
+          </ng-container>
+        </ng-container>
+      </ion-item-options>
+
+      <ion-item-options *ngIf="isAdmin" side="start">
+        <ion-item-option color="light" (click)="remove(item)">
+          <ion-icon color="danger" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item-options *ngIf="isAdmin" side="end">
+        <ion-item-option *ngIf="item.status !== accountStatus.blocked" color="light" (click)="block(item)">
+          <ion-icon color="danger" name="close-circle"></ion-icon>
+        </ion-item-option>
+        <ion-item-option *ngIf="item.status !== accountStatus.pending" color="light" (click)="pending(item)">
+          <ion-icon color="warning" name="help-circle"></ion-icon>
+        </ion-item-option>
+        <ion-item-option *ngIf="item.status !== accountStatus.approved" color="light" (click)="approved(item)">
+          <ion-icon color="success" name="checkmark-circle"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <!-- </ng-container> -->
     </ion-item-sliding>
   </ion-list>
-  <!-- 
-  <ng-template #emptyData>
-    <w-empty-data></w-empty-data>
-  </ng-template>
 
-  <ng-template #noData>
-    <w-skelton *ngIf="isDataLoadingNow; else emptyData"></w-skelton>
-  </ng-template> -->
 
+  <ng-container *ngIf="isUser">
+    <ng-container *ngIf="(users | async)?.length > 0; else noData">
+      <ion-card *ngFor="let item of users | async">
+        <div class="user-info">
+          <img [src]="item.image ?? defaultImage" class="user-image" alt="img" loading="lazy" />
+          <ion-note>{{item.name}}</ion-note>
+          <ng-container *ngIf="isUser" side="start">
+            <ng-container *ngIf="item.subscriberList">
+              <ng-container *ngIf="item.subscriberList.length === 0 || !isUserInList(item)">
+                <ion-button color="success" (click)="subscribe(item)">
+                  <!-- <ion-icon color="success" name="notifications"></ion-icon> -->
+                </ion-button>
+              </ng-container>
+
+              <ng-container *ngFor="let a of item.subscriberList">
+                <ion-item-option *ngIf="a.userId === userId && a.subStatus === subStatus.unSubscribe" color="light"
+                  (click)="subscribe(item)">
+                  <ion-icon color="success" name="notifications"></ion-icon>
+                </ion-item-option>
+              </ng-container>
+
+              <ng-container *ngFor="let a of item.subscriberList">
+                <ion-item-option color="light" *ngIf="(a.subStatus === subStatus.subscribe && a.userId === userId)"
+                  (click)="unsubscribe(item)">
+                  <ion-icon color="danger" name="notifications-off-outline"></ion-icon>
+                </ion-item-option>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+        <ion-card-content>
+          <!-- <ion-note>{{'valid from'}} :&nbsp; {{'5/10/2023'}}</ion-note>
+          <ion-note>{{'valid until'}} :&nbsp; {{'10/10/2023'}}</ion-note> -->
+          <ng-container *ngIf="isUser">
+            <ion-badge slot="end" color="success" *ngIf="getUserStatus(item) === subStatus.subscribe">
+              {{'subscribe' | translate}}
+            </ion-badge>
+            <ion-badge slot="end" color="danger"
+              *ngIf="getUserStatus(item) ===subStatus.unSubscribe || getUserStatus(item) === undefined">
+              {{'unSubscribe' | translate}}
+            </ion-badge>
+          </ng-container>
+
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
 </ion-content>
+
+
+
+
+
+
 
 
 <ng-template #noData>
