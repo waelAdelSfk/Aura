@@ -1,8 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnDestroy, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnDestroy, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ICategory, IOffers } from '@app/models';
+import { ICategory, IOffers, IUser } from '@app/models';
 import { FireStoreService } from '@app/services';
+import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
 import Swiper from 'swiper';
 
@@ -14,39 +15,34 @@ import Swiper from 'swiper';
   imports: [SharedModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent implements OnInit, OnDestroy {
-
-  currentLanguage: string;
-  categories: Array<ICategory> = [];
-  offers: Array<IOffers> = []
+export class HomeComponent extends CommonUtility implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('swiper') swiperRef: ElementRef | undefined;
   swiper?: Swiper;
+  categories: Array<ICategory> = [];
+  offers: Array<IOffers> = []
+  users: IUser[] = [];
 
-  // const swipers = new Swiper('.swiper', {
-  //   speed: 400,
-  //   spaceBetween: 100,
-  // });
 
   constructor(
     private fireStoreService: FireStoreService,
     private router: Router
-  ) { }
+  ) { super(); }
 
 
-  swiperSlideChange(e: any) {
-    console.log('changed')
+  // swiperSlideChange(e: any) {
+  //   console.log('changed')
+  // }
 
-  }
   ngOnInit(): void {
-    this.getCurrentLanguage();
+    this.fireStoreService.getAll('users').subscribe((res: IUser[]) => {
+      this.users = res;
+    })
     this.getCategories();
     this.getAllOffers();
     // this.swiper = new Swiper('.swiper-container', {
-    //   slidesPerView: 2, // Display two slides at a time
-    //   spaceBetween: 20, // Adjust the space between slides
-    //   // Add other configuration options as needed
-    //   // For example, pagination, navigation, etc.
+    //   slidesPerView: 2, 
+    //   spaceBetween: 20,
     //   pagination: {
     //     el: '.swiper-pagination',
     //     clickable: true,
@@ -58,9 +54,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     // });
   }
 
+  ngAfterViewInit(): void {
+    this.initializeSwiper();
+  }
+
+
   initializeSwiper() {
     this.swiper = this.swiperRef?.nativeElement.swiper,
-
     {
       autoplay: {
         delay: 1000,
@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       //   loop: true,
       //   loopedSlides: 3,
     };
-
     window.addEventListener('resize', this.updateSwiper);
   }
 
@@ -85,13 +84,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
-  onFocus(): void {
-    this.router.navigate(['/dashboard/Search']);
-  }
-
   navigateToListPage(category: ICategory): void {
     this.router.navigate([`/app/offer/${category.id}`]);
   }
+
+
+  navigateToRatingPage(offer: IOffers): void {
+    console.log('offer Id', offer.id)
+    this.router.navigate([`/app/details/${offer.id}`]);
+  }
+  // navigateToRatingPage(offer: IOffers): void {
+  //   console.log('offer Id', offer.id)
+  //   this.router.navigate([`/app/rating/${offer.id}`]);
+  // }
 
   private getCategories(): void {
     this.fireStoreService.getAll<ICategory>('categories').subscribe((res: Array<ICategory>) => {
@@ -105,7 +110,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
-  private getCurrentLanguage(): void {
-    this.currentLanguage = localStorage.getItem('lang') || 'ar';
+  getName(id: string): string {
+    if (this.users?.length > 0) {
+      if (id && id != '' && id != null) {
+        const userName = this.users.find(m => m.id == id);
+        return userName ? userName.name : 'x';
+      }
+      return 'xx';
+    }
+    return 'xxx';
   }
+
+  // private getCurrentLanguage(): void {
+  //   this.currentLanguage = localStorage.getItem('lang') || 'ar';
+  // }
 }
