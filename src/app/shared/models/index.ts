@@ -78,6 +78,7 @@ export interface IOffers {
     shopOwner: string;
     offerStatus: OfferStatus,
     categoryId: string;
+    rating: Array<{ userId: string; stars: number; }>;
 }
 
 export interface IRestaurant {
@@ -91,6 +92,18 @@ export interface IRestaurant {
     // mainMenu: string;
     // kidsMenu: string;
     // breakfastMenu: string;
+}
+
+export interface IRate {
+    id?: string;
+    userId?: string;
+    itemId?: string;
+    shopOwner?: string;
+    value?: number;
+    // myStars?: number[];
+    stars?: number;
+    date?: any;
+    comment?: string;
 }
 
 // export interface IUserRate extends IUserBase {

@@ -1,0 +1,75 @@
+.rating-list li {
+  color: #ddd;
+  padding: 0.5px;
+  font-size: 15px;
+  //   padding: 10px 5px;
+}
+
+.rating-list li.val {
+  color: #ffd700;
+  font-size: 15px;
+}
+
+.en-list {
+  display: inline-block;
+  list-style: none;
+}
+
+.ar-list {
+  display: inline-flex;
+  list-style: none;
+  padding-right: 0px;
+}
+
+.row {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  margin-inline-start: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  color: #0a0a0a;
+
+  ion-text {
+    margin-inline-start: 10px;
+    font-size: 14px;
+  }
+  ion-note {
+    margin-inline-start: 150px;
+    margin-top: -10px;
+    // font-size: 14px;
+  }
+  // ion-note.report {
+  //   margin-inline-start: -40px;
+  //   margin-bottom: -90px;
+  //   font-size: 13px;
+  // }
+}
+
+.user-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-inline-start: 10px;
+}
+
+.comment {
+  margin-top: -15px;
+}
+
+.review {
+  border: 1px solid #0a0a0a;
+  border-radius: 5px;
+  height: 50px;
+  margin: 5px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 2px 1px 1px hsl(0deg 0% 67.08%);
+  // box-shadow: 0 2px 6px 0 hsl(328, 100%, 54%);
+}

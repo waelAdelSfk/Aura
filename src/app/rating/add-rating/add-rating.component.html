@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>{{'addReview' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="w-100 p-3">
+    <div class="row">
+      <div>
+        <ul class="list-inline rating-list en-list" *ngFor="let star of myStars">
+          <li (click)="countStar(star)" [ngClass]="{'selected': (selectedValue >= star)}">
+            <ion-icon name="star"></ion-icon>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <textarea type="text" class="w-100 text-area" [placeholder]="'writeAComment' | translate" [(ngModel)]="message"
+      rows="1"></textarea>
+    <ion-button color="primary" expand="block" type="button" (click)="rate()" class="ion-margin-top"
+      [disabled]="!isFormValid">
+      {{'save' | translate}}
+    </ion-button>
+  </div>
+
+</ion-content>

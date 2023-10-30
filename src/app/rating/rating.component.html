@@ -1,0 +1,51 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>{{'reviews' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<!-- <ion-content> -->
+<div class="review" (click)="openAddEditModal()">
+  <ion-text>Write a reviews</ion-text>
+  <ion-icon name="chevron-forward-outline"></ion-icon>
+</div>
+<hr>
+<ion-list class="ion-padding-start" *ngIf="(rates | async)?.length > 0; else emptyData">
+  <ng-container *ngFor="let item of rates | async; last as last">
+    <div class="user-info">
+      <img class="user-image" alt="Silhouette of mountains" [src]="getUserImage(item.userId)" />
+      <ion-text>{{getUserName(item.userId)}}</ion-text>
+      <ion-note> {{(item.date.toMillis()) | date:'dd / MM / yyyy'}}</ion-note>
+      <!-- <ion-note color="danger" class="report" > {{'Report ?'}}</ion-note> -->
+    </div>
+    <div class="row">
+      <div>
+        <ul [ngClass]="this.isArabic? 'list-inline rating-list ar-list' : 'list-inline rating-list en-list'"
+          *ngFor="let star of myStars">
+          <li [ngClass]="{'val':(item.stars >= star)}">
+            <ion-icon name="star"></ion-icon>
+          </li>
+        </ul>
+      </div>
+      <ion-note class="comment">{{item.comment}}</ion-note>
+    </div>
+    <hr>
+  </ng-container>
+</ion-list>
+<!-- </ion-content> -->
+
+
+<ng-template #emptyData>
+  No Rating For This Product
+  <!-- <app-empty-data></app-empty-data> -->
+</ng-template>
+
+<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="openAddEditModal()" mode="ios" size="small">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab> -->

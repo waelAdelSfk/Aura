@@ -1,0 +1,41 @@
+.rating-list li {
+  float: right;
+  color: #ddd;
+  padding: 10px 5px;
+  font-size: 22px;
+}
+
+.rating-list li:hover,
+.rating-list li:hover ~ li,
+.rating-list li.selected {
+  color: #db1e7a;
+  //   color: #ffd700;
+  font-size: 30px;
+}
+
+.en-list {
+  display: inline-block;
+  list-style: none;
+}
+
+.ar-list {
+  display: inline-flex;
+  list-style: none;
+  padding-right: 0px;
+}
+
+.row {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.text-area-content {
+  height: 40px;
+}
+
+.text-area {
+  background-color: var(--ion-color-light);
+  border-radius: 10px;
+  height: 40px;
+  padding: 5px 10px;
+}
