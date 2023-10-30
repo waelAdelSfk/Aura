@@ -17,6 +17,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { WTranslateModule } from './shared/modules/translate.module';
 import { LoadingComponent } from './loading/loading.component';
 import { environment } from 'environments/environment';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+// import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,10 +33,13 @@ import { environment } from 'environments/environment';
     LoadingComponent,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // MaterialModule
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

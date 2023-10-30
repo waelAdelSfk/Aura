@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { InputComponent } from './components/input/input.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 
 const modules = [
@@ -23,7 +24,7 @@ const modules = [
   FormsModule,
   ReactiveFormsModule,
   IonicModule,
-  MaterialModule,
+  MaterialModule
 ];
 
 const components = [
@@ -35,14 +36,17 @@ const components = [
   FilterComponent,
   InputComponent,
   PageNotFoundComponent,
-  UploaderComponent
+  UploaderComponent,
+  // DatePickerComponent,
 ];
 
 @NgModule({
   declarations: components,
   imports: modules,
   exports: [...components, ...modules],
+  providers: [
+    DatePipe
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-
 })
 export class SharedModule { }

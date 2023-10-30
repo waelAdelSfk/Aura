@@ -5,9 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 // import { MatRippleModule} from '@angular/material/core';
 // import {A11yModule} from '@angular/cdk/a11y';
@@ -52,11 +53,14 @@ const modules = [
   MatSelectModule,
   MatIconModule,
   MatButtonModule,
+  MatFormFieldModule,
   MatDatepickerModule,
-  // NgxMatTimepickerModule,
   MatNativeDateModule,
   MatDividerModule,
   MatDialogModule,
+  NgxMatTimepickerModule,
+
+  // NgxMatTimepickerModule,
   // MatRippleModule,
   // A11yModule,
   // CdkAccordionModule,
@@ -98,6 +102,7 @@ const modules = [
 
 @NgModule({
   imports: modules,
-  exports: modules
+  exports: modules,
+
 })
 export class MaterialModule { }

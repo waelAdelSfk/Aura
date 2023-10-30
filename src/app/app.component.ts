@@ -7,7 +7,6 @@ import { Capacitor } from '@capacitor/core';
 import { Toast } from '@capacitor/toast';
 import { App } from '@capacitor/app';
 import { AuthService, LanguageService, TranslationService } from './shared/services';
-
 import { register } from 'swiper/element/bundle';
 register();
 

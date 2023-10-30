@@ -16,6 +16,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { OfferComponent } from './offer/offer.component';
 import { UsersComponent } from './users/users.component';
+import { RatingComponent } from './rating/rating.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [AutoLoginGuard] },
@@ -31,6 +32,9 @@ const routes: Routes = [
       { path: 'restaurants', component: RestaurantsComponent },
       { path: 'offer', component: OfferComponent },
       { path: 'offer/:id', loadComponent: () => import('./offer/offer.component').then(m => m.OfferComponent) },
+      { path: 'rating', component: RatingComponent },
+      { path: 'rating/:id', loadComponent: () => import('./rating/rating.component').then(m => m.RatingComponent) },
+      { path: 'details/:id', loadComponent: () => import('./details/details.component').then(m => m.DetailsComponent) },
       // {
       //   path: `${'offer'}/:id`,
       //   loadComponent: () => import('./offer/offer.component').then(m => m.OfferComponent)
