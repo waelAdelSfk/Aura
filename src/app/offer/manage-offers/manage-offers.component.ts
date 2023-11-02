@@ -8,7 +8,7 @@ import { DataService, FireStoreService, ModalService } from '@app/services';
 import { CommonUtility } from '@app/utilities';
 import { ControlsModule } from 'app/controls/controls.module';
 import { SharedModule } from 'app/shared/shared.module';
-import { Observable, map } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -27,8 +27,8 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
   subscriberList: Array<IUser> = [];
   subStatus = subscriptionStatus;
   offerStatus = OfferStatus;
-  categories: Observable<ICategory[]>;
-
+  // categories: Observable<ICategory[]>;
+  categories: Array<ICategory>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -117,6 +117,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       categoryId: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
+      shortDescription: [null, Validators.required],
       description: [null, Validators.required],
     });
   }
@@ -125,17 +126,23 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm.patchValue({
       title: this.item.title,
       image: this.item.image,
-      // categoryId: this.item.categoryId,
+      startDate: new Date(this.item.startDate.seconds * 1000),
+      endDate: new Date(this.item.endDate.seconds * 1000),
+      shortDescription: this.item.shortDescription,
+      description: this.item.description,
+      categoryId: this.item.categoryId,
     });
   }
 
   private getAllCategories(): void {
-    this.categories = this.fireStoreService.getAll('categories');
+    this.fireStoreService.getAll<ICategory>('categories').subscribe(res => {
+      this.categories = res
+    });
   }
 
-  handleChange(ev) {
-    console.log('Current value:', JSON.stringify(ev.target.value));
-  }
+  // handleChange(ev) {
+  //   console.log('Current value:', JSON.stringify(ev.target.value));
+  // }
 
   // private getAllCategories(): void {
   //   this.firebaseService.getAll(Constants.FirebaseCollection.monthsGrowth).subscribe(monthsGrowth => {

@@ -1,0 +1,49 @@
+img {
+  width: 100%;
+  height: 190px;
+  max-height: 190px;
+}
+
+.favorite {
+  color: var(--ion-color-danger);
+  font-size: 22px;
+}
+
+.not-favorite {
+  color: var(--ion-color-primary);
+  font-size: 22px;
+}
+
+.heart-icon {
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 28px;
+  position: absolute;
+  top: 184px;
+  right: 30px;
+  padding: 4px;
+}
+
+.details {
+  background-color: var(--ion-color-light);
+  padding: 16px;
+}
+
+.contact {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.price-category {
+  position: absolute;
+  top: 180px;
+  left: 24px;
+  ion-chip {
+    background-color: #ffffff;
+  }
+}
+// #f0f8ff61
+
+// #dfdfdf75

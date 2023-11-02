@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary" mode="ios">
     <ion-title>{{'Details' | translate}}</ion-title>
     <ion-buttons slot="end">
@@ -16,4 +16,84 @@
     </ion-card-content>
   </ion-card>
   <app-rating></app-rating>
+</ion-content> -->
+
+<app-page-header [title]="'Details'" [hasBackIcon]="true"></app-page-header>
+
+<ion-content>
+  <ng-container *ngIf="offers">
+    <ion-card>
+      <img [src]="offers.image" alt="img" loading="lazy" />
+    </ion-card>
+    <div>
+      <ng-container *ngIf="offers">
+        <span class="heart-icon">
+          <span (click)="removeFromFavorite()" *ngIf="isFavorite">
+            <ion-icon class="favorite" name="heart"></ion-icon>
+          </span>
+          <span (click)="addToFavorite()" *ngIf="!isFavorite">
+            <ion-icon class="not-favorite" name="heart-outline"></ion-icon>
+          </span>
+        </span>
+      </ng-container>
+    </div>
+
+    <div class="details">
+      <div class="contact">
+        <ion-chip color="tertiary">
+          <ion-icon color="primary" name="mail-outline"></ion-icon>
+          <ion-label>{{offers.title}}</ion-label>
+        </ion-chip>
+        <ion-chip color="tertiary">
+          <ion-icon color="medium" name="call-outline"></ion-icon>
+          <ion-label>{{offers.title}}</ion-label>
+        </ion-chip>
+      </div>
+
+      <div class="price-category">
+        <ion-chip outline color="tertiary" (click)="subscribe(shopOwnerId)">
+          <ion-label color="dark">{{'subscribe'}}</ion-label>
+        </ion-chip>
+
+        <ion-chip outline color="tertiary" (click)="unsubscribe(shopOwnerId)">
+          <ion-icon name="notifications-off-outline"></ion-icon>
+          <ion-label color="dark">{{'subscribed'}}</ion-label>
+        </ion-chip>
+      </div>
+
+      <div class="contact">
+        <hr>
+        <div>{{'location' | translate}}:</div>
+        <!-- {{offers.location}} -->
+      </div>
+
+      <div class="contact">
+        <hr>
+        <div>{{'openingTimes' | translate}}:</div>
+        <!-- {{offers.openingTimes}} -->
+      </div>
+
+      <div class="contact">
+        <hr>
+        <div>{{'view' | translate}}:</div>
+        <!-- {{getSessionViewName(offers.view)}} -->
+      </div>
+
+      <div class="contact">
+        <hr>
+        <div>{{'cuisineType' | translate}}:</div>
+        <!-- {{getCuisineName(offers.cuisineType)}} -->
+      </div>
+
+      <div class="contact">
+        <hr>
+        <div>{{'city' | translate}}:</div>
+        <!-- {{getCityName(offers.cities)}} -->
+      </div>
+
+      <hr>
+      <app-rating></app-rating>
+    </div>
+  </ng-container>
+
 </ion-content>
