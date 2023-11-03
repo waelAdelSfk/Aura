@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="header-content d-flex justify-content-between align-items-center">
+      <span *ngIf="hasBackIcon && !isSearchInputVisible" (click)="back()"
+        class="back-btn-container cursor-pointer d-flex justify-content-center align-items-center">
+        <ion-icon *ngIf="isAr" name="chevron-back-outline"></ion-icon>
+        <ion-icon *ngIf="!isAr" name="chevron-back-outline"></ion-icon>
+      </span>
+      <ion-title *ngIf="!isSearchInputVisible && title" size="small">{{title}}</ion-title>
+      <ion-searchbar *ngIf="isSearchInputVisible" color="light" #filterInput (ionClear)="cancelSearch()"
+        [(ngModel)]="searchText" [placeholder]="'search' | translate" (ionInput)="filter(searchText)"
+        class="w-100"></ion-searchbar>
+      <ion-buttons slot="start">
+        <ng-container *ngIf="hasSearchIcon">
+          <ion-button (click)="toggleSearchInput()" *ngIf="!isSearchInputVisible">
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
+          <ion-button (click)="toggleSearchInput()" *ngIf="isSearchInputVisible">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ng-container>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-header>
