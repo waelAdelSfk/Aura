@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { IUser } from '@app/models';
 import { FireStoreService } from './firestore.service';
+import { Observable, map } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ export class UsersService {
 
   users: Array<IUser> = [];
 
-  constructor(private fireStoreService: FireStoreService) {
+  constructor(private fireStoreService: FireStoreService, private angularFireAuth: AngularFireAuth) {
     this.getAllUsers();
   }
 
@@ -23,6 +26,12 @@ export class UsersService {
       return '';
     }
     return ''
+  }
+
+  getCurrentLoggedInUser(): Observable<firebase.User> {
+    return this.angularFireAuth.user.pipe(
+      map(user => user || ({} as firebase.User))
+    );
   }
 
   private getAllUsers(): void {

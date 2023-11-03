@@ -100,12 +100,12 @@
         <div class="user-info">
           <img [src]="item.image ?? defaultImage" class="user-image" alt="img" loading="lazy" />
           <ion-note>{{item.name}}</ion-note>
+
+
           <ng-container *ngIf="isUser" side="start">
             <ng-container *ngIf="item.subscriberList">
               <ng-container *ngIf="item.subscriberList.length === 0 || !isUserInList(item)">
-                <ion-button color="success" (click)="subscribe(item)">
-                  <!-- <ion-icon color="success" name="notifications"></ion-icon> -->
-                </ion-button>
+                <ion-icon color="success" name="notifications" (click)="subscribe(item)"></ion-icon>
               </ng-container>
 
               <ng-container *ngFor="let a of item.subscriberList">

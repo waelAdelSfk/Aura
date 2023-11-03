@@ -75,7 +75,8 @@ export interface IOffers {
     startDate: Timestamp;
     endDate: Timestamp;
     description: string;
-    shopOwner: string;
+    shortDescription: string;
+    shopOwnerId: string;
     offerStatus: OfferStatus,
     categoryId: string;
     rating: Array<{ userId: string; stars: number; }>;
@@ -104,6 +105,12 @@ export interface IRate {
     stars?: number;
     date?: any;
     comment?: string;
+}
+
+export interface IFavorite {
+    id: string;
+    userId: string;
+    itemId: string;
 }
 
 // export interface IUserRate extends IUserBase {

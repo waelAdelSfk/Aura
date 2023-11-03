@@ -9,7 +9,7 @@ import {
 import { AngularFirestore, AngularFirestoreCollection, DocumentData, QueryFn } from '@angular/fire/compat/firestore';
 
 import { NotificationType, Role } from '@app/enums';
-import { IUser, ICollectionData, INotification } from '@app/models';
+import { IUser, ICollectionData, INotification, IFavorite } from '@app/models';
 import { convertSnaps } from './db-utils';
 
 @Injectable({
@@ -40,6 +40,8 @@ export class FireStoreService {
   addDoc<T>(collectionName: string, data: PartialWithFieldValue<any>): Observable<DocumentReference<T>> {
     return from(addDoc(this.getCollection(collectionName), data));
   }
+
+
 
   async setUserDoc(user: IUser): Promise<void> {
     const docRef: DocumentReference = doc(this.firestore, `users/${user.id}`);
@@ -105,6 +107,11 @@ export class FireStoreService {
   getUserNotifications(userId: string): Observable<Array<INotification>> {
     const documentQuery = query(this.getCollection('notification'), where('userId', '==', userId));
     return collectionData(documentQuery, { idField: 'id' }) as Observable<Array<INotification>>;
+  }
+
+  getUserFavorite(userId: string): Observable<Array<IFavorite>> {
+    const documentQuery = query(this.getCollection('favorite'), where('userId', '==', userId));
+    return collectionData(documentQuery, { idField: 'id' }) as Observable<Array<IFavorite>>;
   }
 
   private collectionData<T = DocumentData>(query: Query<T>, options?: { idField?: string; }): Observable<T[]> {

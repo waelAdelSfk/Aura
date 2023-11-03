@@ -15,6 +15,9 @@ import { InputComponent } from './components/input/input.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SelectComponent } from './components/select/select.component';
+import { TextAreaComponent } from './components/text-area/text-area.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 // import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 
@@ -37,6 +40,9 @@ const components = [
   InputComponent,
   PageNotFoundComponent,
   UploaderComponent,
+  SelectComponent,
+  TextAreaComponent,
+  PageHeaderComponent
   // DatePickerComponent,
 ];
 
