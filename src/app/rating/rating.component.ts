@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IOffers, IRate, IUser } from '@app/models';
-import { FireStoreService, ModalService } from '@app/services';
+import { DataService, FireStoreService, ModalService } from '@app/services';
 import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
 import { Observable, map } from 'rxjs';
@@ -29,6 +29,7 @@ export class RatingComponent extends CommonUtility implements OnInit {
     private fireStoreService: FireStoreService,
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
+    private dataService: DataService,
   ) { super(); }
 
   get itemId(): string {
@@ -39,6 +40,11 @@ export class RatingComponent extends CommonUtility implements OnInit {
     this.getAllRates();
     // this.getAverage();
   }
+
+  remove(item: IRate): void {
+    this.dataService.remove(`rating/${item.id}`);
+  }
+
 
   getUserName(userId: string): string {
     if (this.users?.length > 0) {

@@ -1,16 +1,5 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'reviews' | translate}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
-
-<!-- <ion-content> -->
 <div class="review" (click)="openAddEditModal()">
-  <ion-text>Write a reviews</ion-text>
+  <ion-text>{{'WriteReviews' | translate}}</ion-text>
   <ion-icon name="chevron-forward-outline"></ion-icon>
 </div>
 <hr>
@@ -20,7 +9,6 @@
       <img class="user-image" alt="Silhouette of mountains" [src]="getUserImage(item.userId)" />
       <ion-text>{{getUserName(item.userId)}}</ion-text>
       <ion-note> {{(item.date.toMillis()) | date:'dd / MM / yyyy'}}</ion-note>
-      <!-- <ion-note color="danger" class="report" > {{'Report ?'}}</ion-note> -->
     </div>
     <div class="row">
       <div>
@@ -32,20 +20,14 @@
         </ul>
       </div>
       <ion-note class="comment">{{item.comment}}</ion-note>
+      <ion-icon *ngIf="isAdmin" class="trash-icon" name="trash-outline" color="danger" (click)="remove(item)">
+      </ion-icon>
     </div>
     <hr>
   </ng-container>
 </ion-list>
-<!-- </ion-content> -->
-
-
 <ng-template #emptyData>
-  No Rating For This Product
-  <!-- <app-empty-data></app-empty-data> -->
+  <ion-text class="no-data">{{'NoRating' | translate}}</ion-text>
+  <br>
+  <ion-text class="no-data">{{'BeTheFirstToRateThisItem'| translate}}</ion-text>
 </ng-template>
-
-<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="openAddEditModal()" mode="ios" size="small">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab> -->
