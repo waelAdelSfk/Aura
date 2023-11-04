@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountStatus, Role, subscriptionStatus } from '@app/enums';
 
 import { IUser } from '@app/models';
@@ -33,7 +34,7 @@ export class UsersComponent extends CommonUtility implements OnInit {
   // userId: string;
   isDataLoading = false;
   // destroyed = new Subject();
-  // users: User[] = [];
+  user: IUser;
   // searchUsers: User[] = [];
   defaultImage = 'assets/images/avatar.png';
 
@@ -46,6 +47,7 @@ export class UsersComponent extends CommonUtility implements OnInit {
   constructor(
     private fireStoreService: FireStoreService,
     private dataService: DataService,
+    private router: Router
     // private toastService: ToastService,
     // private firebaseService: FirebaseService,
     // private navigationService: NavigationService,
@@ -76,6 +78,17 @@ export class UsersComponent extends CommonUtility implements OnInit {
 
   seeDetails(user: IUser): void {
     // this.navigationService.navigateDependOnRole(`${Constants.Routes.users}/${user.id}`);
+  }
+
+  viewDetails(user: IUser): void {
+    // if (this.user) {
+    // if (this.element.type === 'restaurant') {
+    this.router.navigateByUrl(`app/offer/${user.id}`);
+    console.log('clicked')
+    // } else if (this.element.type === 'place') {
+    // this.router.navigateByUrl(`app/place/${this.element.id}`);
+    // }
+    // }
   }
 
   remove(user: IUser): void {
