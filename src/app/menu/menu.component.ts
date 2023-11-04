@@ -64,6 +64,12 @@ export class MenuComponent {
       url: 'offer',
       icon: 'gift',
       visibility: [Role.admin, Role.user]
+    },
+    {
+      labelKey: 'favorite',
+      url: 'favorite',
+      icon: 'heart',
+      visibility: [Role.user]
     }
   ];
 
@@ -72,7 +78,7 @@ export class MenuComponent {
     private menuController: MenuController,
     private authService: AuthService,
     private languageService: LanguageService,
-  ) { }
+  ) { this.setMenuItems(); }
 
   navigate(url: string): void {
     this.router.navigateByUrl(`app/${url}`);
@@ -94,5 +100,16 @@ export class MenuComponent {
 
   private closeMenu(): void {
     this.menuController.close('secureMenuId');
+  }
+
+  private setMenuItems(): void {
+    this.authService.isAdmin.subscribe(isAdmin => {
+      if (isAdmin) {
+        this.menuItems = this.menuItems.filter(m => m.visibility.includes(Role.admin));
+      }
+      else {
+        this.menuItems = this.menuItems.filter(m => m.visibility.includes(Role.user));
+      }
+    });
   }
 }

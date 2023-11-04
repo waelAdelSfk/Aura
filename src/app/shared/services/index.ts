@@ -10,3 +10,4 @@ export { FireStoreService } from './firestore.service';
 export { ToastService } from './toast.service';
 export { DataService } from './data.service';
 export { UsersService } from './users.service'
+export { FavoriteService } from './favorite.service'

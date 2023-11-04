@@ -1,0 +1,13 @@
+<ng-container *ngIf="item && element">
+  <ion-card class="cursor-pointer">
+    <ion-card-header class="">
+      <ion-icon name="trash-outline" color="danger" (click)="remove()"></ion-icon>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center" (click)="viewDetails()">
+      <img [src]="element.image" alt="img" class="favorite-image" loading="lazy" />
+      <div class="text-truncate mt-2">
+        {{element.title}}
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
