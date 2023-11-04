@@ -16,6 +16,9 @@ export class CommonUtility {
   get isUser(): boolean {
     return localStorage.getItem('role') === Role.user.toString();
   }
+  get isShopOwner(): boolean {
+    return localStorage.getItem('role') === Role.shopOwner.toString();
+  }
 
   get userId(): string {
     const id = localStorage.getItem('userId');

@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary" mode="ios">
     <ion-title *ngIf="categoryId">{{getName(categoryId)}}</ion-title>
-    <!-- <ion-title *ngIf="!categoryId">{{'offers' | translate}}</ion-title> -->
-    <!-- <ion-title *ngIf="ownerId">{{'offers' | translate}}</ion-title> -->
+    <ion-title *ngIf="!categoryId">{{'Offers'}}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -13,7 +12,7 @@
   <ng-container *ngIf="(offers | async) as offersData">
     <ion-list *ngIf="offersData.length > 0; else emptyData">
       <ion-item-sliding *ngFor="let item of offers | async; last as last">
-        <ion-item [lines]="last ? 'none' : 'full'">
+        <ion-item [lines]="last ? 'none' : 'full'" (click)="viewDetails(item)">
           <ion-avatar slot="start">
             <img [src]="item.image" alt="img" class="img w-100" />
           </ion-avatar>
@@ -22,10 +21,10 @@
           </ion-label>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="light" (click)="openAddEditModal(item)">
+          <ion-item-option color="light" (click)="openAddEditModal(item)" *ngIf="isShopOwner">
             <ion-icon name="create" color="primary"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="light" (click)="remove(item)">
+          <ion-item-option color="light" (click)="remove(item)" *ngIf="isShopOwner || isAdmin">
             <ion-icon name="trash" color="danger"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -37,7 +36,7 @@
 <ng-template #emptyData>
   <app-empty-data></app-empty-data>
 </ng-template>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab *ngIf="isShopOwner" vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="openAddEditModal()" mode="ios" size="small">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
