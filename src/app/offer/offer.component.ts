@@ -16,9 +16,11 @@ import { ActivatedRoute } from '@angular/router';
 export class OfferComponent implements OnInit {
 
 
+  offer: IOffers;
   offers: Observable<IOffers[]>;
   categories: ICategory[] = [];
   categoryId: string;
+  ownerId: string;
   constructor(
     private modalService: ModalService,
     private fireStoreService: FireStoreService,
@@ -35,6 +37,8 @@ export class OfferComponent implements OnInit {
       this.categories = res;
     })
     this.categoryId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.ownerId = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.getAllOffers();
   }
 
@@ -52,26 +56,37 @@ export class OfferComponent implements OnInit {
   }
 
   private getAllOffers(): void {
-    if (this.categoryId) {
-      this.offers = this.fireStoreService.getAll('offersList').pipe(map((data: IOffers[]) => data.
-        filter((offer) => offer.categoryId === this.categoryId)));
-    } else {
-      this.offers = this.fireStoreService.getAll('offersList');
-      // .pipe(map((data: IOffers[]) => data.
-      // filter((offer) => offer.categoryId === this.categoryId)))
-    }
-
+    this.offers = this.fireStoreService.getAll('offersList').pipe(
+      map((data: IOffers[]) => {
+        const paramValue = this.activatedRoute.snapshot.paramMap.get('id');
+        const categoryOffers = data.filter(offer => offer.categoryId === paramValue);
+        const ownerOffers = data.filter(offer => offer.shopOwnerId === paramValue);
+        return [...categoryOffers, ...ownerOffers];
+      })
+    );
   }
+
+  // private getAllOffers(): void {
+  //   if (this.categoryId) {
+  //     this.offers = this.fireStoreService.getAll('offersList').pipe(map((data: IOffers[]) => data.
+  //       filter((offer) => offer.categoryId === this.categoryId)));
+  //   } else if (this.ownerId) {
+  //     this.offers = this.fireStoreService.getAll('offersList').pipe(map((data: IOffers[]) => data.
+  //       filter((offer) => offer.shopOwnerId === this.ownerId)));
+  //   } else {
+  //     this.offers = this.fireStoreService.getAll('offersList');
+  //   }
+  // }
 
   getName(id: string): string {
     if (this.categories?.length > 0) {
       if (id && id != '' && id != null) {
         const categoryName = this.categories.find(m => m.id == id);
-        return categoryName ? categoryName.name : 'x';
+        return categoryName ? categoryName.name : 'Offers';
       }
-      return 'xx';
+      return 'Offers';
     }
-    return 'xxx';
+    return 'Offers';
   }
 
   // private getAllStages(): void {
