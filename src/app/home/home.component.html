@@ -5,7 +5,7 @@
     </ion-buttons>
     <div class="user-info">
       <img class="user-image" alt="Silhouette of mountains" src="assets/images/avatar.png" />
-      <h6>{{getName(userId)}}</h6>
+      <h6>{{'Hello,'}} &nbsp; {{getName(userId)}}</h6>
     </div>
     <div class="welcome">
       <ion-text>{{'Welcome Back'}}</ion-text>
@@ -23,7 +23,7 @@
 <ion-content color="light">
   <ion-grid class="ion-no-padding">
     <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
-      [spaceBetween]="10" [centeredSlides]="false" [loop]="true">
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
       <swiper-slide class="top" *ngFor="let category of categories">
         <!-- <div class="swiper-zoom-container"> -->
         <!-- <ion-card class="category" (click)="navigateToListPage(category)"> -->
@@ -49,8 +49,9 @@
           <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
           <ion-card-content class="main-card">
             <ion-note>{{offer.title}}</ion-note>
-            <ion-note>{{'valid from'}} :&nbsp; {{'5/10/2023'}}</ion-note>
-            <ion-note>{{'valid until'}} :&nbsp; {{'10/10/2023'}}</ion-note>
+            <ion-note>{{offer.shortDescription}}</ion-note>
+            <ion-note>{{'valid from'}} :&nbsp; {{offer.startDate.toDate() | date:'mediumDate'}}</ion-note>
+            <ion-note>{{'valid until'}} :&nbsp; {{offer.endDate.toDate() | date:'mediumDate'}}</ion-note>
           </ion-card-content>
         </ion-card>
         <!-- </div> -->

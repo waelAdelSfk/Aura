@@ -22,7 +22,7 @@ export class MenuComponent extends CommonUtility {
       labelKey: 'home',
       url: 'home',
       icon: 'home',
-      visibility: [Role.admin, Role.user]
+      visibility: [Role.admin, Role.user, Role.shopOwner]
     },
     {
       labelKey: 'notifications',
