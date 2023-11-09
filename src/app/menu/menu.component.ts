@@ -6,6 +6,7 @@ import { IMenu } from '@app/models';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthService, LanguageService } from '@app/services';
 import { Role } from '@app/enums';
+import { CommonUtility } from '@app/utilities';
 
 @Component({
   selector: 'app-menu',
@@ -14,19 +15,13 @@ import { Role } from '@app/enums';
   standalone: true,
   imports: [SharedModule]
 })
-export class MenuComponent {
+export class MenuComponent extends CommonUtility {
 
   menuItems: Array<IMenu> = [
     {
       labelKey: 'home',
       url: 'home',
       icon: 'home',
-      visibility: [Role.admin, Role.user]
-    },
-    {
-      labelKey: 'restaurants',
-      url: 'restaurants',
-      icon: 'restaurant',
       visibility: [Role.admin, Role.user]
     },
     {
@@ -45,13 +40,13 @@ export class MenuComponent {
       labelKey: 'users',
       url: 'users',
       icon: 'people',
-      visibility: [Role.admin]
+      visibility: [Role.admin, Role.user]
     },
     {
       labelKey: 'profile',
       url: 'profile',
       icon: 'person',
-      visibility: [Role.admin, Role.user]
+      visibility: [Role.admin, Role.user, Role.shopOwner]
     },
     {
       labelKey: 'feedback',
@@ -63,7 +58,7 @@ export class MenuComponent {
       labelKey: 'offers',
       url: 'offer',
       icon: 'gift',
-      visibility: [Role.admin, Role.user]
+      visibility: [Role.admin, Role.shopOwner]
     },
     {
       labelKey: 'favorite',
@@ -78,7 +73,10 @@ export class MenuComponent {
     private menuController: MenuController,
     private authService: AuthService,
     private languageService: LanguageService,
-  ) { this.setMenuItems(); }
+  ) {
+    super();
+    this.setMenuItems();
+  }
 
   navigate(url: string): void {
     this.router.navigateByUrl(`app/${url}`);
@@ -107,7 +105,10 @@ export class MenuComponent {
       if (isAdmin) {
         this.menuItems = this.menuItems.filter(m => m.visibility.includes(Role.admin));
       }
-      else {
+      if (this.isShopOwner) {
+        this.menuItems = this.menuItems.filter(m => m.visibility.includes(Role.shopOwner));
+      }
+      if (this.isUser) {
         this.menuItems = this.menuItems.filter(m => m.visibility.includes(Role.user));
       }
     });

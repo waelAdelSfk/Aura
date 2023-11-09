@@ -81,14 +81,7 @@ export class UsersComponent extends CommonUtility implements OnInit {
   }
 
   viewDetails(user: IUser): void {
-    // if (this.user) {
-    // if (this.element.type === 'restaurant') {
     this.router.navigateByUrl(`app/offer/${user.id}`);
-    console.log('clicked')
-    // } else if (this.element.type === 'place') {
-    // this.router.navigateByUrl(`app/place/${this.element.id}`);
-    // }
-    // }
   }
 
   remove(user: IUser): void {
