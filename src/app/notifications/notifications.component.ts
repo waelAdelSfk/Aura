@@ -19,7 +19,7 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
 
   notifications: Array<INotificationViewModel> = [];
   notificationType = NotificationType;
-  
+
   constructor(
     private fireStoreService: FireStoreService,
     private translationService: TranslationService,
@@ -35,12 +35,19 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
   }
 
   markAsSeen(notification: INotificationViewModel): void {
-    if ((this.isAdmin && !notification.isAdminSeen) || (!this.isAdmin &&!notification.isUserSeen)) {
+    if ((this.isAdmin && !notification.isAdminSeen)) {
       const updatedNotification: Partial<INotification> = {
         isAdminSeen: this.isAdmin ? !notification.isAdminSeen : notification.isAdminSeen,
         isUserSeen: this.isAdmin ? notification.isUserSeen : !notification.isUserSeen
       };
       this.fireStoreService.updateDoc(`notifications/${notification.id}`, updatedNotification).subscribe(() => {
+        this.toastService.showToaster(this.getTranslateValue('updatedSuccessfully'));
+      });
+    } else if (this.isUser && !notification.isUserSeen) {
+      const updatedNotification: Partial<INotification> = {
+        isUserSeen: !notification.isUserSeen
+      };
+      this.fireStoreService.updateDoc(`notification/${notification.id}`, updatedNotification).subscribe(() => {
         this.toastService.showToaster(this.getTranslateValue('updatedSuccessfully'));
       });
     }
@@ -60,19 +67,35 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
   }
 
   private getAllNotifications(): void {
-    const emailField: keyof IUser = 'email';
-    const imageField: keyof IUser = 'image';
-    this.fireStoreService.getAll<INotification>('notifications').subscribe(notifications => {
-      this.notifications = notifications.filter(n => this.isAdmin ? !n.isAdminRemoved : !n.isUserRemoved).map(n => ({
-        ...n,
-        userName: this.usersService.getUserPropById(n.userId),
-        email: this.usersService.getUserPropById(n.userId, emailField),
-        image: this.usersService.getUserPropById(n.userId, imageField),
-        cssClass: this.getCssClass(n)
-      })).sort((a,b) => b.date.toMillis() - a.date.toMillis());
-    });
+    if (this.isAdmin) {
+      const emailField: keyof IUser = 'email';
+      const imageField: keyof IUser = 'image';
+      this.fireStoreService.getAll<INotification>('notifications').subscribe(notifications => {
+        this.notifications = notifications.filter(n => this.isAdmin ? !n.isAdminRemoved : !n.isUserRemoved).map(n => ({
+          ...n,
+          userName: this.usersService.getUserPropById(n.userId),
+          email: this.usersService.getUserPropById(n.userId, emailField),
+          image: this.usersService.getUserPropById(n.userId, imageField),
+          cssClass: this.getCssClass(n)
+        })).sort((a, b) => b.date.toMillis() - a.date.toMillis());
+      });
+    } else {
+      const emailField: keyof IUser = 'email';
+      const imageField: keyof IUser = 'image';
+      this.fireStoreService.getAll<INotification>('notification').subscribe(notifications => {
+        this.notifications = notifications.filter(n => n.userId === this.userId && !n.isAdminRemoved).map(n => ({
+          ...n,
+          userName: this.usersService.getUserPropById(n.userId),
+          email: this.usersService.getUserPropById(n.userId, emailField),
+          image: this.usersService.getUserPropById(n.userId, imageField),
+          cssClass: this.getCssClass(n)
+        })).sort((a, b) => b.date.toMillis() - a.date.toMillis());
+
+      })
+    }
+
   }
-  
+
   private getTranslateValue(key: string): string {
     return this.translationService.instant(key);
   }

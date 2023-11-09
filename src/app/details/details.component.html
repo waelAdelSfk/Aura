@@ -42,11 +42,11 @@
       <div class="contact">
         <ion-chip color="tertiary">
           <ion-icon color="primary" name="mail-outline"></ion-icon>
-          <ion-label>{{offers.title}}</ion-label>
+          <ion-label>{{offers.email}}</ion-label>
         </ion-chip>
         <ion-chip color="tertiary">
           <ion-icon color="medium" name="call-outline"></ion-icon>
-          <ion-label>{{offers.title}}</ion-label>
+          <ion-label>{{offers.phoneNumber}}</ion-label>
         </ion-chip>
       </div>
 
@@ -105,32 +105,32 @@
       <div class="contact">
         <hr>
         <div>{{'location' | translate}}:</div>
-        <!-- {{offers.location}} -->
+        {{offers.location}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'openingTimes' | translate}}:</div>
-        <!-- {{offers.openingTimes}} -->
+        <div>{{'Valid From' | translate}}:</div>
+        {{offers.startDate.toDate() | date:'mediumDate'}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'view' | translate}}:</div>
-        <!-- {{getSessionViewName(offers.view)}} -->
+        <div>{{'Valid until' | translate}}:</div>
+        {{offers.endDate.toDate() | date:'mediumDate'}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'cuisineType' | translate}}:</div>
-        <!-- {{getCuisineName(offers.cuisineType)}} -->
+        <div>{{'description' | translate}}:</div>
+        {{offers.description}}
       </div>
 
-      <div class="contact">
+      <!-- <div class="contact">
         <hr>
         <div>{{'city' | translate}}:</div>
-        <!-- {{getCityName(offers.cities)}} -->
-      </div>
+        {{getCityName(offers.cities)}}
+      </div> -->
 
       <hr>
       <app-rating></app-rating>

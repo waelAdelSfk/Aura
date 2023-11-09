@@ -57,22 +57,22 @@
 
 
 
-  <ng-container *ngIf=" isUser && (users | async)?.length > 0; else noData">
-    <ion-card *ngFor="let item of users | async" (click)="viewDetails(item)">
+  <ng-container *ngIf=" isUser && (users | async)?.length > 0">
+    <ion-card *ngFor="let item of users | async">
       <div class="user-info">
         <img [src]="item.image ?? defaultImage" class="user-image" alt="img" loading="lazy" />
-        <ion-note>{{item.name}}</ion-note>
+        <ion-note (click)="viewDetails(item)">{{item.name}}</ion-note>
         <ng-container side="start">
           <ng-container *ngIf="item.subscriberList">
             <ng-container *ngIf="item.subscriberList.length === 0 || !isUserInList(item)">
               <ion-badge slot="start" (click)="subscribe(item)"></ion-badge>
-              <ion-icon color="success" name="notifications" (click)="subscribe(item)"></ion-icon>
+              <ion-icon color="success" name="notifications-outline" (click)="subscribe(item)"></ion-icon>
             </ng-container>
 
             <ng-container *ngFor="let a of item.subscriberList">
               <ion-item-option *ngIf="a.userId === userId && a.subStatus === subStatus.unSubscribe" color="light"
                 (click)="subscribe(item)">
-                <ion-icon color="success" name="notifications" (click)="subscribe(item)"></ion-icon>
+                <ion-icon color="success" name="notifications-outline" (click)="subscribe(item)"></ion-icon>
               </ion-item-option>
             </ng-container>
 
@@ -99,8 +99,8 @@
     </ion-card>
   </ng-container>
 
-  <ng-template #noData>
+  <!-- <ng-template #noData>
     No data
-  </ng-template>
+  </ng-template> -->
 
 </ion-content>
