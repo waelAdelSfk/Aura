@@ -89,7 +89,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
                 userId: subscriber.userId, // Use subscriber's userId
                 shopOwnerId: this.userId,
                 date: Timestamp.fromDate(new Date()),
-                content: 'newOffer',
+                content: 'You Have New Offer',
                 isUserRemoved: false,
                 isUserSeen: false,
                 offerId: offerId,
@@ -114,9 +114,12 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm = this.formBuilder.group({
       title: [null, Validators.required],
       image: [null, Validators.required],
+      email: [null, Validators.required],
+      phoneNumber: [null, Validators.required],
       categoryId: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
+      location: [null, Validators.required],
       shortDescription: [null, Validators.required],
       description: [null, Validators.required],
     });
@@ -126,10 +129,13 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm.patchValue({
       title: this.item.title,
       image: this.item.image,
+      email: this.item.email,
+      phoneNumber: this.item.phoneNumber,
       startDate: new Date(this.item.startDate.seconds * 1000),
       endDate: new Date(this.item.endDate.seconds * 1000),
       shortDescription: this.item.shortDescription,
       description: this.item.description,
+      location: this.item.location,
       categoryId: this.item.categoryId,
     });
   }

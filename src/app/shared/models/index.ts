@@ -79,6 +79,9 @@ export interface IOffers {
     shopOwnerId: string;
     offerStatus: OfferStatus,
     categoryId: string;
+    email: string;
+    location: string;
+    phoneNumber: number;
     rating: Array<{ userId: string; stars: number; }>;
 }
 
