@@ -14,7 +14,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { CategoriesComponent } from './categories/categories.component';
 // import { UsersComponent } from './users/UsersComponent';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
-import { OffersComponent } from './offer/offers.component';
+import { OffersComponent } from './offers/offers.component';
 import { UsersComponent } from './users/users.component';
 import { RatingComponent } from './rating/rating.component';
 import { FavoriteComponent } from './favorite/favorite.component';
@@ -31,9 +31,9 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'restaurants', component: RestaurantsComponent },
-      { path: 'offer', component: OffersComponent },
+      { path: 'offers', component: OffersComponent },
       { path: 'favorite', component: FavoriteComponent },
-      { path: 'offer/:id', loadComponent: () => import('./offer/offers.component').then(m => m.OffersComponent) },
+      { path: 'offers/:id', loadComponent: () => import('./offers/offers.component').then(m => m.OffersComponent) },
       { path: 'rating', component: RatingComponent },
       { path: 'rating/:id', loadComponent: () => import('./rating/rating.component').then(m => m.RatingComponent) },
       { path: 'details/:id', loadComponent: () => import('./details/details.component').then(m => m.DetailsComponent) },
