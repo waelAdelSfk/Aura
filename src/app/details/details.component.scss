@@ -36,7 +36,18 @@ img {
   flex-direction: column;
 }
 
-.price-category {
+.report {
+  position: absolute;
+  top: 209px;
+  right: 30px;
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: -19px;
+    margin-inline-start: -9px;
+  }
+}
+
+.subscription {
   position: absolute;
   top: 180px;
   left: 24px;

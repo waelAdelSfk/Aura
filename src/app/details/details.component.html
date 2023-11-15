@@ -1,23 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'Details' | translate}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-
-<ion-content>
-  <ion-card>
-    <ion-card-title>my comp</ion-card-title>
-    <ion-card-content>
-      <h5>wael</h5>
-    </ion-card-content>
-  </ion-card>
-  <app-rating></app-rating>
-</ion-content> -->
-
 <app-page-header [title]="'Details'" [hasBackIcon]="true"></app-page-header>
 
 <ion-content>
@@ -26,7 +6,7 @@
       <img [src]="offers.image" alt="img" loading="lazy" />
     </ion-card>
     <div>
-      <ng-container *ngIf="offers">
+      <ng-container *ngIf="offers && isUser">
         <span class="heart-icon">
           <span (click)="removeFromFavorite()" *ngIf="isFavorite">
             <ion-icon class="favorite" name="heart"></ion-icon>
@@ -41,8 +21,8 @@
     <div class="details">
       <div class="contact">
         <ion-chip color="tertiary">
-          <ion-icon color="primary" name="mail-outline"></ion-icon>
-          <ion-label>{{offers.email}}</ion-label>
+          <ion-icon color="medium" name="globe-outline"></ion-icon>
+          <a href="{{offers.site}}" target="_blank">{{offers.site}}</a>
         </ion-chip>
         <ion-chip color="tertiary">
           <ion-icon color="medium" name="call-outline"></ion-icon>
@@ -50,15 +30,18 @@
         </ion-chip>
       </div>
 
+      <div class="report">
+        <div (click)="report()" *ngIf="isUser" color="danger">
+          <ion-icon color="warning" name="flag-outline"></ion-icon>
+          <br>
+          <ion-note>{{'Report'}}</ion-note>
+        </div>
+        <div (click)="remove()" *ngIf="isAdmin">
+          <ion-icon name="trash" color="danger"></ion-icon>
+        </div>
+      </div>
 
-
-
-
-
-
-
-
-      <div class="price-category">
+      <div class="subscription" *ngIf="isUser">
         <div side="start" *ngIf="(users | async)?.length > 0">
           <ng-container *ngFor="let item of users | async">
             <ng-container *ngIf="item.id === offers.shopOwnerId">
@@ -72,7 +55,7 @@
 
                 <ng-container *ngFor="let a of item.subscriberList">
                   <ion-chip outline color="tertiary"
-                    *ngIf="a.userId === userId && a.subStatus === subStatus.unSubscribe"
+                    *ngIf="a.userId === currentUser && a.subStatus === subStatus.unSubscribe"
                     (click)="subscribe(offers.shopOwnerId)">
                     <ion-label color="dark">{{'subscribe'}}</ion-label>
                   </ion-chip>
@@ -80,7 +63,7 @@
 
                 <ng-container *ngFor="let a of item.subscriberList">
                   <ion-chip outline color="tertiary"
-                    *ngIf="(a.subStatus === subStatus.subscribe && a.userId === userId)"
+                    *ngIf="(a.subStatus === subStatus.subscribe && a.userId === currentUser)"
                     (click)="unsubscribe(offers.shopOwnerId)">
                     <ion-icon name="notifications-off-outline"></ion-icon>
                     <ion-label color="dark">{{'subscribed'}}</ion-label>
@@ -90,16 +73,6 @@
             </ng-container>
           </ng-container>
         </div>
-
-        <!-- <ion-chip outline color="tertiary" (click)="subscribe(offers.shopOwnerId)">
-          <ion-label color="dark">{{'subscribe'}}</ion-label>
-        </ion-chip>
-
-        <ion-chip outline color="tertiary" *ngIf="isSubUserInList(offers.shopOwnerId)"
-          (click)="unsubscribe(offers.shopOwnerId)">
-          <ion-icon name="notifications-off-outline"></ion-icon>
-          <ion-label color="dark">{{'subscribed'}}</ion-label>
-        </ion-chip> -->
       </div>
 
       <div class="contact">
@@ -125,13 +98,6 @@
         <div>{{'description' | translate}}:</div>
         {{offers.description}}
       </div>
-
-      <!-- <div class="contact">
-        <hr>
-        <div>{{'city' | translate}}:</div>
-        {{getCityName(offers.cities)}}
-      </div> -->
-
       <hr>
       <app-rating></app-rating>
     </div>
