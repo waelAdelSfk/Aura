@@ -49,12 +49,6 @@ export class MenuComponent extends CommonUtility {
       visibility: [Role.admin, Role.user, Role.shopOwner]
     },
     {
-      labelKey: 'feedback',
-      url: 'feedback',
-      icon: 'thumbs-down',
-      visibility: [Role.admin, Role.user]
-    },
-    {
       labelKey: 'offers',
       url: 'offer',
       icon: 'gift',
@@ -65,7 +59,14 @@ export class MenuComponent extends CommonUtility {
       url: 'favorite',
       icon: 'heart',
       visibility: [Role.user]
-    }
+    },
+    {
+      labelKey: 'feedback',
+      url: 'feedback',
+      icon: 'thumbs-down',
+      visibility: [Role.admin, Role.user]
+    },
+
   ];
 
   constructor(

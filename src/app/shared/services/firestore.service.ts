@@ -27,6 +27,10 @@ export class FireStoreService {
     // this.getRegisterEmails();
   }
 
+  getDocumentRef(url: string): DocumentReference {
+    return doc(this.firestore, url);
+  }
+
   createId(): string {
     return this.angularFirestore.createId();
   }
@@ -107,6 +111,21 @@ export class FireStoreService {
   getUserNotifications(userId: string): Observable<Array<INotification>> {
     const documentQuery = query(this.getCollection('notification'), where('userId', '==', userId));
     return collectionData(documentQuery, { idField: 'id' }) as Observable<Array<INotification>>;
+  }
+
+  async updateDocNotifications(collectionName: string, id: string, data: any): Promise<void> {
+    // this.loadingService.showAsyncLoading().then(async (loading: HTMLIonLoadingElement) => {
+    const docRef = doc(this.firestore, `${collectionName}/${id}`);
+    return updateDoc(docRef, data).then(() => {
+      // loading.dismiss();
+      // if (!hasCustomMsg) {
+      //   this.toastService.showToaster('updatedSuccessfully');
+      // }
+    }).catch((error) => {
+      // loading.dismiss();
+      // this.handleErrorService.showWarningAlert(error.message);
+      // });
+    });
   }
 
   getUserFavorite(userId: string): Observable<Array<IFavorite>> {

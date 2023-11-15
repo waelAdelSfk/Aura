@@ -1,4 +1,4 @@
-import { FieldPath, Timestamp, WhereFilterOp } from '@angular/fire/firestore';
+import { DocumentReference, FieldPath, Timestamp, WhereFilterOp } from '@angular/fire/firestore';
 
 import { AccountStatus, NotificationType, Role, OfferStatus } from '@app/enums';
 
@@ -79,7 +79,7 @@ export interface IOffers {
     shopOwnerId: string;
     offerStatus: OfferStatus,
     categoryId: string;
-    email: string;
+    site: string;
     location: string;
     phoneNumber: number;
     rating: Array<{ userId: string; stars: number; }>;
@@ -104,7 +104,6 @@ export interface IRate {
     itemId?: string;
     shopOwner?: string;
     value?: number;
-    // myStars?: number[];
     stars?: number;
     date?: any;
     comment?: string;
@@ -114,6 +113,19 @@ export interface IFavorite {
     id: string;
     userId: string;
     itemId: string;
+}
+
+export interface IReport {
+    id?: string;
+    userId?: string;
+    itemId?: string;
+    shopOwnerId?: string;
+    date?: any;
+    message?: string;
+    userName?: string;
+    isAdminSeen: boolean;
+    isAdminRemoved: boolean;
+    userRef?: DocumentReference;
 }
 
 // export interface IUserRate extends IUserBase {

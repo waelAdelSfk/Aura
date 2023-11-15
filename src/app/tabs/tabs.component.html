@@ -13,7 +13,7 @@
       </ion-tab-button> -->
 
     <!-- *ngIf="role === 'Admin'" -->
-    <ion-tab-button tab="categories" *ngIf="isAdmin">
+    <ion-tab-button tab="categories" *ngIf="!isShopOwner">
       <ion-icon [name]="isTabSelected('categories') ? 'list' : 'list-outline'"></ion-icon>
       {{'categories' | translate}}
     </ion-tab-button>
@@ -40,10 +40,11 @@
       </ion-tab-button> -->
     <!-- *ngIf="role === 'Admin'" -->
     <ion-tab-button tab="users" *ngIf="!isShopOwner">
-      <ion-icon [name]="isTabSelected('users') ? 'people' : 'people-outline'"></ion-icon>
+      <ion-icon [name]="isTabSelected('users') ? 'basket' : 'basket-outline'"></ion-icon>
+      <!-- <ion-icon [name]="isTabSelected('users') ? 'people' : 'people-outline'"></ion-icon> -->
       <ion-label>
-        <span *ngIf="isUser"> {{'Shop Owners'}}</span>
-        <span *ngIf="isAdmin"> {{'Users'}}</span>
+        <span> {{'Brands'}}</span>
+        <!-- <span *ngIf="isAdmin"> {{'Users'}}</span> -->
       </ion-label>
     </ion-tab-button>
 
