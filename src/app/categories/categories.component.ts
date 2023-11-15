@@ -5,6 +5,8 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DataService, FireStoreService, ModalService } from '@app/services';
 import { ICategory } from '@app/models';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { Router } from '@angular/router';
+import { CommonUtility } from '@app/utilities';
 
 @Component({
   selector: 'app-categories',
@@ -12,22 +14,23 @@ import { ManageCategoryComponent } from './manage-category/manage-category.compo
   standalone: true,
   imports: [SharedModule]
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent extends CommonUtility implements OnInit {
 
   categories: Observable<ICategory[]>;
 
   constructor(
     private fireStoreService: FireStoreService,
     private modalService: ModalService,
-    private dataService: DataService
-  ) { }
+    private dataService: DataService,
+    private router: Router
+  ) { super(); }
 
   ngOnInit(): void {
     this.getAllCategories();
   }
 
-  remove(category: ICategory): void {
-    this.dataService.remove(`categories/${category.id}`);
+  remove(item: ICategory): void {
+    this.dataService.remove(`categories/${item.id}`);
   }
 
   async openAddEditModal(category?: ICategory): Promise<void> {
@@ -40,5 +43,9 @@ export class CategoriesComponent implements OnInit {
 
   private getAllCategories(): void {
     this.categories = this.fireStoreService.getAll('categories');
+  }
+
+  navigateToCategoryList(category: ICategory): void {
+    this.router.navigate([`/app/offer/${category.id}`]);
   }
 }
