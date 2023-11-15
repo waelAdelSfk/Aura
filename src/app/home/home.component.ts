@@ -30,28 +30,12 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
   ) { super(); }
 
 
-  // swiperSlideChange(e: any) {
-  //   console.log('changed')
-  // }
-
   ngOnInit(): void {
     this.fireStoreService.getAll('users').subscribe((res: IUser[]) => {
       this.users = res;
     })
     this.getCategories();
     this.getAllOffers();
-    // this.swiper = new Swiper('.swiper-container', {
-    //   slidesPerView: 2, 
-    //   spaceBetween: 20,
-    //   pagination: {
-    //     el: '.swiper-pagination',
-    //     clickable: true,
-    //   },
-    //   scrollbar: {
-    //     el: '.swiper-scrollbar',
-    //     draggable: true,
-    //   },
-    // });
   }
 
   ngAfterViewInit(): void {
@@ -65,10 +49,6 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
       autoplay: {
         delay: 1000,
       },
-      // speed: 400,
-      //   spaceBetween: 100,
-      //   loop: true,
-      //   loopedSlides: 3,
     };
     window.addEventListener('resize', this.updateSwiper);
   }
@@ -84,19 +64,15 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
   }
 
 
-  navigateToListPage(category: ICategory): void {
-    this.router.navigate([`/app/offer/${category.id}`]);
-  }
+  // navigateToListPage(category: ICategory): void {
+  //   this.router.navigate([`/app/offer/${category.id}`]);
+  // }
 
 
-  navigateToRatingPage(offer: IOffers): void {
+  navigateToDetailsPage(offer: IOffers): void {
     console.log('offer Id', offer.id)
     this.router.navigate([`/app/details/${offer.id}`]);
   }
-  // navigateToRatingPage(offer: IOffers): void {
-  //   console.log('offer Id', offer.id)
-  //   this.router.navigate([`/app/rating/${offer.id}`]);
-  // }
 
   private getCategories(): void {
     this.fireStoreService.getAll<ICategory>('categories').subscribe((res: Array<ICategory>) => {
@@ -121,7 +97,4 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
     return 'xxx';
   }
 
-  // private getCurrentLanguage(): void {
-  //   this.currentLanguage = localStorage.getItem('lang') || 'ar';
-  // }
 }

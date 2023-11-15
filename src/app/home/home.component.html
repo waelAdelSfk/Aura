@@ -18,43 +18,33 @@
   </svg>
 
 </ion-header>
-<h4>{{'categories' | translate}}</h4>
+<!-- <h4>{{'categories' | translate}}</h4> -->
 
 <ion-content color="light">
-  <ion-grid class="ion-no-padding">
+  <!-- <ion-grid class="ion-no-padding">
     <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
       [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
       <swiper-slide class="top" *ngFor="let category of categories">
-        <!-- <div class="swiper-zoom-container"> -->
-        <!-- <ion-card class="category" (click)="navigateToListPage(category)"> -->
-        <!-- <ion-card-content> -->
         <div class="category" (click)="navigateToListPage(category)">
           <img [src]="category.image" alt="img" loading="lazy" class="top-image">
         </div>
-        <!-- <h6>{{category.name}}</h6> -->
-        <!-- </ion-card-content> -->
-        <!-- </ion-card> -->
-        <!-- </div> -->
       </swiper-slide>
     </swiper-container>
-  </ion-grid>
+  </ion-grid> -->
 
   <ion-grid>
-    <!-- (slidechange)="swiperSlideChange($event)"  -->
     <swiper-container #swiper (afterinit)="initializeSwiper()" [loop]="true" [zoom]="false" [slidesPerView]="1.25"
       [centeredSlides]="true">
       <swiper-slide *ngFor="let offer of offers">
-        <!-- <div class="swiper-zoom-container"> -->
-        <ion-card (click)="navigateToRatingPage(offer)">
+        <ion-card (click)="navigateToDetailsPage(offer)">
           <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
           <ion-card-content class="main-card">
             <ion-note>{{offer.title}}</ion-note>
-            <ion-note>{{offer.shortDescription}}</ion-note>
+            <ion-note color="primary">{{offer.shortDescription}}</ion-note>
             <ion-note>{{'valid from'}} :&nbsp; {{offer.startDate.toDate() | date:'mediumDate'}}</ion-note>
             <ion-note>{{'valid until'}} :&nbsp; {{offer.endDate.toDate() | date:'mediumDate'}}</ion-note>
           </ion-card-content>
         </ion-card>
-        <!-- </div> -->
       </swiper-slide>
     </swiper-container>
   </ion-grid>
@@ -64,28 +54,3 @@
 <ng-template #emptyData>
   <app-empty-data></app-empty-data>
 </ng-template>
-
-
-
-<!-- <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'home' | translate}}</ion-title>
-  </ion-toolbar> -->
-
-<!-- [centeredSlides]="true" [spaceBetween]="10" [initialSlide]="0" -->
-
-<!-- <ion-row>
-      <ion-col size="12" class="ion-no-padding">
-        <img src="assets/images/home.jpg" alt="img" loading="lazy" class="w-100">
-      </ion-col>
-      <ion-col size="12" class="ion-no-padding">
-        <ion-searchbar (ionFocus)="onFocus()" class="ion-no-padding"
-          [placeholder]="'whatAreYouLookingFor' | translate"></ion-searchbar>
-      </ion-col>
-    </ion-row> -->
-
-<!-- <h5>{{'offers' | translate}}</h5> -->
-<!-- <div>
-            <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
-            <br>
-            <span class="font-weight-bold">{{offer.title}}</span>
-          </div> -->
