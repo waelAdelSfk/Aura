@@ -14,7 +14,7 @@
         <ion-label class="ion-no-margin py-2">
           <div class="d-flex justify-content-between align-items-center pb-2">
             <div>
-              <div *ngIf="item.content" class="ion-padding-bottom">
+              <div *ngIf="item.content" class="ion-padding-bottom" (click)="viewDetails(item.offerId)">
                 {{item.content | translate}}
               </div>
               <div *ngIf="item.notificationType === notificationType.newRegister" class="badge badge-success">

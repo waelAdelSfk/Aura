@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NotificationType } from '@app/enums';
-import { INotification, INotificationViewModel, IUser } from '@app/models';
+import { INotification, INotificationViewModel, IOffers, IUser } from '@app/models';
 import { AlertService, FireStoreService, TranslationService } from '@app/services';
 import { CommonUtility } from '@app/utilities';
 import { ToastService } from 'app/shared/services/toast.service';
 import { UsersService } from 'app/shared/services/users.service';
 import { SharedModule } from 'app/shared/shared.module';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-notifications',
@@ -19,13 +21,15 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
 
   notifications: Array<INotificationViewModel> = [];
   notificationType = NotificationType;
+  offers: IOffers;
 
   constructor(
     private fireStoreService: FireStoreService,
     private translationService: TranslationService,
     private toastService: ToastService,
     private alertService: AlertService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {
     super();
   }
@@ -103,5 +107,13 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
   private getCssClass(notification: INotification): string {
     const isSeen = this.isAdmin ? notification.isAdminSeen : notification.isUserSeen;
     return isSeen ? 'seen' : 'not-seen';
+  }
+
+  viewDetails(offerId: string): void {
+    this.fireStoreService.getAll('offersList')
+      .pipe(map((data: IOffers[]) => data.find(o => o.id === offerId))).subscribe(res => {
+        this.offers = res
+        this.router.navigate([`/app/details/${this.offers.id}`]);
+      });
   }
 }
