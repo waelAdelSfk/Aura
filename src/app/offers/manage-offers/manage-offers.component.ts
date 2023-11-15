@@ -114,7 +114,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm = this.formBuilder.group({
       title: [null, Validators.required],
       image: [null, Validators.required],
-      email: [null, Validators.required],
+      site: [null, Validators.required],
       phoneNumber: [null, Validators.required],
       categoryId: [null, Validators.required],
       startDate: [null, Validators.required],
@@ -129,7 +129,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm.patchValue({
       title: this.item.title,
       image: this.item.image,
-      email: this.item.email,
+      site: this.item.site,
       phoneNumber: this.item.phoneNumber,
       startDate: new Date(this.item.startDate.seconds * 1000),
       endDate: new Date(this.item.endDate.seconds * 1000),

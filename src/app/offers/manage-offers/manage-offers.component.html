@@ -26,48 +26,21 @@
             <app-uploader formControlName="image" (imgChange)="onImageChanged($event)"></app-uploader>
           </div>
 
-          <!-- <div class="background-with-padding">
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'name' | translate}}</mat-label>
-              <input matInput type="text" formControlName="title">
-              <mat-error *ngIf="manageForm.get('title')?.hasError('required')">
-                {{ 'filedRequired' | translate }}
-              </mat-error>
-            </mat-form-field>
-          </div> -->
-
           <div class="background-with-padding">
-            <app-input formControlName="name" [label]="'Name' | translate"></app-input>
+            <app-input formControlName="title" [label]="'Name' | translate"></app-input>
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="email" [label]="'email' | translate"></app-input>
+            <app-input formControlName="site" [label]="'Website' | translate"></app-input>
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="phone" [label]="'Phone Number' | translate"></app-input>
+            <app-input formControlName="phoneNumber" [label]="'Phone Number' | translate"></app-input>
           </div>
 
           <div class="background-with-padding">
             <app-input formControlName="location" [label]="'Location' | translate"></app-input>
           </div>
-
-          <!-- <ion-datetime></ion-datetime> -->
-
-          <!-- <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field> -->
-
-
-          <!-- <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field> -->
 
           <div class="background-with-padding ">
             <app-text-area [controlName]="'shortDescription'" [label]="'Short Description' | translate"
@@ -78,11 +51,6 @@
             <app-text-area [controlName]="'description'" [label]="'Description' | translate"
               spellcheck="true"></app-text-area>
           </div>
-
-          <!-- <div class="background-with-padding">
-            <app-time-picker [controlName]="'endDate'" [lbl]="'time' | translate">
-            </app-time-picker>
-          </div> -->
 
           <div class="background-with-padding">
             <app-date-picker [controlName]="'startDate'" [lbl]="'Valid From' | translate">
@@ -99,19 +67,6 @@
               [display]="'name'" [isMultiple]="false">
             </app-select>
           </div>
-
-          <!-- <div>
-            <ion-list>
-              <ion-item *ngIf="(categories | async) as category">
-                <ion-select aria-label="categories" placeholder="Select category" (ionChange)="handleChange($event)"
-                  controlName="categoryId">
-                  <ion-select-option *ngFor="let category of categories | async" [value]="category.id">
-                    {{ category.name }}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          </div> -->
 
         </form>
       </ion-col>
