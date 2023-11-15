@@ -1,0 +1,14 @@
+<!-- <app-modal-header #modal [title]="'addReport' | translate"></app-modal-header> -->
+
+<ion-content>
+
+  <form class="p-3" [formGroup]="reportForm" novalidate (ngSubmit)="send()">
+
+    <app-text-area [controlName]="'message'" [label]="'yourFeedback' | translate"></app-text-area>
+
+    <ion-button color="primary" type="submitted" expand="block" class="ion-margin-top">
+      {{'send' | translate}}
+    </ion-button>
+  </form>
+
+</ion-content>

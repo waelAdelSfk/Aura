@@ -1,0 +1,43 @@
+<app-page-header [title]="'feedback' | translate"></app-page-header>
+
+<ion-content>
+  <ng-container *ngIf="(reports | async)?.length > 0; else noData">
+    <ion-card *ngFor="let item of reports | async; last as last">
+      <ion-item-sliding>
+
+        <ion-item [ngClass]="item.isAdminSeen ? 'seen' : 'not-seen'" (click)="getComment(item)">
+          <ion-label class="ion-text-wrap">
+            <!-- <ion-text color="secondary"> {{'reportText' | translate}} : </ion-text>
+            <ion-text>
+              <p class="ion-no-margin"> {{item.message}} </p>
+            </ion-text> -->
+            <ion-note color="primary">
+              {{'User Name'}} : {{getUserName(item.userId)}}
+            </ion-note>
+            <ion-text color="danger">
+              <h6>{{'User Message'}} : {{item.message}}</h6>
+            </ion-text>
+          </ion-label>
+          <ion-note slot="end">{{item.date.toDate() | date}}</ion-note>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="light" (click)="remove(item)">
+            <ion-icon name="trash" color="danger"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #emptyData>
+    no Data
+    <!-- <w-empty-data></w-empty-data> -->
+  </ng-template>
+
+  <ng-template #noData>
+    <w-skelton *ngIf="isDataLoadingNow; else emptyData"></w-skelton>
+  </ng-template>
+
+</ion-content>

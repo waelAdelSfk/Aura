@@ -18,6 +18,7 @@ import { OffersComponent } from './offers/offers.component';
 import { UsersComponent } from './users/users.component';
 import { RatingComponent } from './rating/rating.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [AutoLoginGuard] },
@@ -32,7 +33,9 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'restaurants', component: RestaurantsComponent },
       { path: 'offer', component: OffersComponent },
+      { path: 'feedback', component: FeedbackComponent },
       { path: 'favorite', component: FavoriteComponent },
+      { path: 'feedback', component: FeedbackComponent },
       { path: 'offer/:id', loadComponent: () => import('./offers/offers.component').then(m => m.OffersComponent) },
       { path: 'rating', component: RatingComponent },
       { path: 'rating/:id', loadComponent: () => import('./rating/rating.component').then(m => m.RatingComponent) },
