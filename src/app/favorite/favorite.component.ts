@@ -28,31 +28,20 @@ export class FavoriteComponent extends CommonUtility {
   }
 
   ionViewWillEnter(): void {
-    // this.getFavoriteItems();
     this.getFavoriteList();
     console.log('favoriteItems', this.favoriteItems);
   }
 
   reloadList(): void {
     this.getFavoriteList();
-    // this.getFavoriteItems();
     this.changeDetectorRef.detectChanges();
   }
-
-
-
-  // private getFavoriteItems(): void {
-  //   this.favoriteItems = this.fireStoreService.getAll('favorite')
-  //     .pipe(map(data => data.filter((res: IFavorite) => res.userId === this.userId)))
-  //   this.isDataLoadingNow = false;
-  // }
 
   private getFavoriteList(): void {
     this.favoriteItems = this.fireStoreService.getUserFavorite(this.userId);
     this.isDataLoadingNow = false;
     console.log('favorite', this.favoriteItems)
   }
-
 
 
 }

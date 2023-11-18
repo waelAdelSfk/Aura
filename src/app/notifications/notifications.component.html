@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'notifications' | translate}}</ion-title>
+    <ion-title>{{'notifications'}}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -15,17 +15,16 @@
           <div class="d-flex justify-content-between align-items-center pb-2">
             <div>
               <div *ngIf="item.content" class="ion-padding-bottom" (click)="viewDetails(item.offerId)">
-                {{item.content | translate}}
+                {{item.content}}
               </div>
               <div *ngIf="item.notificationType === notificationType.newRegister" class="badge badge-success">
-                {{'newShopOwner' | translate}}
-                <!-- {{'newUser' | translate}} -->
+                {{'newShopOwner'}}
               </div>
               <div *ngIf="item.notificationType === notificationType.deleted" class="badge badge-danger">
-                {{'deleted' | translate}}
+                {{'deleted'}}
               </div>
               <div *ngIf="item.notificationType === notificationType.blocked" class="badge badge-danger">
-                {{'blocked' | translate}}
+                {{'blocked'}}
               </div>
             </div>
             <ion-text slot="end" color="medium">

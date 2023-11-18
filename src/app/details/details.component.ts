@@ -61,10 +61,6 @@ export class DetailsComponent extends CommonUtility implements OnInit {
     this.dataService.remove(`offersList/${this.offerId}`)
   }
 
-  // remove(offer: IOffers): void {
-  //   this.dataService.remove(`offersList/${offer.id}`);
-  // }
-
   async report(): Promise<void> {
     const modal = await this.modalService.create({
       component: AddFeedbackComponent,

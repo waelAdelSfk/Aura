@@ -59,7 +59,12 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     this.manageForm.markAllAsTouched();
     if (this.manageForm.valid) {
       const formValue = this.manageForm.value;
-      const dataValue = { ...formValue, shopOwnerId: this.userId, offerStatus: OfferStatus.approved }
+      const dataValue = {
+        ...formValue,
+        shopOwnerId: this.userId,
+        offerStatus: OfferStatus.approved,
+        viewCount: 0
+      }
       if (this.item) {
         this.dataService.update(`offersList/${this.item.id}`, formValue);
         this.close();
@@ -95,7 +100,6 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
                 offerId: offerId,
               };
               this.dataService.add('notification', notificationData);
-              // this.toastService.showToaster('notificationSentSuccessfully');
             }
           }
         }
@@ -146,15 +150,4 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
     });
   }
 
-  // handleChange(ev) {
-  //   console.log('Current value:', JSON.stringify(ev.target.value));
-  // }
-
-  // private getAllCategories(): void {
-  //   this.firebaseService.getAll(Constants.FirebaseCollection.monthsGrowth).subscribe(monthsGrowth => {
-  //     this.Categories = monthsGrowth.sort(
-  //       (a, b) => a.number - b.number
-  //     );
-  //   });
-  // }
 }

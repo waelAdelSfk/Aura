@@ -12,13 +12,12 @@
     </div>
   </div>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-    <path fill="#d700b1" fill-opacity="1"
+    <path fill="#FFC436" fill-opacity="1"
       d="M0,192L60,181.3C120,171,240,149,360,170.7C480,192,600,256,720,277.3C840,299,960,277,1080,240C1200,203,1320,149,1380,122.7L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
     </path>
   </svg>
 
 </ion-header>
-<!-- <h4>{{'categories' | translate}}</h4> -->
 
 <ion-content color="light">
   <!-- <ion-grid class="ion-no-padding">
@@ -47,6 +46,31 @@
         </ion-card>
       </swiper-slide>
     </swiper-container>
+  </ion-grid>
+
+
+  <ion-grid class="ion-no-padding" *ngIf="trendyOffers.length >=5">
+    <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
+      <swiper-slide class="top" *ngFor="let offer of trendyOffers">
+        <div class="category" (click)="navigateToDetailsPage(offer)">
+          <img [src]="offer.image" alt="img" loading="lazy" class="top-image">
+        </div>
+        <ion-badge class="more-five" color="primary">{{'Trendy Now'}}</ion-badge>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+
+  <ion-grid class="ion-no-padding trendy-container" *ngIf="trendyOffers.length < 5">
+    <!-- <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false"> -->
+    <div class="trendy" *ngFor="let offer of trendyOffers">
+      <div (click)="navigateToDetailsPage(offer)">
+        <img [src]="offer.image" alt="img" loading="lazy">
+      </div>
+      <ion-badge color="primary">{{'Trendy Now'}}</ion-badge>
+    </div>
+    <!-- </swiper-container> -->
   </ion-grid>
 
 </ion-content>

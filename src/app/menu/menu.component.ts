@@ -31,15 +31,21 @@ export class MenuComponent extends CommonUtility {
       visibility: [Role.admin, Role.user]
     },
     {
+      labelKey: 'favorite',
+      url: 'favorite',
+      icon: 'heart',
+      visibility: [Role.user]
+    },
+    {
       labelKey: 'categories',
       url: 'categories',
       icon: 'folder',
-      visibility: [Role.admin]
+      visibility: [Role.admin, Role.user]
     },
     {
-      labelKey: 'users',
-      url: 'users',
-      icon: 'people',
+      labelKey: 'brands',
+      url: 'brands',
+      icon: 'basket',
       visibility: [Role.admin, Role.user]
     },
     {
@@ -55,16 +61,10 @@ export class MenuComponent extends CommonUtility {
       visibility: [Role.admin, Role.shopOwner]
     },
     {
-      labelKey: 'favorite',
-      url: 'favorite',
-      icon: 'heart',
-      visibility: [Role.user]
-    },
-    {
       labelKey: 'feedback',
       url: 'feedback',
       icon: 'thumbs-down',
-      visibility: [Role.admin, Role.user]
+      visibility: [Role.admin]
     },
 
   ];

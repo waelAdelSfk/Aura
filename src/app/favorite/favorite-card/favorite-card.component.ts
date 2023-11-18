@@ -28,7 +28,6 @@ export class FavoriteCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getItemDetailsForRestaurants();
     this.getItemDetails();
   }
 
@@ -45,43 +44,11 @@ export class FavoriteCardComponent implements OnInit {
     });
   }
 
-  // viewDetails(place: IPlace): void {
-  //   this.router.navigateByUrl(`app/place/${place.id}`);
-  // }
-
   viewDetails(): void {
     if (this.element) {
-      // if (this.element.type === 'restaurant') {
       this.router.navigateByUrl(`app/details/${this.element.id}`);
-      // } else if (this.element.type === 'place') {
-      // this.router.navigateByUrl(`app/place/${this.element.id}`);
-      // }
     }
   }
-
-
-
-
-
-
-
-  // viewDetails(): void {
-  //   this.navigationService.navigateDependOnRole(`${Constants.Routes.products}/${this.item.prodId}`);
-  // }
-
-  // private getItemDetailsForRestaurants(): void {
-  //   this.fireStoreService.getAll('restaurants').pipe(
-  //     map(data => data.find((res: IRestaurant) => res.id === this.item.itemId))
-  //   ).subscribe((restaurant: IRestaurant) => {
-  //     this.element = restaurant;
-  //   });
-  //   this.fireStoreService.getAll('places').pipe(
-  //     map(data => data.find((res: IPlace) => res.id === this.item.itemId))
-  //   ).subscribe((restaurant: IPlace) => {
-  //     this.element = restaurant;
-  //   });
-  // }
-
 
 
 
@@ -91,12 +58,6 @@ export class FavoriteCardComponent implements OnInit {
       .subscribe((offer: IOffers) => {
         if (offer) {
           this.element = offer;
-          //   } else {
-          //     this.fireStoreService.getAll('places').pipe(
-          //       map(data => data.find((place: IPlace) => place.id === this.item.itemId))
-          //     ).subscribe((place: IPlace) => {
-          //       this.element = place;
-          //     });
         }
       });
   }

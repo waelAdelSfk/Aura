@@ -58,16 +58,29 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
   }
 
   delete(notification: INotificationViewModel): void {
-    const updatedNotification: Partial<INotification> = {
+    const adminUpdatedNotification: Partial<INotification> = {
       isAdminRemoved: this.isAdmin ? !notification.isAdminRemoved : notification.isAdminRemoved,
-      isUserRemoved: this.isAdmin ? notification.isUserRemoved : !notification.isUserRemoved
     };
-    this.alertService.create({
-      confirmHandler: () =>
-        this.fireStoreService.updateDoc(`notifications/${notification.id}`, updatedNotification).subscribe(() => {
-          this.toastService.showToaster(this.getTranslateValue('notificationRemovedSuccessfully'));
-        })
-    });
+    const userUpdatedNotification: Partial<INotification> = {
+      // isAdminRemoved: this.isAdmin ? !notification.isAdminRemoved : notification.isAdminRemoved,
+      isUserRemoved: this.isUser ?? notification.isUserRemoved,
+    };
+    if (this.isAdmin) {
+      this.alertService.create({
+        confirmHandler: () =>
+          this.fireStoreService.updateDoc(`notifications/${notification.id}`, adminUpdatedNotification).subscribe(() => {
+            this.toastService.showToaster(this.getTranslateValue('notificationRemovedSuccessfully'));
+          })
+      });
+    } else if (this.isUser) {
+      this.alertService.create({
+        confirmHandler: () =>
+          this.fireStoreService.updateDoc(`notification/${notification.id}`, userUpdatedNotification).subscribe(() => {
+            this.toastService.showToaster(this.getTranslateValue('notificationRemovedSuccessfully'));
+          })
+      });
+    }
+
   }
 
   private getAllNotifications(): void {
@@ -87,7 +100,7 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
       const emailField: keyof IUser = 'email';
       const imageField: keyof IUser = 'image';
       this.fireStoreService.getAll<INotification>('notification').subscribe(notifications => {
-        this.notifications = notifications.filter(n => n.userId === this.userId && !n.isAdminRemoved).map(n => ({
+        this.notifications = notifications.filter(n => n.userId === this.userId && !n.isUserRemoved).map(n => ({
           ...n,
           userName: this.usersService.getUserPropById(n.userId),
           email: this.usersService.getUserPropById(n.userId, emailField),

@@ -23,8 +23,6 @@ export class RatingComponent extends CommonUtility implements OnInit {
   isDataLoadingNow = true;
   defaultImage = 'assets/images/avatar.png';
 
-  // averageRating: number;
-
   constructor(
     private fireStoreService: FireStoreService,
     private activatedRoute: ActivatedRoute,
@@ -38,7 +36,6 @@ export class RatingComponent extends CommonUtility implements OnInit {
 
   ngOnInit(): void {
     this.getAllRates();
-    // this.getAverage();
   }
 
   remove(item: IRate): void {
@@ -62,18 +59,6 @@ export class RatingComponent extends CommonUtility implements OnInit {
     return this.defaultImage;
   }
 
-  // private getAverage(): void {
-  //   this.firebaseService.getAll(Constants.FirebaseCollection.rating).pipe(
-  //     map((data: IRate[]) => data.filter((r) => r.itemId === this.productId)),
-  //     tap((data: IRate[]) => {
-  //       const sum = data.reduce((acc, curr) => acc + curr.stars, 0);
-  //       this.averageRating = sum / data.length;
-  //     })
-  //   ).subscribe(() => {
-  //     this.isDataLoadingNow = false;
-  //   });
-  // }
-
 
   async openAddEditModal(offer?: IOffers): Promise<void> {
     const modal = await this.modalService.create({
@@ -90,9 +75,7 @@ export class RatingComponent extends CommonUtility implements OnInit {
     const modal = await this.modalService.create({
       component: AddRatingComponent,
       componentProps: {
-        // itemId: this.item.id,
         itemId: offer.id,
-        // message: stad.message,
       },
     });
     await modal.present();

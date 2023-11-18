@@ -13,15 +13,10 @@ import { SharedModule } from 'app/shared/shared.module';
 })
 export class AddRatingComponent extends CommonUtility implements OnInit {
 
-  // private userId: string;
-
-  // @Input() stadiumId: string;
   @Input() itemId: string;
-  // myStars: Array<KeyValue<number, number>>;
 
   myStars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number;
-  // @ViewChild('modal') modal: ModalHeaderComponent;
   message: string;
 
   isFormValid: boolean = false;
@@ -63,19 +58,7 @@ export class AddRatingComponent extends CommonUtility implements OnInit {
     };
     this.dataService.add('rating', data);
     this.close();
-    // .then(() => {
-    //   this.toastService.showToaster('common.notificationsPage.theRateSendSuccessfully');
-    // });
   }
 
-
-
-  // private getCurrentUserId(): void {
-  //   this.userService.getCurrentLoggedInUser().subscribe(res => {
-  //     if (res && res.uid) {
-  //       this.userId = res.uid;
-  //     }
-  //   });
-  // }
 
 }

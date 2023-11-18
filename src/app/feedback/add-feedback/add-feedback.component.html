@@ -1,5 +1,13 @@
-<!-- <app-modal-header #modal [title]="'addReport' | translate"></app-modal-header> -->
-
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>{{'Add Feedback'}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
 
   <form class="p-3" [formGroup]="reportForm" novalidate (ngSubmit)="send()">
