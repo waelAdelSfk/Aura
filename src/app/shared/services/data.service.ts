@@ -39,6 +39,16 @@ export class DataService {
     });
   }
 
+  softUpdate(path: string, data: any): void {
+    // this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
+    this.fireStoreService.updateDoc(path, data);
+    // .subscribe(() => {
+    // loading.dismiss();
+    // this.toastService.showToaster(this.translationService.instant('updatedSuccessfully'), 'success');
+    // });
+    // });
+  }
+
   remove(path: string): void {
     this.alertService.create({
       confirmHandler: () => {

@@ -9,7 +9,6 @@ import { IonSearchbar, NavController } from '@ionic/angular';
   styleUrls: ['./page-header.component.scss'],
 })
 export class PageHeaderComponent implements OnInit {
-
   @Input() hasSearchIcon = false;
   @Input() hasBackIcon = false;
   @Input() title: string;

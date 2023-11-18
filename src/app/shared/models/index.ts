@@ -83,6 +83,7 @@ export interface IOffers {
     location: string;
     phoneNumber: number;
     rating: Array<{ userId: string; stars: number; }>;
+    viewCount: number;
 }
 
 export interface IRestaurant {

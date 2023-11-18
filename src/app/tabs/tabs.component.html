@@ -6,45 +6,15 @@
       {{'home' | translate}}
     </ion-tab-button>
 
-    <!-- *ngIf="role === 'user'" -->
-    <!-- <ion-tab-button   tab="history">
-        <ion-icon name="list-outline"></ion-icon>
-        <ion-label>{{'history' | translate}}</ion-label>
-      </ion-tab-button> -->
-
-    <!-- *ngIf="role === 'Admin'" -->
     <ion-tab-button tab="categories" *ngIf="!isShopOwner">
       <ion-icon [name]="isTabSelected('categories') ? 'list' : 'list-outline'"></ion-icon>
       {{'categories' | translate}}
     </ion-tab-button>
 
-    <!-- *ngIf="role !== 'user'"  -->
-    <!-- <ion-tab-button tab="company">
-        <ion-icon name="grid-outline"></ion-icon>
-        <ion-label>{{'companies' | translate}}</ion-label>
-      </ion-tab-button> -->
-
-    <!-- *ngIf="role !== 'Admin'"  -->
-    <!-- <ion-tab-button tab="offers">
-        <ion-icon name="megaphone"></ion-icon>
-        <ion-label>{{'offers' | translate}}</ion-label>
-      </ion-tab-button> -->
-
-
-    <!-- <ion-tab-button *ngIf="role !== 'Admin'" tab="EditProfile">
-        <div *ngIf="!user">
-          <ion-icon name="people-circle-outline"></ion-icon>
-        </div>
-        <img *ngIf="user" alt="img" class="user-image" [src]="user.image ? user.image : deafultImage">
-      <ion-label>{{'profile' | translate}}</ion-label>
-      </ion-tab-button> -->
-    <!-- *ngIf="role === 'Admin'" -->
-    <ion-tab-button tab="users" *ngIf="!isShopOwner">
-      <ion-icon [name]="isTabSelected('users') ? 'basket' : 'basket-outline'"></ion-icon>
-      <!-- <ion-icon [name]="isTabSelected('users') ? 'people' : 'people-outline'"></ion-icon> -->
+    <ion-tab-button tab="brands" *ngIf="!isShopOwner">
+      <ion-icon [name]="isTabSelected('brands') ? 'basket' : 'basket-outline'"></ion-icon>
       <ion-label>
         <span> {{'Brands'}}</span>
-        <!-- <span *ngIf="isAdmin"> {{'Users'}}</span> -->
       </ion-label>
     </ion-tab-button>
 
