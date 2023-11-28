@@ -1,7 +1,29 @@
 ion-item.selected {
-  --background: var(--ion-color-secondary);
+  --background: var(--ion-color-secondary-shade);
   --color: var(--ion-color-primary);
   ion-icon {
     color: var(--ion-color-primary);
   }
+}
+
+.menu-content.md ion-item:not(.item-header) {
+  --padding-start: 18px;
+
+  margin-right: 10px;
+
+  border-radius: 0 50px 50px 0;
+
+  font-weight: 500;
+}
+
+.menu-content.md ion-list-header {
+  padding-left: 18px;
+  padding-right: 18px;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 450;
+}
+.menu-content.md ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
 }
