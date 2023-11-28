@@ -79,6 +79,8 @@ export interface IOffers {
     shopOwnerId: string;
     offerStatus: OfferStatus,
     categoryId: string;
+    promoCode: string;
+    discount: number;
     site: string;
     location: string;
     phoneNumber: number;
@@ -126,6 +128,8 @@ export interface IReport {
     userName?: string;
     isAdminSeen: boolean;
     isAdminRemoved: boolean;
+    isBrandOwnerSeen: boolean;
+    isBrandOwnerRemoved: boolean;
     userRef?: DocumentReference;
 }
 
