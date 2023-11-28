@@ -66,14 +66,6 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
     window.removeEventListener('resize', this.updateSwiper);
   }
 
-
-  // navigateToListPage(category: ICategory): void {
-  //   this.router.navigate([`/app/offer/${category.id}`]);
-  // }
-
-
-
-
   private getCategories(): void {
     this.fireStoreService.getAll<ICategory>('categories').subscribe((res: Array<ICategory>) => {
       this.categories = res;
@@ -85,13 +77,6 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
       this.offers = res;
     })
   }
-
-  // private getAllTrendyOffers(): void {
-  //   this.fireStoreService.getAll<IOffers>('offersList').subscribe(
-  //     (res: Array<IOffers>) => {
-  //       this.trendyOffers = res.sort((a, b) => b.viewCount - a.viewCount)
-  //     })
-  // }
 
   private getAllTrendyOffers(): void {
     const minimumViewCount = 10;
@@ -107,14 +92,12 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
     if (this.users?.length > 0) {
       if (id && id != '' && id != null) {
         const userName = this.users.find(m => m.id == id);
-        return userName ? userName.name : 'x';
+        return userName ? userName.name : 'Visitor';
       }
-      return 'xx';
+      return 'Visitor';
     }
-    return 'xxx';
+    return 'Visitor';
   }
-
-
 
 
   navigateToDetailsPage(offer: IOffers): void {
@@ -125,15 +108,7 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
   }
 
   private updateViewCount(offer: IOffers): void {
-    // const offerRef = this.fireStoreService.getDocumentRef(`offersList/${offer.id}`);
     const data = { viewCount: offer.viewCount }
     this.dataService.softUpdate(`offersList/${offer.id}`, data);
-    // offerRef.update({ viewCount: offer.viewCount })
-    //   .then(() => {
-    //     console.log('View count updated in Firestore.');
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error updating view count in Firestore:', error);
-    //   });
   }
 }

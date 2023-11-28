@@ -7,15 +7,15 @@
       <img class="user-image" alt="Silhouette of mountains" src="assets/images/avatar.png" />
       <h6>{{'Hello,'}} &nbsp; {{getName(userId)}}</h6>
     </div>
-    <div class="welcome">
+    <!-- <div class="welcome">
       <ion-text>{{'Welcome Back'}}</ion-text>
-    </div>
+    </div> -->
   </div>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-    <path fill="#FFC436" fill-opacity="1"
+  <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#D71313" fill-opacity="1"
       d="M0,192L60,181.3C120,171,240,149,360,170.7C480,192,600,256,720,277.3C840,299,960,277,1080,240C1200,203,1320,149,1380,122.7L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
     </path>
-  </svg>
+  </svg> -->
 
 </ion-header>
 
@@ -31,16 +31,55 @@
     </swiper-container>
   </ion-grid> -->
 
-  <ion-grid>
+  <ion-grid class="ion-no-padding trendy-container ion-margin-top" *ngIf="trendyOffers.length < 5">
+    <!-- <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false"> -->
+    <div class="trendy" *ngFor="let offer of trendyOffers">
+      <div (click)="navigateToDetailsPage(offer)">
+        <img [src]="offer.image" alt="img" loading="lazy">
+      </div>
+      <ion-badge color="primary">{{'Trendy'}}</ion-badge>
+    </div>
+    <!-- </swiper-container> -->
+  </ion-grid>
+
+  <ion-grid class="ion-no-padding ion-margin-top" *ngIf="trendyOffers.length >=5">
+    <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
+      <swiper-slide class="top" *ngFor="let offer of trendyOffers">
+        <div class="category" (click)="navigateToDetailsPage(offer)">
+          <img [src]="offer.image" alt="img" loading="lazy" class="top-image">
+        </div>
+        <ion-badge class="more-five" color="primary">{{'Trendy'}}</ion-badge>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+
+  <ion-grid class="ion-margin-top">
     <swiper-container #swiper (afterinit)="initializeSwiper()" [loop]="true" [zoom]="false" [slidesPerView]="1.25"
       [centeredSlides]="true">
       <swiper-slide *ngFor="let offer of offers">
         <ion-card (click)="navigateToDetailsPage(offer)">
           <img [src]="offer.image" class="category-image" alt="img" loading="lazy" />
           <ion-card-content class="main-card">
-            <ion-note>{{offer.title}}</ion-note>
-            <ion-note color="primary">{{offer.shortDescription}}</ion-note>
-            <ion-note>{{'valid from'}} :&nbsp; {{offer.startDate.toDate() | date:'mediumDate'}}</ion-note>
+            <!-- <ion-badge>{{offer.promoCode}}</ion-badge> -->
+            <!-- <ion-note class="title">{{offer.title}}</ion-note> -->
+            <div class="info">
+              <div class="promo-discount">
+                <div class="promo-code" *ngIf="offer.promoCode">
+                  <ion-icon color="primary" slot="start" name="gift-outline"></ion-icon>
+                </div>
+                <div *ngIf="offer.discount" class="discount">
+                  <ion-text color="primary">
+                    {{offer.discount}}&nbsp;{{'% off'}}
+                  </ion-text>
+                </div>
+              </div>
+              <div class="title">
+                <ion-badge color="warning">{{offer.title}}</ion-badge>
+              </div>
+            </div>
+
             <ion-note>{{'valid until'}} :&nbsp; {{offer.endDate.toDate() | date:'mediumDate'}}</ion-note>
           </ion-card-content>
         </ion-card>
@@ -49,29 +88,9 @@
   </ion-grid>
 
 
-  <ion-grid class="ion-no-padding" *ngIf="trendyOffers.length >=5">
-    <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
-      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
-      <swiper-slide class="top" *ngFor="let offer of trendyOffers">
-        <div class="category" (click)="navigateToDetailsPage(offer)">
-          <img [src]="offer.image" alt="img" loading="lazy" class="top-image">
-        </div>
-        <ion-badge class="more-five" color="primary">{{'Trendy Now'}}</ion-badge>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
 
-  <ion-grid class="ion-no-padding trendy-container" *ngIf="trendyOffers.length < 5">
-    <!-- <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
-      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false"> -->
-    <div class="trendy" *ngFor="let offer of trendyOffers">
-      <div (click)="navigateToDetailsPage(offer)">
-        <img [src]="offer.image" alt="img" loading="lazy">
-      </div>
-      <ion-badge color="primary">{{'Trendy Now'}}</ion-badge>
-    </div>
-    <!-- </swiper-container> -->
-  </ion-grid>
+
+
 
 </ion-content>
 
