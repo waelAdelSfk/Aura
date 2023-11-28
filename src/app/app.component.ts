@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   private setStatusBarBackground(): void {
     if (Capacitor.isPluginAvailable('StatusBar')) {
-      StatusBar.setBackgroundColor({ color: '#2b9eee' });
+      StatusBar.setBackgroundColor({ color: '#D71313' });
     }
   }
 
