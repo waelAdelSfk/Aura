@@ -2,7 +2,7 @@
   <ion-toolbar color="primary" mode="ios">
     <ion-buttons slot="start">
       <ion-button color="light" (click)="save($event, manageFormRef)">
-        {{ 'save' | translate }}
+        {{ 'save' }}
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -27,43 +27,50 @@
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="title" [label]="'Name' | translate"></app-input>
+            <app-input formControlName="title" [label]="'Name' "></app-input>
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="site" [label]="'Website' | translate"></app-input>
+            <app-input formControlName="site" [label]="'Website' "></app-input>
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="phoneNumber" [label]="'Phone Number' | translate"></app-input>
+            <app-input formControlName="phoneNumber" [label]="'Phone Number' "></app-input>
           </div>
 
           <div class="background-with-padding">
-            <app-input formControlName="location" [label]="'Location' | translate"></app-input>
+            <app-input formControlName="location" [label]="'Location' "></app-input>
+          </div>
+
+          <div class="background-with-padding">
+            <app-input formControlName="discount" [label]="'Discount Percentage'" [type]="'number'"></app-input>
+          </div>
+
+          <div class="background-with-padding">
+            <app-input formControlName="promoCode" [label]="'Promo Code' "></app-input>
           </div>
 
           <div class="background-with-padding ">
-            <app-text-area [controlName]="'shortDescription'" [label]="'Short Description' | translate"
+            <app-text-area [controlName]="'shortDescription'" [label]="'Short Description' "
               spellcheck="true"></app-text-area>
           </div>
 
           <div class="background-with-padding ">
-            <app-text-area [controlName]="'description'" [label]="'Description' | translate"
-              spellcheck="true"></app-text-area>
+            <app-text-area [controlName]="'description'" [label]="'Description' " spellcheck="true"></app-text-area>
           </div>
 
           <div class="background-with-padding">
-            <app-date-picker [controlName]="'startDate'" [lbl]="'Valid From' | translate">
+            <app-date-picker [controlName]="'startDate'" [lbl]="'Valid From' ">
             </app-date-picker>
           </div>
 
           <div class="background-with-padding">
-            <app-date-picker [controlName]="'endDate'" [lbl]="'Valid Until' | translate">
+            <app-date-picker [controlName]="'endDate'" [lbl]="'Valid Until' ">
             </app-date-picker>
           </div>
 
           <div class="background-with-padding">
-            <app-select [data]="categories" [controlName]="'categoryId'" [id]="'id'" [label]="'category' | translate"
+            <app-select [data]="categories" [controlName]="'categoryId'" [id]="'id'" [label]="'category' "
               [display]="'name'" [isMultiple]="false">
             </app-select>
           </div>

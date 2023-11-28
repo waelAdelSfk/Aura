@@ -1,21 +1,21 @@
 <ion-header>
   <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'profile' | translate}}</ion-title>
+    <ion-title>{{'Profile' }}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="secondary">
+<ion-content>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
         <form [formGroup]="profileForm" novalidate (ngSubmit)="save()">
           <app-uploader formControlName="image" (imgChange)="onImageChanged($event)"></app-uploader>
-          <app-input formControlName="name" [label]="'userName' | translate"></app-input>
+          <app-input formControlName="name" [label]="'User Name' "></app-input>
           <ion-button color="primary" shape="round" expand="block" mode="ios" type="submit">
-            {{'save' | translate}}
+            {{'Save' }}
           </ion-button>
         </form>
       </ion-col>

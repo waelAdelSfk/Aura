@@ -2,7 +2,7 @@
   <ion-toolbar color="primary" mode="ios">
     <ion-buttons slot="start">
       <ion-button color="light" (click)="save($event, manageFormRef)">
-        {{ 'save' | translate }}
+        {{ 'Save' }}
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -23,10 +23,10 @@
           </div>
           <div class="background-with-padding">
             <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'name' | translate}}</mat-label>
+              <mat-label>{{'Name' }}</mat-label>
               <input matInput type="text" formControlName="name">
               <mat-error *ngIf="manageForm.get('name')?.hasError('required')">
-                {{ 'filedRequired' | translate }}
+                {{ 'Filed Is Required' }}
               </mat-error>
             </mat-form-field>
           </div>

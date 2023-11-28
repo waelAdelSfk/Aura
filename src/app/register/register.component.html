@@ -1,6 +1,6 @@
 <ion-header class="custom-header">
   <ion-toolbar color="light">
-    <ion-title>{{'signUp' | translate}}</ion-title>
+    <ion-title>{{'SignUp' }}</ion-title>
     <ion-buttons>
       <ion-button (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -14,30 +14,29 @@
     <ion-row class="ion-padding ion-margin-top">
 
       <ion-col size="12" class="ion-margin-top">
-        <app-input formControlName="name" [label]="'name' | translate"></app-input>
+        <app-input formControlName="name" [label]="'Name' "></app-input>
       </ion-col>
 
       <ion-col size="12">
-        <app-input formControlName="email" [label]="'email' | translate"></app-input>
+        <app-input formControlName="email" [label]="'Email' "></app-input>
       </ion-col>
 
       <ion-col size="12">
-        <app-input formControlName="password" [label]="'password' | translate" [hasEyeIcon]="true"></app-input>
+        <app-input formControlName="password" [label]="'Password' " [hasEyeIcon]="true"></app-input>
       </ion-col>
 
       <ion-col size="12">
-        <app-input formControlName="confirmPassword" [label]="'confirmPassword' | translate"
-          [hasEyeIcon]="true"></app-input>
+        <app-input formControlName="confirmPassword" [label]="'Confirm Password' " [hasEyeIcon]="true"></app-input>
       </ion-col>
 
       <ion-col size="12" class="margin-bottom">
         <mat-form-field class="w-100" appearance="fill">
-          <mat-label color="dark">{{'selectAccountType' | translate}}</mat-label>
+          <mat-label color="dark">{{'Select Account Type' }}</mat-label>
           <mat-select formControlName="role">
-            <mat-option [value]="user">{{'user' | translate}}</mat-option>
-            <mat-option [value]="shopOwner">{{'shopOwner' | translate}}</mat-option>
+            <mat-option [value]="user">{{'User' }}</mat-option>
+            <mat-option [value]="shopOwner">{{'Shop Owner' }}</mat-option>
           </mat-select>
-          <mat-error>{{ 'fieldIsRequired' | translate}}</mat-error>
+          <mat-error>{{ 'Field Is Required' }}</mat-error>
         </mat-form-field>
       </ion-col>
 
@@ -47,6 +46,6 @@
 
 <ion-footer class="io">
   <ion-button expand="block" type="submit" class="ion-padding" (click)="register()" color="primary">
-    {{'signUp' | translate}}
+    {{'signUp' }}
   </ion-button>
 </ion-footer>

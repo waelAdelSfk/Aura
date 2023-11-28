@@ -1,7 +1,7 @@
-<app-page-header [title]="'favorite' | translate"></app-page-header>
+<app-page-header [title]="'favorite' "></app-page-header>
 
-<ion-content color="secondary">
-  <ion-grid class="ion-no-padding" *ngIf="(favoriteItems | async)?.length > 0; else noData">
+<ion-content>
+  <ion-grid class="ion-no-padding" *ngIf="(favoriteItems | async)?.length > 0; else emptyData">
     <ion-row>
       <ion-col sizeLg="3" size="6" class="ion-no-padding" *ngFor="let item of favoriteItems | async">
         <app-favorite-card [item]="item" (fireReload)="reloadList()"></app-favorite-card>
@@ -9,13 +9,17 @@
     </ion-row>
   </ion-grid>
 
-  <ng-template #emptyData>
+  <!-- <ng-template #emptyData>
     <div class="bg-white h-100 d-flex justify-content-center align-items-center flex-column">
-      <h5 class="font-weight-bold">{{'Your Favorite Is Empty' | translate}}</h5>
+      <h5 class="font-weight-bold">{{'Your Favorite Is Empty' }}</h5>
     </div>
   </ng-template>
 
   <ng-template #noData>
     <w-skelton *ngIf="isDataLoadingNow; else emptyData"></w-skelton>
   </ng-template>
-</ion-content>
+</ion-content> -->
+
+  <ng-template #emptyData>
+    <app-empty-data></app-empty-data>
+  </ng-template>

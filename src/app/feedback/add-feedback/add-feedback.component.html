@@ -12,10 +12,10 @@
 
   <form class="p-3" [formGroup]="reportForm" novalidate (ngSubmit)="send()">
 
-    <app-text-area [controlName]="'message'" [label]="'yourFeedback' | translate"></app-text-area>
+    <app-text-area [controlName]="'message'" [label]="'Your Message' "></app-text-area>
 
     <ion-button color="primary" type="submitted" expand="block" class="ion-margin-top">
-      {{'send' | translate}}
+      {{'Send' }}
     </ion-button>
   </form>
 

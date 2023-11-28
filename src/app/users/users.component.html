@@ -1,6 +1,6 @@
 <!-- <ion-header>
   <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'Brands' | translate}}</ion-title>
+    <ion-title>{{'Brands' }}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -24,13 +24,13 @@
         </ion-label>
         <ng-container>
           <ion-badge slot="end" color="success" *ngIf="item.status === accountStatus.approved">
-            {{'approved' | translate}}
+            {{'Approved' }}
           </ion-badge>
           <ion-badge slot="end" color="warning" *ngIf="item.status === accountStatus.pending">
-            {{'pending' | translate}}
+            {{'Pending' }}
           </ion-badge>
           <ion-badge slot="end" color="danger" *ngIf="item.status === accountStatus.blocked">
-            {{'blocked' | translate}}
+            {{'Blocked' }}
           </ion-badge>
         </ng-container>
       </ion-item>
@@ -88,7 +88,7 @@
       <ion-card-content>
         <ng-container>
           <ion-badge slot="end" *ngIf="getUserStatus(item) === subStatus.subscribe">
-            {{'Subscribed' | translate}}
+            {{'Subscribed' }}
           </ion-badge>
         </ng-container>
       </ion-card-content>

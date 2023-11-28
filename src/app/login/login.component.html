@@ -1,6 +1,6 @@
 <ion-header class="custom-header">
   <ion-toolbar color="light">
-    <ion-title>{{'login' | translate}}</ion-title>
+    <ion-title>{{'Login' }}</ion-title>
     <ion-buttons>
       <ion-button (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -13,14 +13,14 @@
   <form [formGroup]="loginForm" novalidate>
     <ion-row class="ion-padding ion-margin-top ion-no-padding-bottom">
       <ion-col size="12" class="ion-margin-top">
-        <app-input formControlName="email" [label]="'email' | translate"></app-input>
+        <app-input formControlName="email" [label]="'Email' "></app-input>
       </ion-col>
       <ion-col size="12">
-        <app-input formControlName="password" [label]="'password' | translate" [hasEyeIcon]="true"></app-input>
+        <app-input formControlName="password" [label]="'Password' " [hasEyeIcon]="true"></app-input>
       </ion-col>
       <ion-col size="12" (click)="openForgetPasswordModal()">
         <div class="d-flex justify-content-end">
-          <ion-text color="dark">{{'forgotPassword' | translate}}</ion-text>
+          <ion-text color="dark">{{'Forgot Password' }}</ion-text>
         </div>
       </ion-col>
     </ion-row>
@@ -29,6 +29,6 @@
 
 <ion-footer>
   <ion-button expand="block" type="submit" class="ion-padding" (click)="login()" color="primary">
-    {{'login' | translate}}
+    {{'Login' }}
   </ion-button>
 </ion-footer>

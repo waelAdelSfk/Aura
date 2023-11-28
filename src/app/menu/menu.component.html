@@ -11,7 +11,7 @@
           [name]=" isItemActive(item.url) ?  item.icon : item.icon + '-outline'"></ion-icon>
         <div class="ion-padding-end ion-margin-end" *ngIf="item.htmlIcon" [innerHTML]="item.htmlIcon"></div>
         <ion-label>
-          <span class="px-2">{{ item.labelKey | translate }}</span>
+          <span class="px-2">{{ item.labelKey }}</span>
         </ion-label>
         <ion-badge *ngIf="item.count && item.count > 0" mode="ios" color="primary">{{item.count}}</ion-badge>
       </ion-item>
@@ -21,7 +21,7 @@
       <ion-item lines="none" (click)="logOut()" class="menu-item cursor-pointer">
         <ion-icon slot="start" color="danger" name="log-out"></ion-icon>
         <ion-label color="danger">
-          <span class="px-2">{{ 'logout' | translate }}</span>
+          <span class="px-2">{{ 'Logout' }}</span>
         </ion-label>
       </ion-item>
     </ion-list>

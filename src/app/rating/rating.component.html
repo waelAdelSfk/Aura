@@ -1,5 +1,5 @@
 <div class="review" (click)="openAddEditModal()" *ngIf="isUser">
-  <ion-text>{{'Write Review' | translate}}</ion-text>
+  <ion-text>{{'Write Review' }}</ion-text>
   <ion-icon name="chevron-forward-outline"></ion-icon>
 </div>
 <hr>
@@ -27,7 +27,7 @@
   </ng-container>
 </ion-list>
 <ng-template #emptyData>
-  <ion-text class="no-data">{{'No Rating' | translate}}</ion-text>
+  <ion-text class="no-data">{{'No Rating' }}</ion-text>
   <br>
-  <ion-text class="no-data">{{'Be The First To Rate This Item'| translate}}</ion-text>
+  <ion-text class="no-data">{{'Be The First To Rate This Item'}}</ion-text>
 </ng-template>

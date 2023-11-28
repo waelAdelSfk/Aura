@@ -3,7 +3,7 @@
     <mat-label>{{label}}</mat-label>
     <textarea matInput [type]="'text'" [formControlName]="controlName" [rows]="rows"></textarea>
     <mat-error *ngIf="formGroup.form.get(controlName).hasError('required')">
-      {{'fieldIsRequired' | translate}}
+      {{'Field Is Required' }}
     </mat-error>
   </mat-form-field>
 </ng-container>
