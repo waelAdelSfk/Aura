@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary" mode="ios">
-    <ion-title>{{'addReview' | translate}}</ion-title>
+    <ion-title>{{'addReview' }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -22,11 +22,11 @@
         </ul>
       </div>
     </div>
-    <textarea type="text" class="w-100 text-area" [placeholder]="'Write Comment' | translate" [(ngModel)]="message"
+    <textarea type="text" class="w-100 text-area" [placeholder]="'Write Comment' " [(ngModel)]="message"
       rows="1"></textarea>
     <ion-button color="primary" expand="block" type="button" (click)="rate()" class="ion-margin-top"
       [disabled]="!isFormValid">
-      {{'save' | translate}}
+      {{'Save' }}
     </ion-button>
   </div>
 
