@@ -126,6 +126,8 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       location: [null, Validators.required],
       shortDescription: [null, Validators.required],
       description: [null, Validators.required],
+      promoCode: [null],
+      discount: [null],
     });
   }
 
@@ -141,6 +143,8 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       description: this.item.description,
       location: this.item.location,
       categoryId: this.item.categoryId,
+      promoCode: this.item.promoCode,
+      discount: this.item.discount,
     });
   }
 
