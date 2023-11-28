@@ -3,12 +3,12 @@
 
     <ion-tab-button tab="home">
       <ion-icon [name]="isTabSelected('home') ? 'home' : 'home-outline'"></ion-icon>
-      {{'home' | translate}}
+      {{'Home' }}
     </ion-tab-button>
 
     <ion-tab-button tab="categories" *ngIf="!isShopOwner">
       <ion-icon [name]="isTabSelected('categories') ? 'list' : 'list-outline'"></ion-icon>
-      {{'categories' | translate}}
+      {{'Categories' }}
     </ion-tab-button>
 
     <ion-tab-button tab="brands" *ngIf="!isShopOwner">
@@ -29,7 +29,7 @@
         <ion-badge color="primary">{{ count }}</ion-badge>
       </ng-container>
       <ion-icon [name]="isTabSelected('notifications') ? 'notifications' : 'notifications-outline'"></ion-icon>
-      <ion-label>{{'notifications' | translate}}</ion-label>
+      <ion-label>{{'Notifications' }}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
