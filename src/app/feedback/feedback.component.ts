@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IReport, IUser } from '@app/models';
 import { DataService, FireStoreService } from '@app/services';
+import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-feedback',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [SharedModule]
 })
-export class FeedbackComponent implements OnInit {
+export class FeedbackComponent extends CommonUtility implements OnInit {
 
   users: IUser[] = []
   reports: Observable<Array<IReport>>;
@@ -21,8 +22,8 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private router: Router,
-    private fireStoreService: FireStoreService
-  ) { }
+    private fireStoreService: FireStoreService,
+  ) { super(); }
 
   ngOnInit(): void {
     this.getAllFeedbacks();
@@ -36,22 +37,45 @@ export class FeedbackComponent implements OnInit {
   //   await this.fireStoreService.delete('feedback', feedback.id);
   // }
 
-  remove(feedback: IReport): void {
-    this.dataService.remove(`categories/${feedback.id}`);
+  remove(feedback: IReport) {
+    if (this.isAdmin) {
+      this.dataService.softDelete(
+        `feedback/${feedback.id}`, { ...feedback, isAdminRemoved: true }
+      );
+    }
+    if (this.isShopOwner) {
+      this.dataService.softDelete(
+        `feedback/${feedback.id}`, { ...feedback, isBrandOwnerRemoved: true }
+      );
+    }
+
   }
 
 
   getComment(item: IReport) {
+    this.setAsSeen(item);
     this.router.navigateByUrl(`app/details/${item.itemId}`);
-    this.updateNotificationCount(item);
   }
 
-  updateNotificationCount(item: IReport): void {
-    this.fireStoreService.updateDocNotifications('feedback', item.id, { ...item, isAdminSeen: true });
+  setAsSeen(item: IReport): void {
+    if (this.isAdmin) {
+      this.fireStoreService.updateDocNotifications('feedback', item.id, { ...item, isAdminSeen: true });
+    }
+    if (this.isShopOwner) {
+      this.fireStoreService.updateDocNotifications('feedback', item.id, { ...item, isBrandOwnerSeen: true });
+    }
   }
 
   private getAllFeedbacks(): void {
-    this.reports = this.fireStoreService.getAll('feedback')
+    if (this.isAdmin) {
+      this.reports = this.fireStoreService.getAll<IReport>('feedback').pipe(map((data) => data.filter((report: IReport) => report.isAdminRemoved === false)))
+    } else {
+      this.reports = this.fireStoreService.getAll<IReport>('feedback')
+        .pipe(map((data) => data.filter((report: IReport) => report.shopOwnerId === this.userId && report.isBrandOwnerRemoved === false)));
+    }
+    // this.reports = this.fireStoreService.getAll('feedback').
+    //   subscribe(res => res.filter((report: IReport) => report.shopOwnerId === this.userId));
+
     this.isDataLoadingNow = false;
   }
 
@@ -64,6 +88,16 @@ export class FeedbackComponent implements OnInit {
       return 'xx';
     }
     return 'xxx';
+  }
+
+  getClassNames(item: IReport): string {
+    if (this.isAdmin) {
+      return item.isAdminSeen ? 'seen' : 'not-seen'
+    } else {
+      return item.isBrandOwnerSeen ? 'seen' : 'not-seen'
+    }
+    // return (item.isAdminSeen ? 'admin-seen' : 'admin-not-seen') + ' ' +
+    //   (item.isBrandOwnerSeen ? 'brand-owner-seen' : 'brand-owner-not-seen');
   }
 
 }

@@ -1,21 +1,30 @@
-<app-page-header [title]="'feedback' | translate"></app-page-header>
+<app-page-header [title]="'Feedback' "></app-page-header>
 
 <ion-content>
-  <ng-container *ngIf="(reports | async)?.length > 0; else noData">
+  <ng-container *ngIf="(reports | async)?.length > 0; else emptyData">
     <ion-card *ngFor="let item of reports | async; last as last">
       <ion-item-sliding>
+        <!-- [ngClass]="(item.isAdminSeen ? 'admin-seen' : 'admin-not-seen') || (item.isBrandOwnerSeen ? 'brand-owner-seen' : 'brand-owner-not-seen')" -->
 
-        <ion-item [ngClass]="item.isAdminSeen ? 'seen' : 'not-seen'" (click)="getComment(item)">
+        <ion-item [ngClass]="getClassNames(item)" (click)="getComment(item)">
+          <!-- <ion-item [ngClass]="((item.isAdminSeen || item.isBrandOwnerSeen)? 'seen' : 'not-seen')"
+          (click)="getComment(item)"> -->
+          <!-- <ion-item
+          [ngClass]="{'seen': item.isAdminSeen,'brand-owner-seen': item.isBrandOwnerSeen,'not-seen': !(item.isAdminSeen || item.isBrandOwnerSeen)}"
+          (click)="getComment(item)"> -->
+          <!-- <ion-item
+          [ngClass]="{'admin-seen': item.isAdminSeen &&
+           item.isBrandOwnerSeen  , 'brand-owner-not-seen': !item.isBrandOwnerSeen , 'admin-not-seen': !item.isAdminSeen}"
+          (click)="getComment(item)"> -->
+          <!-- <ion-item
+          [ngClass]="{'seen': item.isAdminSeen || item.isBrandOwnerSeen, 'admin-seen': item.isAdminSeen, 'brand-owner-seen': item.isBrandOwnerSeen, 'not-seen': !(item.isAdminSeen || item.isBrandOwnerSeen)}"
+          (click)="getComment(item)"> -->
           <ion-label class="ion-text-wrap">
-            <!-- <ion-text color="secondary"> {{'reportText' | translate}} : </ion-text>
-            <ion-text>
-              <p class="ion-no-margin"> {{item.message}} </p>
-            </ion-text> -->
-            <ion-note color="primary">
+            <ion-note color="tertiary">
               {{'User Name'}} : {{getUserName(item.userId)}}
             </ion-note>
-            <ion-text color="danger">
-              <h6>{{'User Message'}} : {{item.message}}</h6>
+            <ion-text color="tertiary">
+              <h6>{{'Message'}} : {{item.message}}</h6>
             </ion-text>
           </ion-label>
           <ion-note slot="end">{{item.date.toDate() | date}}</ion-note>
@@ -31,13 +40,17 @@
     </ion-card>
   </ng-container>
 
-  <ng-template #emptyData>
+  <!-- <ng-template #emptyData>
     no Data
-    <!-- <w-empty-data></w-empty-data> -->
-  </ng-template>
+    <w-empty-data></w-empty-data>
+  </ng-template> -->
 
-  <ng-template #noData>
+  <!-- <ng-template #noData>
     <w-skelton *ngIf="isDataLoadingNow; else emptyData"></w-skelton>
+  </ng-template> -->
+
+  <ng-template #emptyData>
+    <app-empty-data></app-empty-data>
   </ng-template>
 
 </ion-content>

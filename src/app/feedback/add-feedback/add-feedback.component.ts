@@ -21,7 +21,7 @@ export class AddFeedbackComponent extends CommonUtility implements OnInit {
   // @ViewChild('modal') modal: ModalHeaderComponent;
   @Input() messageId: string;
   @Input() itemId: string;
-  @Input() shopOwnerId: string;
+  @Input() shopOwner: string;
   @Input() userName: string;
 
   constructor(
@@ -52,10 +52,13 @@ export class AddFeedbackComponent extends CommonUtility implements OnInit {
         date: Timestamp.fromDate(new Date()),
         userRef: this.userDocumentRef,
         itemId: this.itemId,
-        // shopOwnerId: this.shopOwnerId,
+        shopOwnerId: this.shopOwner,
         // userName: this.userName,
         userId: this.userId,
         isAdminSeen: false,
+        isAdminRemoved: false,
+        isBrandOwnerRemoved: false,
+        isBrandOwnerSeen: false,
         message: this.reportForm.value.message
       };
       this.fireStoreService.addDoc('feedback', data).subscribe(() => {
