@@ -19,52 +19,52 @@ export class MenuComponent extends CommonUtility {
 
   menuItems: Array<IMenu> = [
     {
-      labelKey: 'home',
+      labelKey: 'Home',
       url: 'home',
       icon: 'home',
       visibility: [Role.admin, Role.user, Role.shopOwner]
     },
     {
-      labelKey: 'notifications',
+      labelKey: 'Notifications',
       url: 'notifications',
       icon: 'notifications',
       visibility: [Role.admin, Role.user]
     },
     {
-      labelKey: 'favorite',
+      labelKey: 'Favorite',
       url: 'favorite',
       icon: 'heart',
       visibility: [Role.user]
     },
     {
-      labelKey: 'categories',
+      labelKey: 'Categories',
       url: 'categories',
       icon: 'folder',
       visibility: [Role.admin, Role.user]
     },
     {
-      labelKey: 'brands',
+      labelKey: 'Brands',
       url: 'brands',
       icon: 'basket',
       visibility: [Role.admin, Role.user]
     },
     {
-      labelKey: 'profile',
+      labelKey: 'Profile',
       url: 'profile',
       icon: 'person',
       visibility: [Role.admin, Role.user, Role.shopOwner]
     },
     {
-      labelKey: 'offers',
+      labelKey: 'Offers',
       url: 'offer',
       icon: 'gift',
       visibility: [Role.admin, Role.shopOwner]
     },
     {
-      labelKey: 'feedback',
+      labelKey: 'Feedback',
       url: 'feedback',
       icon: 'thumbs-down',
-      visibility: [Role.admin]
+      visibility: [Role.admin, Role.shopOwner]
     },
 
   ];
