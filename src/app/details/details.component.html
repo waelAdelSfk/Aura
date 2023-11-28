@@ -43,59 +43,68 @@
 
       <div class="subscription" *ngIf="isUser">
         <div side="start" *ngIf="(users | async)?.length > 0">
-          <ng-container *ngFor="let item of users | async">
-            <ng-container *ngIf="item.id === offers.shopOwnerId">
-              <ng-container *ngIf="item.subscriberList">
+          <ng-container *ngFor="let user of users | async">
+            <ng-container *ngIf="user.id === offers.shopOwnerId">
+              <ng-container *ngIf="user.subscriberList">
 
-                <ng-container *ngIf="item.subscriberList.length === 0 || !isUserInList(item)">
+                <ng-container *ngIf="user.subscriberList.length === 0 || !isUserInList(user)">
                   <ion-chip outline color="tertiary" (click)="subscribe(offers.shopOwnerId)">
-                    <ion-label color="dark">{{'subscribe'}}</ion-label>
+                    <!-- <ion-label color="dark">{{'subscribe'}}</ion-label> -->
+                    <ion-icon name="notifications-outline"></ion-icon>
                   </ion-chip>
                 </ng-container>
 
-                <ng-container *ngFor="let a of item.subscriberList">
+                <ng-container *ngFor="let a of user.subscriberList">
                   <ion-chip outline color="tertiary"
                     *ngIf="a.userId === currentUser && a.subStatus === subStatus.unSubscribe"
                     (click)="subscribe(offers.shopOwnerId)">
-                    <ion-label color="dark">{{'subscribe'}}</ion-label>
+                    <ion-icon name="notifications-outline"></ion-icon>
+                    <!-- <ion-label color="dark">{{'subscribe'}}</ion-label> -->
                   </ion-chip>
                 </ng-container>
 
-                <ng-container *ngFor="let a of item.subscriberList">
+                <ng-container *ngFor="let a of user.subscriberList">
                   <ion-chip outline color="tertiary"
                     *ngIf="(a.subStatus === subStatus.subscribe && a.userId === currentUser)"
                     (click)="unsubscribe(offers.shopOwnerId)">
                     <ion-icon name="notifications-off-outline"></ion-icon>
-                    <ion-label color="dark">{{'subscribed'}}</ion-label>
+                    <!-- <ion-label color="dark">{{'subscribed'}}</ion-label> -->
                   </ion-chip>
                 </ng-container>
+
               </ng-container>
             </ng-container>
           </ng-container>
         </div>
       </div>
 
+      <div class="brandName">
+        <ion-chip outline color="tertiary">
+          <ion-label color="dark">{{getName(offers.shopOwnerId)}}</ion-label>
+        </ion-chip>
+      </div>
+
       <div class="contact">
         <hr>
-        <div>{{'location' | translate}}:</div>
+        <div>{{'location' }}:</div>
         {{offers.location}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'Valid From' | translate}}:</div>
+        <div>{{'Valid From' }}:</div>
         {{offers.startDate.toDate() | date:'mediumDate'}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'Valid until' | translate}}:</div>
+        <div>{{'Valid until' }}:</div>
         {{offers.endDate.toDate() | date:'mediumDate'}}
       </div>
 
       <div class="contact">
         <hr>
-        <div>{{'description' | translate}}:</div>
+        <div>{{'description' }}:</div>
         {{offers.description}}
       </div>
       <hr>

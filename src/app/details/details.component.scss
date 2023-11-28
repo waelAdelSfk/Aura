@@ -49,6 +49,17 @@ img {
 
 .subscription {
   position: absolute;
+  top: 2px;
+  left: 2px;
+  ion-chip {
+    background-color: #ffffff;
+  }
+  ion-icon {
+    margin-inline-start: -3px;
+  }
+}
+.brandName {
+  position: absolute;
   top: 180px;
   left: 24px;
   ion-chip {

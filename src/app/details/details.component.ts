@@ -25,6 +25,7 @@ export class DetailsComponent extends CommonUtility implements OnInit {
   itemFavorite: IFavorite;
   subStatus = subscriptionStatus;
   users: Observable<IUser[]>;
+  brands: IUser[] = [];
   public currentUser: string;
 
   constructor(
@@ -47,10 +48,12 @@ export class DetailsComponent extends CommonUtility implements OnInit {
     this.getCurrentUserId();
     this.getFavoriteItem();
     this.users = this.fireStoreService.getAll<IUser>('users');
+    this.fireStoreService.getAll('users').subscribe((res: IUser[]) => {
+      this.brands = res;
+    });
   }
 
   private getAllOffers(): void {
-
     this.fireStoreService.getAll('offersList')
       .pipe(map((data: IOffers[]) => data.find(o => o.id === this.offerId))).subscribe(res => {
         this.offers = res
@@ -178,6 +181,17 @@ export class DetailsComponent extends CommonUtility implements OnInit {
 
   isUserInList(user: IUser): boolean {
     return user.subscriberList?.some(u => u.userId === this.currentUser);
+  }
+
+  getName(id: string): string {
+    if (this.brands?.length > 0) {
+      if (id && id != '' && id != null) {
+        const userName = this.brands.find(m => m.id == id);
+        return userName ? userName.name : 'Visitor';
+      }
+      return 'Visitor';
+    }
+    return 'Visitor';
   }
 
 }
