@@ -5,8 +5,6 @@ img {
 }
 
 swiper-container {
-  // --swiper-pagination-bullet-inactive-color: var(--ion-color-step-400, #53e01b);
-  // --swiper-pagination-color: var(--ion-color-tertiary, #ff8838);
   --swiper-pagination-progressbar-bg-color: rgba(
     var(--ion-text-color-rgb, 0, 0, 0),
     0.25
@@ -21,7 +19,7 @@ swiper-container {
 }
 
 swiper-container::part(bullet-active) {
-  background-color: #e52d8e;
+  background-color: #ff0000;
   width: 16px;
   height: 16px;
   margin-bottom: -3px;
@@ -39,12 +37,12 @@ swiper-slide {
 }
 
 .login-button {
-  --background: linear-gradient(#e555b9, #e52d8e, #9f195a, #c940a0);
+  --background: linear-gradient(#e55555, #ee3030, #c42121, #d62626);
 }
 
 ion-button {
   --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
-  --ripple-color: deeppink;
+  --ripple-color: #ff1616;
   --padding-top: 10px;
   --padding-bottom: 10px;
 }
