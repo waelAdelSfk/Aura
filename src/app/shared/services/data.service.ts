@@ -39,6 +39,22 @@ export class DataService {
     });
   }
 
+  async softDelete(path: string, data: any): Promise<void> {
+    return this.alertService.create(
+      {
+        confirmHandler: () => {
+          this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
+            this.fireStoreService.updateDoc(path, data).subscribe(() => {
+              loading.dismiss();
+              this.toastService.showToaster(this.translationService.instant('removedSuccessfully'), 'success');
+            });
+          });
+
+        }
+      }
+    );
+  }
+
   softUpdate(path: string, data: any): void {
     // this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
     this.fireStoreService.updateDoc(path, data);
@@ -48,6 +64,8 @@ export class DataService {
     // });
     // });
   }
+
+
 
   remove(path: string): void {
     this.alertService.create({
