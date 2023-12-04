@@ -61,8 +61,8 @@ export class MenuComponent extends CommonUtility {
       visibility: [Role.admin, Role.shopOwner]
     },
     {
-      labelKey: 'Feedback',
-      url: 'feedback',
+      labelKey: 'Reports',
+      url: 'reports',
       icon: 'thumbs-down',
       visibility: [Role.admin, Role.shopOwner]
     },

@@ -8,7 +8,7 @@ import { Observable, map, take } from 'rxjs';
 import { subscriptionStatus } from '@app/enums';
 import { FavoriteService } from 'app/shared/services/favorite.service';
 import { CommonUtility } from '@app/utilities';
-import { AddFeedbackComponent } from 'app/feedback/add-feedback/add-feedback.component';
+import { AddReportsComponent } from 'app/reports/add-reports/add-reports.component';
 
 @Component({
   selector: 'app-details',
@@ -66,7 +66,7 @@ export class DetailsComponent extends CommonUtility implements OnInit {
 
   async report(): Promise<void> {
     const modal = await this.modalService.create({
-      component: AddFeedbackComponent,
+      component: AddReportsComponent,
       componentProps: {
         itemId: this.offerId,
         // message: item.message,

@@ -5,10 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 
 import { EmptyDataComponent } from './components/empty-data/empty-data.component';
-import { RateComponent } from './components/rate/rate.component';
-import { ListMenuComponent } from './components/list-menu/list-menu.component';
-import { FeedbackComponent } from './components/feedback/feedback.component';
-import { FilterComponent } from './components/filter/filter.component';
 import { SkeltonComponent } from './components/skelton/skelton.component';
 import { MaterialModule } from './modules/material.module';
 import { InputComponent } from './components/input/input.component';
@@ -33,10 +29,6 @@ const modules = [
 const components = [
   SkeltonComponent,
   EmptyDataComponent,
-  RateComponent,
-  ListMenuComponent,
-  FeedbackComponent,
-  FilterComponent,
   InputComponent,
   PageNotFoundComponent,
   UploaderComponent,

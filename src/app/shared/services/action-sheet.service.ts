@@ -19,7 +19,7 @@ export class ActionSheetService {
       translucent: true,
       animated: true,
       ...opts,
-      header: this.translationService.instant(opts.header ?? 'pleaseSelect'),
+      header: this.translationService.instant(opts.header ?? 'Please Select'),
     })
   }
 }

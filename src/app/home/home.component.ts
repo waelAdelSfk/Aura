@@ -79,7 +79,7 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
   }
 
   private getAllTrendyOffers(): void {
-    const minimumViewCount = 10;
+    const minimumViewCount = 5;
     this.fireStoreService.getAll<IOffers>('offersList').subscribe(
       (res: Array<IOffers>) => {
         this.trendyOffers = res.filter(offer => offer.viewCount >= minimumViewCount);
@@ -99,6 +99,21 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
     return 'Visitor';
   }
 
+  getImage(id: string): string {
+    if (this.users?.length > 0) {
+      if (id && id != '' && id != null) {
+        const userImage = this.users.find(m => m.id == id);
+        return userImage ? userImage.image : 'assets/images/avatar.png';
+      }
+      return 'assets/images/avatar.png';
+    }
+    return 'assets/images/avatar.png';
+  }
+
+  navigateToListPage(item: ICategory): void {
+    this.router.navigate([`/app/offer/${item.id}`]);
+  }
+
 
   navigateToDetailsPage(offer: IOffers): void {
     console.log('offer Id', offer.id)
@@ -106,6 +121,7 @@ export class HomeComponent extends CommonUtility implements OnInit, AfterViewIni
     this.updateViewCount(offer);
     this.router.navigate([`/app/details/${offer.id}`]);
   }
+
 
   private updateViewCount(offer: IOffers): void {
     const data = { viewCount: offer.viewCount }

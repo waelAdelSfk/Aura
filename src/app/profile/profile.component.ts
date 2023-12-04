@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '@app/models';
 
-import { FireStoreService } from '@app/services';
+import { DataService, FireStoreService } from '@app/services';
 import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
 
@@ -19,6 +19,7 @@ export class ProfileComponent extends CommonUtility implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private fireStoreService: FireStoreService,
+    private dataService: DataService
   ) {
     super();
     this.initFormModels();
@@ -60,7 +61,8 @@ export class ProfileComponent extends CommonUtility implements OnInit {
     this.profileForm.markAllAsTouched();
     console.log('f', this.profileForm.value);
     if (this.profileForm.valid) {
-      this.fireStoreService.updateDoc(`users/${this.userId}`, this.profileForm.value);
+      this.dataService.update(`users/${this.userId}`, this.profileForm.value);
+      // this.fireStoreService.updateDoc(`users/${this.userId}`, this.profileForm.value);
     }
   }
 

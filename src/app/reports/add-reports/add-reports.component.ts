@@ -7,13 +7,13 @@ import { CommonUtility } from '@app/utilities';
 import { SharedModule } from 'app/shared/shared.module';
 
 @Component({
-  selector: 'app-add-feedback',
-  templateUrl: './add-feedback.component.html',
-  styleUrls: ['./add-feedback.component.scss'],
+  selector: 'app-add-reports',
+  templateUrl: './add-reports.component.html',
+  styleUrls: ['./add-reports.component.scss'],
   standalone: true,
   imports: [SharedModule]
 })
-export class AddFeedbackComponent extends CommonUtility implements OnInit {
+export class AddReportsComponent extends CommonUtility implements OnInit {
 
   reportForm: UntypedFormGroup;
 
@@ -61,20 +61,12 @@ export class AddFeedbackComponent extends CommonUtility implements OnInit {
         isBrandOwnerSeen: false,
         message: this.reportForm.value.message
       };
-      this.fireStoreService.addDoc('feedback', data).subscribe(() => {
-        this.toastService.showToaster('feedbackSendSuccessfully');
+      this.fireStoreService.addDoc('reports', data).subscribe(() => {
+        this.toastService.showToaster('report Send Successfully');
         this.close();
       });
     }
   }
-
-  // private getCurrentUserId(): void {
-  //   this.userService.getCurrentLoggedInUser().subscribe(res => {
-  //     if (res && res.uid) {
-  //       this.userId = res.uid;
-  //     }
-  //   });
-  // }
 
   private initFormModels(): void {
     this.reportForm = this.formBuilder.group({

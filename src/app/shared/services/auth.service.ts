@@ -56,7 +56,7 @@ export class AuthService {
           }
         }).then(() => {
           loading.dismiss();
-          this.toastService.showToaster(this.translationService.instant('accountCreatedSuccessfully'));
+          this.toastService.showToaster(this.translationService.instant('Account Created Successfully'));
         }).catch((error: FirebaseError) => {
           loading.dismiss();
           this.showErrorMessage(error.code);
@@ -135,7 +135,7 @@ export class AuthService {
   }
 
   private showErrorMessage(errorKey: string): void {
-    const message = errorMessages[errorKey] || 'somethingWentWrong';
+    const message = errorMessages[errorKey] || 'some thing Went Wrong';
     this.toastService.showToaster(this.translationService.instant(message), 'danger');
   }
 

@@ -1,29 +1,13 @@
 <ng-container [formGroup]="formGroup.form">
   <mat-form-field appearance="outline" class="w-100 mt-2">
     <mat-label>{{ label}}</mat-label>
-    <!-- (ngModelChange)="onChange($event)" -->
     <mat-select [formControlName]="controlName" [multiple]="isMultiple">
-
-      <!-- <mat-select-trigger *ngIf="isHexaCode" class="d-inline-flex">
-        <ng-container *ngIf="list.value">
-          <ng-container *ngIf="isMultiple">
-            <ng-container *ngFor="let color of list.value">
-              <span class="color-circle rounded-circle" [style.backgroundColor]="color"></span>
-            </ng-container>
-          </ng-container>
-          <span *ngIf="!isMultiple" class="color-circle rounded-circle" [style.backgroundColor]="list.value"></span>
-        </ng-container>
-      </mat-select-trigger> -->
-
       <mat-option *ngFor="let item of data" [value]="item[id]">
         <div class="d-flex flex-row align-items-center">
-          <!-- <span *ngIf="isHexaCode" class="color-circle rounded-circle" [style.backgroundColor]="item[displayed]"></span> -->
           <ng-container>{{ item[display] }}</ng-container>
         </div>
       </mat-option>
-
     </mat-select>
-    <mat-error *ngIf="formGroup.form.get(controlName).hasError('required')">{{ 'fieldIsRequired' |
-      translate}}</mat-error>
+    <mat-error *ngIf="formGroup.form.get(controlName).hasError('required')">{{ 'Field Is Required'}}</mat-error>
   </mat-form-field>
 </ng-container>

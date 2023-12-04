@@ -42,7 +42,7 @@ export class NotificationsComponent extends CommonUtility implements OnInit {
     if ((this.isAdmin && !notification.isAdminSeen)) {
       const updatedNotification: Partial<INotification> = {
         isAdminSeen: this.isAdmin ? !notification.isAdminSeen : notification.isAdminSeen,
-        isUserSeen: this.isAdmin ? notification.isUserSeen : !notification.isUserSeen
+        isUserSeen: this.isUser ? notification.isUserSeen : !notification.isUserSeen
       };
       this.fireStoreService.updateDoc(`notifications/${notification.id}`, updatedNotification).subscribe(() => {
         this.toastService.showToaster(this.getTranslateValue('updatedSuccessfully'));

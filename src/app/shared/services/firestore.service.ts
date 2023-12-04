@@ -57,9 +57,9 @@ export class FireStoreService {
           title: '',
           content: '',
           isAdminSeen: false,
-          isUserSeen: false,
           isAdminRemoved: false,
-          isUserRemoved: false,
+          // isUserSeen: false,
+          // isUserRemoved: false,
           notificationType: NotificationType.newRegister,
           date: user.creationDate
         };

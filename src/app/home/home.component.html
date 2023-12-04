@@ -4,15 +4,13 @@
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <div class="user-info">
-      <img class="user-image" alt="Silhouette of mountains" src="assets/images/avatar.png" />
+      <img class="user-image" [src]="(getImage(userId) && getImage(userId) !== null &&
+      getImage(userId) !== null) ? getImage(userId) : 'assets/images/avatar.png'" loading="lazy" alt="img">
       <h6>{{'Hello,'}} &nbsp; {{getName(userId)}}</h6>
     </div>
-    <!-- <div class="welcome">
-      <ion-text>{{'Welcome Back'}}</ion-text>
-    </div> -->
   </div>
   <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-    <path fill="#D71313" fill-opacity="1"
+    <path fill="#ff5e00" fill-opacity="1"
       d="M0,192L60,181.3C120,171,240,149,360,170.7C480,192,600,256,720,277.3C840,299,960,277,1080,240C1200,203,1320,149,1380,122.7L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
     </path>
   </svg> -->
@@ -20,18 +18,9 @@
 </ion-header>
 
 <ion-content color="light">
-  <!-- <ion-grid class="ion-no-padding">
-    <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
-      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
-      <swiper-slide class="top" *ngFor="let category of categories">
-        <div class="category" (click)="navigateToListPage(category)">
-          <img [src]="category.image" alt="img" loading="lazy" class="top-image">
-        </div>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid> -->
 
-  <ion-grid class="ion-no-padding trendy-container ion-margin-top" *ngIf="trendyOffers.length < 5">
+
+  <ion-grid class="ion-no-padding trendy-container ion-margin-top" *ngIf="trendyOffers.length < 3">
     <!-- <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
       [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false"> -->
     <div class="trendy" *ngFor="let offer of trendyOffers">
@@ -43,7 +32,7 @@
     <!-- </swiper-container> -->
   </ion-grid>
 
-  <ion-grid class="ion-no-padding ion-margin-top" *ngIf="trendyOffers.length >=5">
+  <ion-grid class="ion-no-padding ion-margin-top" *ngIf="trendyOffers.length >=3">
     <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
       [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
       <swiper-slide class="top" *ngFor="let offer of trendyOffers">
@@ -67,10 +56,10 @@
             <div class="info">
               <div class="promo-discount">
                 <div class="promo-code" *ngIf="offer.promoCode">
-                  <ion-icon color="primary" slot="start" name="gift-outline"></ion-icon>
+                  <ion-icon slot="start" name="gift-outline"></ion-icon>
                 </div>
                 <div *ngIf="offer.discount" class="discount">
-                  <ion-text color="primary">
+                  <ion-text color="danger">
                     {{offer.discount}}&nbsp;{{'% off'}}
                   </ion-text>
                 </div>
@@ -88,8 +77,16 @@
   </ion-grid>
 
 
-
-
+  <!-- <ion-grid class="ion-no-padding">
+    <swiper-container #swiper (afterinit)="initializeSwiper()" [slidesPerView]="2" [initialSlide]="1"
+      [spaceBetween]="10" [centeredSlides]="false" [loop]="true" [autoplay]="false">
+      <swiper-slide class="top" *ngFor="let category of categories">
+        <div class="category" (click)="navigateToListPage(category)">
+          <img [src]="category.image" alt="img" loading="lazy" class="top-image">
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid> -->
 
 
 </ion-content>

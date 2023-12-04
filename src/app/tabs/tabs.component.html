@@ -23,6 +23,10 @@
       <ion-label> {{'Offers'}} </ion-label>
     </ion-tab-button>
 
+    <ion-tab-button tab="reports" *ngIf="isShopOwner">
+      <ion-icon [name]="isTabSelected('reports') ? 'thumbs-down' : 'thumbs-down-outline'"></ion-icon>
+      {{'Reports' }}
+    </ion-tab-button>
 
     <ion-tab-button tab="notifications" *ngIf="!isShopOwner">
       <ng-container *ngIf="(notifications | async)?.length as count">

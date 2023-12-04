@@ -29,7 +29,7 @@ export class FavoriteService {
 
 
     private showErrorMessage(errorKey: string): void {
-        const message = errorMessages[errorKey] || 'somethingWentWrong';
+        const message = errorMessages[errorKey] || 'something Went Wrong';
         this.toastService.showToaster(this.translationService.instant(message), 'danger');
     }
 
@@ -39,7 +39,7 @@ export class FavoriteService {
 
     create(data: Partial<IFavorite>): Observable<void> {
         return from(this.addingDoc('favorite', data).then(() => {
-            this.toastService.showToaster('addedSuccessfully');
+            this.toastService.showToaster(this.translationService.instant('Added Successfully'));
         }).catch((error: FirebaseError) => {
             this.showErrorMessage(error.code);
         })
@@ -73,7 +73,7 @@ export class FavoriteService {
 
     remove(id: string): Observable<void> {
         return from(this.delete(`${'favorite'}/${id}`).then(() => {
-            this.toastService.showToaster('removedSuccessfully');
+            this.toastService.showToaster(this.translationService.instant('Removed Successfully'));
         }).catch((error: FirebaseError) => {
             this.showErrorMessage(error.code);
         }));

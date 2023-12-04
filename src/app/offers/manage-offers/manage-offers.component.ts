@@ -55,6 +55,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
 
 
   save(event: Event, manageFormRef: FormGroupDirective): void {
+
     manageFormRef.onSubmit(event);
     this.manageForm.markAllAsTouched();
     if (this.manageForm.valid) {
@@ -91,7 +92,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
           for (const subscriber of subscribers) {
             if (subscriber.subStatus === this.subStatus.subscribe) {
               const notificationData: Partial<INotification> = {
-                userId: subscriber.userId, // Use subscriber's userId
+                userId: subscriber.userId,
                 shopOwnerId: this.userId,
                 date: Timestamp.fromDate(new Date()),
                 content: 'You Have New Offer',
@@ -124,7 +125,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
       location: [null, Validators.required],
-      shortDescription: [null, Validators.required],
+      // shortDescription: [null, Validators.required],
       description: [null, Validators.required],
       promoCode: [null],
       discount: [null],
@@ -139,7 +140,7 @@ export class ManageOffersComponent extends CommonUtility implements OnInit {
       phoneNumber: this.item.phoneNumber,
       startDate: new Date(this.item.startDate.seconds * 1000),
       endDate: new Date(this.item.endDate.seconds * 1000),
-      shortDescription: this.item.shortDescription,
+      // shortDescription: this.item.shortDescription,
       description: this.item.description,
       location: this.item.location,
       categoryId: this.item.categoryId,

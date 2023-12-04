@@ -21,12 +21,15 @@ export class WelcomeComponent implements OnInit {
   currentLanguage: string;
 
   images: string[] = [
+    // 'assets/welcome/firstImage.jpeg',
+    // 'assets/welcome/secondImage.jpeg',
     'assets/welcome/firstImage.jpeg',
     'assets/welcome/secondImage.jpeg',
     'assets/welcome/thirdImage.jpeg',
     'assets/welcome/fourthImage.jpeg',
-    'assets/welcome/fifthImage.jpeg',
+    'assets/welcome/fifthImage.png',
     'assets/welcome/lastImage.jpeg',
+    // 'assets/welcome/lastImage.jpeg',
   ];
 
   constructor(private modalControl: ModalController) { }

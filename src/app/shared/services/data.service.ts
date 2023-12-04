@@ -23,7 +23,7 @@ export class DataService {
     this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
       this.fireStoreService.addDoc(collectionName, data).subscribe(() => {
         loading.dismiss();
-        this.toastService.showToaster(this.translationService.instant('addedSuccessfully'), 'success');
+        this.toastService.showToaster(this.translationService.instant('Added Successfully'), 'success');
       });
     });
   }
@@ -34,7 +34,7 @@ export class DataService {
     this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
       this.fireStoreService.updateDoc(path, data).subscribe(() => {
         loading.dismiss();
-        this.toastService.showToaster(this.translationService.instant('updatedSuccessfully'), 'success');
+        this.toastService.showToaster(this.translationService.instant('Updated Successfully'), 'success');
       });
     });
   }
@@ -46,7 +46,7 @@ export class DataService {
           this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
             this.fireStoreService.updateDoc(path, data).subscribe(() => {
               loading.dismiss();
-              this.toastService.showToaster(this.translationService.instant('removedSuccessfully'), 'success');
+              this.toastService.showToaster(this.translationService.instant('Removed Successfully'), 'success');
             });
           });
 
@@ -73,7 +73,7 @@ export class DataService {
         this.loadingService.create().then((loading: HTMLIonLoadingElement) => {
           this.fireStoreService.delete(path).subscribe(() => {
             loading.dismiss();
-            this.toastService.showToaster(this.translationService.instant('removedSuccessfully'), 'success');
+            this.toastService.showToaster(this.translationService.instant('Removed Successfully'), 'success');
           });
         });
       }
